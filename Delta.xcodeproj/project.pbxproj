@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6952C3C58520081BC63 /* DeltaApp.swift */; };
-		649FF6982C3C58520081BC63 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* ContentView.swift */; };
+		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
 		649FF69D2C3C58520081BC63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		649FF6922C3C58520081BC63 /* Delta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		649FF6952C3C58520081BC63 /* DeltaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaApp.swift; sourceTree = "<group>"; };
-		649FF6972C3C58520081BC63 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		649FF6972C3C58520081BC63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		649FF6992C3C58520081BC63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +32,139 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		64251ED42C4191ED0014D18A /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		64251ED52C4191F50014D18A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		64251ED62C41920E0014D18A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		64251ED72C41927F0014D18A /* OnboardingView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OnboardingView;
+			sourceTree = "<group>";
+		};
+		64251ED82C4192980014D18A /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		64251EDA2C4192B20014D18A /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				649FF6972C3C58520081BC63 /* MainView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		64251EDB2C4193350014D18A /* TransferView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TransferView;
+			sourceTree = "<group>";
+		};
+		64251EDC2C41935F0014D18A /* SeeAllView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SeeAllView;
+			sourceTree = "<group>";
+		};
+		64251EDD2C4193960014D18A /* ShoppingListView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ShoppingListView;
+			sourceTree = "<group>";
+		};
+		64251EDE2C4193B20014D18A /* AnalyticsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AnalyticsView;
+			sourceTree = "<group>";
+		};
+		64251EDF2C4193D50014D18A /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		64251EE02C4193F50014D18A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				64251ED72C41927F0014D18A /* OnboardingView */,
+				64251ED82C4192980014D18A /* LoginView */,
+				64251EDA2C4192B20014D18A /* MainView */,
+				64251EDE2C4193B20014D18A /* AnalyticsView */,
+				64251EDD2C4193960014D18A /* ShoppingListView */,
+				64251EDF2C4193D50014D18A /* SettingsView */,
+				64251EE42C4196CF0014D18A /* ProfileSettingsView */,
+				64251EE52C4197850014D18A /* AppDesignSettingsView */,
+				64251EE22C4194F70014D18A /* AccountSettingsView */,
+				64251EE32C4195230014D18A /* AccountGroupSettingsView */,
+				64251EE12C4194A00014D18A /* SettingsCategoryView */,
+				64251EDC2C41935F0014D18A /* SeeAllView */,
+				64251EDB2C4193350014D18A /* TransferView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		64251EE12C4194A00014D18A /* SettingsCategoryView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SettingsCategoryView;
+			sourceTree = "<group>";
+		};
+		64251EE22C4194F70014D18A /* AccountSettingsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AccountSettingsView;
+			sourceTree = "<group>";
+		};
+		64251EE32C4195230014D18A /* AccountGroupSettingsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AccountGroupSettingsView;
+			sourceTree = "<group>";
+		};
+		64251EE42C4196CF0014D18A /* ProfileSettingsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ProfileSettingsView;
+			sourceTree = "<group>";
+		};
+		64251EE52C4197850014D18A /* AppDesignSettingsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppDesignSettingsView;
+			sourceTree = "<group>";
+		};
 		649FF6892C3C58510081BC63 = {
 			isa = PBXGroup;
 			children = (
@@ -51,8 +184,11 @@
 		649FF6942C3C58520081BC63 /* Delta */ = {
 			isa = PBXGroup;
 			children = (
+				64251EE02C4193F50014D18A /* Views */,
+				64251ED42C4191ED0014D18A /* CustomViews */,
+				64251ED52C4191F50014D18A /* Models */,
+				64251ED62C41920E0014D18A /* Services */,
 				649FF6952C3C58520081BC63 /* DeltaApp.swift */,
-				649FF6972C3C58520081BC63 /* ContentView.swift */,
 				649FF6992C3C58520081BC63 /* Assets.xcassets */,
 				649FF69B2C3C58520081BC63 /* Preview Content */,
 			);
@@ -137,7 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				649FF6982C3C58520081BC63 /* ContentView.swift in Sources */,
+				649FF6982C3C58520081BC63 /* MainView.swift in Sources */,
 				649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
