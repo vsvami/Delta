@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6952C3C58520081BC63 /* DeltaApp.swift */; };
 		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		649FF6922C3C58520081BC63 /* Delta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		649FF6952C3C58520081BC63 /* DeltaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaApp.swift; sourceTree = "<group>"; };
 		649FF6972C3C58520081BC63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -58,12 +60,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A6725492C56D4AC004B3730 /* UISystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A6725472C56D4AC004B3730 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		64251ED42C4191ED0014D18A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,8 +225,10 @@
 		649FF6892C3C58510081BC63 = {
 			isa = PBXGroup;
 			children = (
+				1A6725462C56D426004B3730 /* UISystem */,
 				649FF6942C3C58520081BC63 /* Delta */,
 				649FF6932C3C58520081BC63 /* Products */,
+				1A6725472C56D4AC004B3730 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,6 +287,9 @@
 			dependencies = (
 			);
 			name = Delta;
+			packageProductDependencies = (
+				1A6725482C56D4AC004B3730 /* UISystem */,
+			);
 			productName = Delta;
 			productReference = 649FF6922C3C58520081BC63 /* Delta.app */;
 			productType = "com.apple.product-type.application";
@@ -552,6 +567,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1A6725482C56D4AC004B3730 /* UISystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UISystem;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 649FF68A2C3C58510081BC63 /* Project object */;
 }
