@@ -7,16 +7,22 @@
 
 import Foundation
 
-protocol IconRepresentable {
-    var icon: String { get }
+enum CategoryType: String {
+    case account = "Account"
+    case groupOfAccounts = "GroupOfAccounts"
+    case income = "Income"
+    case expense = "Expense"
+    case goal = "Goal"
+    case investment = "Investment"
+    case credit = "Credit"
+    case loan = "Loan"
 }
 
-protocol CurrencyRepresentable {
-    var currency: Currency { get }
-}
-
-protocol ColorRepresentable {
-    var color: String { get }
+enum RepeatInterval: String {
+    case daily
+    case weekly
+    case monthly
+    case yearly
 }
 
 enum Currency: String {
@@ -27,149 +33,129 @@ enum Currency: String {
     // ...
 }
 
-struct User {
-    let mail: String
-    let phoneNumber: String
-    let password: String
-    let passwordCode: String
-    let person: Person
+
+enum TransactionType: String {
+    case random
+    case certain
 }
 
-struct Person {
-    let id: UUID
-    let photo: String
-    let firstName: String
-    let lastName: String
-    
-    var fullName: String {
-        firstName + " " + lastName
-    }
-    
-    let age: Int
+final class User {
+    var mail: String = ""
+    var phoneNumber: String = ""
+    var password: String = ""
+    var passwordCode: String = ""
+    var person: Person?
+}
+
+final class Person {
+    var id: UUID = UUID()
+    var photo: String = ""
+    var name: String = ""
+    var age: Int = 0
     
     var isAdult: Bool {
         return age >= 18
     }
 }
 
-struct Account: IconRepresentable, ColorRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let name: String
-    let icon: String
-    let color: String
-    let currency: Currency
-    let balance: Double
-    let transactions: [Transaction]
-    let users: [User] // ?
-}
-
-// if the account is not in a group - display on the main page
-// if it is in a group - in the container "Account group"
-
-struct GroupOfAccounts: IconRepresentable, ColorRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let name: String
-    let icon: String
-    let color: String
-    let currency: Currency
-    let accounts: [Account] // ?
-}
-
-enum TransactionType: String {
-    case income = "Income"
-    case expense = "Expense"
-    case goal = "Goal"
-    case investment = "Investment"
-    case loan = "Loan"
-    case credit = "Credit"
-}
-
-struct Transaction: CurrencyRepresentable {
-    let id: UUID
-    let date: Date
-    let currency: Currency
-    let type: TransactionType
-    let amount: Double
-    let person: Person
+class Transaction {
+    var id: UUID = UUID()
+    var amount: Double = 0.0
+    var dateAdded: Date = Date()
+    var source: Category?
+    var purpose: Category?
+    var categoryType: String = "" //TODO: init + CategoryType.rawValue
+    var tags: String = ""
+    var currency: Currency = .rub
+    var person: Person?
     
-    let tag: String?
-    let exchangeRate: Double?
-    let fee: Double?
-    let reminder: Reminder?
-    let repeatInterval: Date?
-}
-
-struct Reminder {
-    let reminderDate: Date?
-    let period: String
-    let notice: Bool
-}
-
-struct Income: IconRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let source: String
-    let icon: String
-    let currency: Currency
-    let currentAmount: Double
-    let plannedAmount: Double
-    let transactions: [Transaction]
-}
-
-struct Expense: IconRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let category: String
-    let icon: String
-    let currency: Currency
-    let currentAmount: Double
-    let plannedAmount: Double
-    let transactions: [Transaction]
-}
-
-struct Goal: IconRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let name: String
-    let icon: String
-    let currency: Currency
-    let currentAmount: Double
-    let targetAmount: Double
-    let transactions: [Transaction]
-    let person: Person
-}
-
-struct Investment: IconRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let assetLongName: String
-    let assetShortName: String
-    let icon: String
-    let currency: Currency
-    var currentBalance: Double
+    var exchangeRate: Double = 0.0
+    var fee: Double = 0.0
     
-    var percentageChange: Double {
-        // ((currentBalance - initialBalance) / initialBalance) * 100
-        return 0.0
+    var isRepeating: Bool = false
+    var repeatInterval: RepeatInterval?
+    var nextDate: Date?
+    var notification: Bool = false
+}
+
+class Category {
+    var id: UUID = UUID()
+    var title: String = ""
+    var image: String = ""
+    var color: String = ""
+    
+    var currency: Currency = .rub
+    var currentAmount: Double = 0.0
+    var plannedAmount: Double = 0.0
+    var categoryType: CategoryType = .account
+    
+    var isCompleted: Bool {
+        return currentAmount >= plannedAmount
     }
     
-    let person: Person
+    var users: [Person] = []
+    var transactions: [Transaction] = []
+    
+    var transactionType: TransactionType = .random
+    var subCategories: [SubCategory] = []
+    
+    func calculatePlannedAmount() {
+        plannedAmount = subCategories.reduce(0) { $0 + $1.amount }
+    }
+    
+    func getAmountsByDate() -> [(amount: Double, date: Date)] {
+        return subCategories.map { ($0.amount, $0.date) }
+    }
+    
+    func getAmountsByPeriod() -> [(amount: Double, date: Date)] {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let range = calendar.range(of: .day, in: .month, for: currentDate)!
+        let numberOfDaysInMonth = range.count
+        let dailyAmount = plannedAmount / Double(numberOfDaysInMonth)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+        
+        var result: [(amount: Double, date: Date)] = []
+        for day in 0..<numberOfDaysInMonth {
+            if let date = calendar.date(byAdding: .day, value: day, to: startOfMonth) {
+                result.append((amount: dailyAmount, date: date))
+            }
+        }
+        return result
+    }
 }
 
-struct Loan: CurrencyRepresentable {
-    let id: UUID
-    let lender: String
-    let photo: String
-    let currency: Currency
-    let currentAmount: Double
-    let plannedAmount: Double
-    let interestRate: Double
-    let person: Person
+final class SubCategory {
+    var id: UUID = UUID()
+    var title: String = "" // выбор из тэгов, например свет
+    var amount: Double = 0.0
+    var date: Date = Date()
+    var dateOfCompletion: Date = Date() // для долгов
+    var notification: Bool = false
+    var autoTransaction: Bool = false
+    var transaction: Transaction?
 }
 
-struct Credit: IconRepresentable, CurrencyRepresentable {
-    let id: UUID
-    let institution: String
-    let icon: String
-    let currency: Currency
-    let currentAmount: Double
-    let plannedAmount: Double
-    let interestRate: Double
-    let person: Person
+final class GroupOfAccounts: Category {
+    var accounts: [Category] = []
+}
+
+final class Loan: Category {
+    var isReceivable: Bool = false // true, если долг должен вам, false, если вы должны
+    var interestRate: Double = 0.0
+}
+
+final class Credit: Category {
+    var creditAmount: Double = 0.0
+    var interestRate: Double = 0.0
+    var period: String = "Year"
+}
+
+final class Investment: Category {
+    var shortTitle: String = ""
+    
+//    var percentageChange: Double {
+//        ((currentBalance - initialBalance) / initialBalance) * 100
+//        return 0.0
+//    }
 }
