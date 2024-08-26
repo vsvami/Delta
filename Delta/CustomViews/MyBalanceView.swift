@@ -6,38 +6,42 @@
 //
 
 import SwiftUI
-import UISystem
 
 struct MyBalanceView: View {
+    let balance: String
+    let image: String
+    let size: CGSize
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text("Мой баланс")
-                    .font(.system(size: 12))
+                    .font(.caption)
                 Spacer()
-                Text("₽ 120000")
+                Text(balance)
                     .font(.title.bold())
             }
-            .minimumScaleFactor(0.5)
-            .lineLimit(1)
-            
+//            .minimumScaleFactor(0.5)
+//            .lineLimit(1)
+
             Spacer()
             
-            Image("person")
+            Image(image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipShape(.circle)
                 .layoutPriority(1)
                 .frame(maxHeight: .infinity)
         }
-        .frame(height: 55)
-        .padding()
-        .background(.white)
-        .cornerRadius(16)
-        .shadow(color: Color.gray.opacity(0.2), radius: 16)
+        .frame(width: size.width, height: size.height)
+        .componentBackground(color: .white)
     }
 }
 
 #Preview {
-    MyBalanceView()
+    MyBalanceView(
+        balance: "₽ 1 200 000",
+        image: "person",
+        size: CGSize(width: 328, height: 45)
+    )
 }

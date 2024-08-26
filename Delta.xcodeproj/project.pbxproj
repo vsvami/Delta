@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
+		640F9F422C7CFEAE007C7E7E /* ExpensesIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F412C7CFEAE007C7E7E /* ExpensesIncomeView.swift */; };
+		640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F4B2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift */; };
+		640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */; };
+		640F9F502C7D3F53007C7E7E /* PlanVsActualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */; };
 		6457CA4D2C517D54008C56DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4C2C517D54008C56DE /* User.swift */; };
 		6457CA4F2C518375008C56DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4E2C518375008C56DE /* Settings.swift */; };
 		649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6952C3C58520081BC63 /* DeltaApp.swift */; };
@@ -35,6 +39,10 @@
 
 /* Begin PBXFileReference section */
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
+		640F9F412C7CFEAE007C7E7E /* ExpensesIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesIncomeView.swift; sourceTree = "<group>"; };
+		640F9F4B2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBackgroundModifier.swift; sourceTree = "<group>"; };
+		640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCardView.swift; sourceTree = "<group>"; };
+		640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanVsActualView.swift; sourceTree = "<group>"; };
 		6457CA4C2C517D54008C56DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6457CA4E2C518375008C56DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		649FF6922C3C58520081BC63 /* Delta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delta.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,10 +88,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		640F9F4A2C7D3EC7007C7E7E /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				640F9F4B2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		64251ED42C4191ED0014D18A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
 				64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */,
+				640F9F412C7CFEAE007C7E7E /* ExpensesIncomeView.swift */,
+				640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */,
+				640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -252,6 +271,7 @@
 		649FF6942C3C58520081BC63 /* Delta */ = {
 			isa = PBXGroup;
 			children = (
+				640F9F4A2C7D3EC7007C7E7E /* Modifiers */,
 				64251EE02C4193F50014D18A /* Views */,
 				64251ED42C4191ED0014D18A /* CustomViews */,
 				64251ED52C4191F50014D18A /* Models */,
@@ -363,15 +383,19 @@
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
 				64FB5C4F2C4BF4ED00BBADB1 /* AccountGroupSettingsView.swift in Sources */,
 				64FB5C3F2C4BF48600BBADB1 /* OnboardingView.swift in Sources */,
+				640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */,
 				649FF6982C3C58520081BC63 /* MainView.swift in Sources */,
 				64FB5C412C4BF49B00BBADB1 /* LoginView.swift in Sources */,
 				64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */,
 				64FB5C432C4BF4A600BBADB1 /* AnalyticsView.swift in Sources */,
+				640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */,
 				649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */,
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
+				640F9F422C7CFEAE007C7E7E /* ExpensesIncomeView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,
 				64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */,
 				64FB5C5E2C4BF64100BBADB1 /* Fonts.swift in Sources */,
+				640F9F502C7D3F53007C7E7E /* PlanVsActualView.swift in Sources */,
 				64FB5C552C4BF52500BBADB1 /* TransferView.swift in Sources */,
 				6457CA4D2C517D54008C56DE /* User.swift in Sources */,
 			);
