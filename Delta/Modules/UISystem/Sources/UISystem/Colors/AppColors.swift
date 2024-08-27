@@ -15,6 +15,8 @@ public struct AppColors {
     //System Colors
     public let appWhite = Color("appWhite")
     public let appBlack = Color("appBlack")
+    public let appGray = Color("appGray")
+    public let textGray = Color("textGray")
     public let appBackground = Color("appBackground")
     public let appBackgroundMini = Color("appBackgroundMini")
     
