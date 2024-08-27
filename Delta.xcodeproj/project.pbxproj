@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
+		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640F9F422C7CFEAE007C7E7E /* ExpensesIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F412C7CFEAE007C7E7E /* ExpensesIncomeView.swift */; };
 		640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F4B2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift */; };
 		640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
+		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640F9F412C7CFEAE007C7E7E /* ExpensesIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesIncomeView.swift; sourceTree = "<group>"; };
 		640F9F4B2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentBackgroundModifier.swift; sourceTree = "<group>"; };
 		640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCardView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				640F9F412C7CFEAE007C7E7E /* ExpensesIncomeView.swift */,
 				640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */,
 				640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */,
+				640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				64FB5C432C4BF4A600BBADB1 /* AnalyticsView.swift in Sources */,
 				640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */,
 				649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */,
+				640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */,
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				640F9F422C7CFEAE007C7E7E /* ExpensesIncomeView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,

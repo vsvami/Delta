@@ -8,34 +8,40 @@
 import SwiftUI
 
 struct AccountCardView: View {
+    let title: String
+    let amount: String
+    let image: String
+    let color: Color
     let size: CGSize
     
     var body: some View {
         VStack(alignment: .trailing) {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Sber Bank")
+                    Text(title)
                         .font(.headline)
-                    
-                    Spacer()
-                    
-                    Text("₽ 10 000 000")
+                    Spacer(minLength: 0)
+                    Text(amount)
                         .font(.caption)
                 }
-                
                 Spacer()
             }
             
-            Spacer()
-            
-            Image(systemName: "rublesign.circle")
+            Spacer(minLength: 0)
+            Image(systemName: image)
                 .font(.headline)
         }
         .frame(width: size.width, height: size.height)
-        .componentBackground(color: .appMint)
+        .componentBackground(color: color)
     }
 }
 
 #Preview {
-    AccountCardView(size: CGSize(width: 124, height: 65))
+    AccountCardView(
+        title: "Sber Bank",
+        amount: "₽ 10 000 000",
+        image: "rublesign.circle",
+        color: .appMint,
+        size: CGSize(width: 124, height: 60)
+    )
 }

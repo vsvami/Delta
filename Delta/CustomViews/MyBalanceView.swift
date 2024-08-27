@@ -17,12 +17,10 @@ struct MyBalanceView: View {
             VStack(alignment: .leading) {
                 Text("Мой баланс")
                     .font(.caption)
-                Spacer()
+                Spacer(minLength: 0)
                 Text(balance)
                     .font(.title.bold())
             }
-//            .minimumScaleFactor(0.5)
-//            .lineLimit(1)
 
             Spacer()
             
@@ -30,7 +28,6 @@ struct MyBalanceView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipShape(.circle)
-                .layoutPriority(1)
                 .frame(maxHeight: .infinity)
         }
         .frame(width: size.width, height: size.height)
@@ -40,7 +37,7 @@ struct MyBalanceView: View {
 
 #Preview {
     MyBalanceView(
-        balance: "₽ 1 200 000",
+        balance: "₽ 1200000",
         image: "person",
         size: CGSize(width: 328, height: 45)
     )

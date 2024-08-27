@@ -28,11 +28,8 @@ struct ExpensesIncomeView: View {
                 Text(plannedAmount)
                     .font(.caption)
                     .foregroundStyle(Color.gray)
-                Spacer()
+                Spacer(minLength: 0)
             }
-//            .minimumScaleFactor(0.5)
-//            .lineLimit(1)
-            
 //          Text("Text")
 //              .font(.title) // 28
 //          Text("Text")
@@ -50,8 +47,8 @@ struct ExpensesIncomeView: View {
 #Preview {
     ExpensesIncomeView(
         title: "Расходы",
-        currentAmount: "120 000",
-        plannedAmount: "78 000",
+        currentAmount: "120000",
+        plannedAmount: "78000",
         size: CGSize(width: 124, height: 45)
     )
 }
