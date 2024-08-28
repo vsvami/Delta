@@ -6,49 +6,48 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct ExpensesIncomeView: View {
     let title: String
-    let currentAmount: String
-    let plannedAmount: String
+    let currentAmount: Double
+    let plannedAmount: Double
     let size: CGSize
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(title)
-                .font(.caption)
-            
-            Spacer()
-            
-            HStack(alignment: .firstTextBaseline) {
-                Text(currentAmount)
-                    .font(.headline)
-                Text("/")
-                    .font(.headline)
-                Text(plannedAmount)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(title)
                     .font(.caption)
-                    .foregroundStyle(Color.gray)
-                Spacer(minLength: 0)
+                Text(currentAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    .font(.headline)
+                Text(plannedAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    .font(.caption)
+                    .foregroundStyle(.appBlack)
+                
             }
-//          Text("Text")
-//              .font(.title) // 28
-//          Text("Text")
-//              .font(.headline) // 17.bold
-//          Text("Text")
-//              .font(.subheadline) // 15
-//          Text("Text")
-//              .font(.caption) //12
+            Spacer(minLength: 0)
         }
+//            HStack(alignment: .firstTextBaseline) {
+//                Text(currentAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+//                    .font(.headline)
+//                Text("/")
+//                    .font(.headline)
+//                Text(plannedAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+//                    .font(.caption)
+//                    .foregroundStyle(.appBlack)
+//                Spacer(minLength: 0)
+//            }
         .frame(width: size.width, height: size.height)
-        .componentBackground(color: .white)
+        .componentBackground(color: .appBackgroundMini)
     }
 }
 
 #Preview {
     ExpensesIncomeView(
         title: "Расходы",
-        currentAmount: "120000",
-        plannedAmount: "78000",
+        currentAmount: 120000,
+        plannedAmount: 78000,
         size: CGSize(width: 124, height: 45)
     )
 }

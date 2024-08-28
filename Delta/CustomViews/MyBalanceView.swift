@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyBalanceView: View {
-    let balance: String
+    let balance: Double
     let image: String
     let size: CGSize
     
@@ -18,7 +18,7 @@ struct MyBalanceView: View {
                 Text("Мой баланс")
                     .font(.caption)
                 Spacer(minLength: 0)
-                Text(balance)
+                Text(balance, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                     .font(.title.bold())
             }
 
@@ -37,7 +37,7 @@ struct MyBalanceView: View {
 
 #Preview {
     MyBalanceView(
-        balance: "₽ 1200000",
+        balance: 1200000,
         image: "person",
         size: CGSize(width: 328, height: 45)
     )
