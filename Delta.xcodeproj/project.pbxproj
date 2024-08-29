@@ -20,11 +20,11 @@
 		640F9F502C7D3F53007C7E7E /* PlanVsActualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */; };
 		6457CA4D2C517D54008C56DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4C2C517D54008C56DE /* User.swift */; };
 		6457CA4F2C518375008C56DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4E2C518375008C56DE /* Settings.swift */; };
+		647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */; };
 		649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6952C3C58520081BC63 /* DeltaApp.swift */; };
 		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
 		649FF69D2C3C58520081BC63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */; };
-		64DAA09A2C7FA90F0089D789 /* AccountGroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */; };
 		64E7B2FF2C56A59E00AD4533 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7B2FE2C56A59E00AD4533 /* Tab.swift */; };
 		64FB5C3F2C4BF48600BBADB1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C3E2C4BF48600BBADB1 /* OnboardingView.swift */; };
 		64FB5C412C4BF49B00BBADB1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C402C4BF49B00BBADB1 /* LoginView.swift */; };
@@ -405,6 +405,7 @@
 				64FB5C532C4BF51700BBADB1 /* SeeAllView.swift in Sources */,
 				64FB5C452C4BF4B100BBADB1 /* ShoppingListView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
+				647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */,
 				64E7B2FF2C56A59E00AD4533 /* Tab.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
 				64FB5C4F2C4BF4ED00BBADB1 /* AccountGroupSettingsView.swift in Sources */,
