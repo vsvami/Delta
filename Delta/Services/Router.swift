@@ -29,7 +29,7 @@ enum TabRoute: Hashable {
 
 @MainActor
 final class Router: ObservableObject {
-    @Published var startScreen: Route = .onboarding
+    @Published var startScreen: Route = .main
     @Published var path = NavigationPath()
     
     @ViewBuilder func tabView() -> some View {
