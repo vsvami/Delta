@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct TabBarView: View {
     @State private var selectedTab = TabRoute.main
+    
+    init() {
+        setupTabBarAppearance()
+    }
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -17,7 +22,6 @@ struct TabBarView: View {
                     Label("Главная", systemImage: "house")
                 }
                 .tag(TabRoute.main)
-            
             
             AnalyticsView()
                 .tabItem {
@@ -36,6 +40,31 @@ struct TabBarView: View {
                     Label("Настройки", systemImage: "gearshape")
                 }
                 .tag(TabRoute.settings)
+        }
+    }
+}
+
+extension TabBarView {
+    private func setupTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .appBackground
+        
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
+        
+        // Цвет для выделенного таба
+        appearance.stackedLayoutAppearance.selected.iconColor = .appBlack
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.appBlack]
+        
+        // Цвет для невыбранных табов
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.lightGray
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.lightGray]
+        
+        UITabBar.appearance().standardAppearance = appearance
+        
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
         }
     }
 }
