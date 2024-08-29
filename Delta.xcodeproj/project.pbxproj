@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A2A33792C80B5A1008F6414 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33782C80B5A1008F6414 /* Router.swift */; };
 		1A2A337B2C80ED06008F6414 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337A2C80ED06008F6414 /* TabBarView.swift */; };
+		1A2A337D2C80F61F008F6414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337C2C80F61F008F6414 /* ContentView.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		1A2A33782C80B5A1008F6414 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1A2A337A2C80ED06008F6414 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		1A2A337C2C80F61F008F6414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				64251ED62C41920E0014D18A /* Services */,
 				64FB5C5C2C4BF5F400BBADB1 /* Helpers */,
 				649FF6952C3C58520081BC63 /* DeltaApp.swift */,
+				1A2A337C2C80F61F008F6414 /* ContentView.swift */,
 				649FF6992C3C58520081BC63 /* Assets.xcassets */,
 				649FF69B2C3C58520081BC63 /* Preview Content */,
 			);
@@ -399,6 +402,7 @@
 				64E7B2FF2C56A59E00AD4533 /* Tab.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
 				64FB5C4F2C4BF4ED00BBADB1 /* AccountGroupSettingsView.swift in Sources */,
+				1A2A337D2C80F61F008F6414 /* ContentView.swift in Sources */,
 				64FB5C3F2C4BF48600BBADB1 /* OnboardingView.swift in Sources */,
 				640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */,
 				649FF6982C3C58520081BC63 /* MainView.swift in Sources */,
