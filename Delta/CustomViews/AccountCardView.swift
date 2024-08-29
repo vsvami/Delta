@@ -11,7 +11,7 @@ struct AccountCardView: View {
     let title: String
     let amount: String
     let image: String
-    let color: Color
+    let gradient: LinearGradient
     let size: CGSize
     
     var body: some View {
@@ -24,15 +24,15 @@ struct AccountCardView: View {
                     Text(amount)
                         .font(.caption)
                 }
-                Spacer()
+                Spacer(minLength: 0)
             }
-            
             Spacer(minLength: 0)
+            
             Image(systemName: image)
                 .font(.headline)
         }
-        .frame(width: size.width, height: size.height)
-        .componentBackground(color: color)
+        .padding()
+        .componentBackground(gradient: gradient, size: size)
     }
 }
 
@@ -41,7 +41,7 @@ struct AccountCardView: View {
         title: "Sber Bank",
         amount: "₽ 10 000 000",
         image: "rublesign.circle",
-        color: .appMint,
-        size: CGSize(width: 124, height: 60)
+        gradient: .greenGradient,
+        size: CGSize(width: 144, height: 90)
     )
 }

@@ -17,7 +17,6 @@ struct BaseCategoryCardView: View {
     let size: CGSize
     
     var body: some View {
-        
         VStack(alignment: .leading) {
             HStack() {
                 VStack(alignment: .leading) {
@@ -25,7 +24,7 @@ struct BaseCategoryCardView: View {
                         .font(.subheadline.bold())
                     Text(subtitle)
                         .font(.caption)
-                        .foregroundStyle(.appBlack)
+                        .foregroundStyle(.textGray)
                 }
                 
                 Spacer()
@@ -36,35 +35,33 @@ struct BaseCategoryCardView: View {
                     Image(systemName: image)
                         .font(.caption.bold())
                         .foregroundStyle(.appBlack)
-                } // Лучше бы передавать View под разные Категории
+                }
             }
-            
             Spacer()
             
             ZStack {
                 Circle()
-                    .stroke(.appBackground, style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round))
-                    .frame(height: 55)
-                
+                    .stroke(.appBackground, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    .frame(height: 40)
                 Circle()
                     .trim(from: 0, to: 0.65)
                     .rotation(.degrees(-90))
-                    .stroke(.appBlack, style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
-                    .frame(height: 55)
+                    .stroke(.appBlack, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    .frame(height: 40)
                 Image(systemName: icon)
-                    .font(.headline)
-            } // Лучше бы передавать View под разные Категории
-            
+                    .font(.subheadline)
+            }
             Spacer()
             
             Text(currentAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 .font(.subheadline.bold())
             Text(plannedAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 .font(.caption)
-                .foregroundStyle(.appBlack)
+                .foregroundStyle(.textGray)
         }
-        .frame(width: size.width, height: size.height)
-        .componentBackground(color: .white)
+        .padding()
+        .componentBackground(gradient: .yellowGradient, size: size)
+        .shadow()
     }
 }
 
@@ -76,6 +73,6 @@ struct BaseCategoryCardView: View {
         currentAmount: 58000,
         plannedAmount: 37000,
         image: "rublesign",
-        size: CGSize(width: 124, height: 150)
+        size: CGSize(width: 144, height: 166)
     )
 }

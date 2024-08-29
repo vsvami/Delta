@@ -15,7 +15,7 @@ struct GoalCategoryCardView: View {
     let size: CGSize
     
     var body: some View {
-        HStack {
+        VStack {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.subheadline.bold())
@@ -25,19 +25,22 @@ struct GoalCategoryCardView: View {
                     .font(.subheadline.bold())
                 Text(plannedAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                     .font(.caption)
-                    .foregroundStyle(.appBlack)
+                    .foregroundStyle(.textGray)
+                
                 ProgressView(value: 0.7)
                     .tint(.appBlack)
-
-                Image("visionpro")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .padding([.leading, .bottom, .trailing], -16)
-                    .frame(width: size.width, height: size.height / 2)
+                    .background(.appBackground)
             }
+            .padding([.leading, .top, .trailing], 16)
+            
+            Image("visionpro")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: size.width, height: size.height / 2.3)
+                .clipped()
         }
-        .frame(width: size.width, height: size.height)
-        .componentBackground(color: .white)
+        .componentBackground(gradient: .yellowGradient, size: size)
+        .shadow()
     }
 }
 
@@ -47,6 +50,6 @@ struct GoalCategoryCardView: View {
         currentAmount: 230000,
         plannedAmount: 300000,
         image: "visionpro",
-        size: CGSize(width: 124, height: 150)
+        size: CGSize(width: 144, height: 166)
     )
 }
