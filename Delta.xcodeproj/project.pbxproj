@@ -21,6 +21,10 @@
 		6457CA4D2C517D54008C56DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4C2C517D54008C56DE /* User.swift */; };
 		6457CA4F2C518375008C56DE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457CA4E2C518375008C56DE /* Settings.swift */; };
 		647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */; };
+		647A6F3C2C811E4900927749 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647A6F3B2C811E4900927749 /* PlusButtonView.swift */; };
+		647A6F3E2C8120C000927749 /* CapsuleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */; };
+		647A6F402C8123E100927749 /* ChevronButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647A6F3F2C8123E100927749 /* ChevronButtonView.swift */; };
+		647A6F422C8125D000927749 /* RoundedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647A6F412C8125D000927749 /* RoundedButtonView.swift */; };
 		649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6952C3C58520081BC63 /* DeltaApp.swift */; };
 		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
@@ -59,6 +63,10 @@
 		640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanVsActualView.swift; sourceTree = "<group>"; };
 		6457CA4C2C517D54008C56DE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6457CA4E2C518375008C56DE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		647A6F3B2C811E4900927749 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
+		647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButtonView.swift; sourceTree = "<group>"; };
+		647A6F3F2C8123E100927749 /* ChevronButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronButtonView.swift; sourceTree = "<group>"; };
+		647A6F412C8125D000927749 /* RoundedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButtonView.swift; sourceTree = "<group>"; };
 		649FF6922C3C58520081BC63 /* Delta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		649FF6952C3C58520081BC63 /* DeltaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaApp.swift; sourceTree = "<group>"; };
 		649FF6972C3C58520081BC63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -124,6 +132,10 @@
 				640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */,
 				640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */,
 				64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */,
+				647A6F3B2C811E4900927749 /* PlusButtonView.swift */,
+				647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */,
+				647A6F412C8125D000927749 /* RoundedButtonView.swift */,
+				647A6F3F2C8123E100927749 /* ChevronButtonView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -403,9 +415,11 @@
 				64FB5C492C4BF4C500BBADB1 /* ProfileSettingsView.swift in Sources */,
 				64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */,
 				64FB5C532C4BF51700BBADB1 /* SeeAllView.swift in Sources */,
+				647A6F3C2C811E4900927749 /* PlusButtonView.swift in Sources */,
 				64FB5C452C4BF4B100BBADB1 /* ShoppingListView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
 				647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */,
+				647A6F402C8123E100927749 /* ChevronButtonView.swift in Sources */,
 				64E7B2FF2C56A59E00AD4533 /* Tab.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
 				64FB5C4F2C4BF4ED00BBADB1 /* AccountGroupSettingsView.swift in Sources */,
@@ -414,6 +428,7 @@
 				640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */,
 				649FF6982C3C58520081BC63 /* MainView.swift in Sources */,
 				64FB5C412C4BF49B00BBADB1 /* LoginView.swift in Sources */,
+				647A6F3E2C8120C000927749 /* CapsuleButtonView.swift in Sources */,
 				64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */,
 				64FB5C432C4BF4A600BBADB1 /* AnalyticsView.swift in Sources */,
 				640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */,
@@ -421,6 +436,7 @@
 				640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */,
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				640F9F422C7CFEAE007C7E7E /* ExpenseIncomeView.swift in Sources */,
+				647A6F422C8125D000927749 /* RoundedButtonView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,
 				64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */,
 				64FB5C5E2C4BF64100BBADB1 /* Fonts.swift in Sources */,
