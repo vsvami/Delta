@@ -8,39 +8,27 @@
 import SwiftUI
 
 struct ComponentBackgroundModifier: ViewModifier {
-    let color: Color?
-    let gradient: LinearGradient?
-
-    init(color: Color? = nil, gradient: LinearGradient? = nil) {
-        self.color = color
+    let gradient: LinearGradient
+    let size: CGSize
+    
+    init(gradient: LinearGradient, size: CGSize) {
         self.gradient = gradient
+        self.size = size
     }
-
+    
     func body(content: Content) -> some View {
         content
-            .padding()
-            .background(
-                Group {
-                    if let gradient = gradient {
-                        gradient
-                    } else if let color = color {
-                        color
-                    } else {
-                        Color.clear
-                    }
-                }
-            )
+            .frame(width: size.width, height: size.height)
+            .background(gradient)
             .cornerRadius(16)
-            .shadow(color: Color.gray.opacity(0.2), radius: 16)
     }
 }
 
 extension View {
-    func componentBackground(color: Color) -> some View {
-        modifier(ComponentBackgroundModifier(color: color))
-    }
-
-    func componentBackground(gradient: LinearGradient) -> some View {
-        modifier(ComponentBackgroundModifier(gradient: gradient))
+    func componentBackground(
+        gradient: LinearGradient,
+        size: CGSize
+    ) -> some View {
+        modifier(ComponentBackgroundModifier(gradient: gradient, size: size))
     }
 }

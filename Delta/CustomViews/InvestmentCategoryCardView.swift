@@ -34,64 +34,59 @@ struct InvestmentCategoryCardView: View {
     let size: CGSize
     
     var body: some View {
-        ZStack {
-            
-            VStack(alignment: .leading) {
-                HStack() {
-                    VStack(alignment: .leading) {
-                        Text(title)
-                            .font(.subheadline.bold())
-                        Text(subtitle)
-                            .font(.caption)
-                            .foregroundStyle(.appBlack)
-                    }
-                    
-                    Spacer()
-                    ZStack {
-                        Circle()
-                            .frame(height: 32)
-                            .foregroundStyle(.appBackground)
-                        Image(systemName: image)
-                            .font(.caption.bold())
-                            .foregroundStyle(.appBlack)
-                    } 
+        VStack(alignment: .leading) {
+            HStack() {
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.subheadline.bold())
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.textGray)
                 }
-                
                 Spacer()
                 
-                Chart {
-                    ForEach(dailySales) { sale in
-                        LineMark(
-                            x: .value("", sale.time),
-                            y: .value("", sale.sales)
-                        )
-                        .interpolationMethod(.catmullRom)
+                ZStack {
+                    Circle()
+                        .frame(height: 32)
+                        .foregroundStyle(.appBackground)
+                    Image(systemName: image)
+                        .font(.caption.bold())
                         .foregroundStyle(.appBlack)
-                    }
                 }
-                .chartXAxis(.hidden) // Скрывает ось X
-                .chartYAxis(.hidden) // Скрывает ось Y
-                .chartXAxisLabel("") // Убирает подписи на оси X
-                .chartYAxisLabel("") // Убирает подписи на оси Y
-                .chartPlotStyle { plotArea in
-                    plotArea
-                        .background(Color.clear) // Убирает фон сетки
-                        .border(Color.clear) // Убирает рамку вокруг сетки
-                }
-                .frame(width: size.width, height: size.height / 2)
-                
-                Spacer()
-                
-                Text(amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .font(.subheadline.bold())
-                Text(percent, format: .percent)
-                    .font(.caption)
+            }
+            Spacer(minLength: 0)
+            
+            Chart {
+                ForEach(dailySales) { sale in
+                    LineMark(
+                        x: .value("", sale.time),
+                        y: .value("", sale.sales)
+                    )
+                    .interpolationMethod(.catmullRom)
                     .foregroundStyle(.appBlack)
+                }
+            }
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            .chartXAxisLabel("")
+            .chartYAxisLabel("")
+            .chartPlotStyle { plotArea in
+                plotArea
+                    .background(Color.clear)
+                    .border(Color.clear)
             }
             
+            Spacer(minLength: 0)
+            
+            Text(amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                .font(.subheadline.bold())
+            Text(percent, format: .percent)
+                .font(.caption)
+                .foregroundStyle(.textGray)
         }
-        .frame(width: size.width, height: size.height)
-        .componentBackground(color: .white)
+        .padding()
+        .componentBackground(gradient: .yellowGradient, size: size)
+        .shadow()
     }
 }
 
@@ -102,6 +97,6 @@ struct InvestmentCategoryCardView: View {
         amount: 60142,
         percent: 0.0512,
         image: "bitcoinsign.circle.fill",
-        size: CGSize(width: 124, height: 150)
+        size: CGSize(width: 144, height: 166)
     )
 }

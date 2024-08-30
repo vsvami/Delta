@@ -14,14 +14,14 @@ struct PlanVsActualView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 Circle()
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(.textGray)
                     .frame(width: 4, height: 4)
-                Text("План")
+                Text("Plan")
                     .font(.caption)
                 Circle()
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.appBlack)
                     .frame(width: 4, height: 4)
-                Text("Факт")
+                Text("Actual")
                     .font(.caption)
                 Spacer()
             }
@@ -30,11 +30,12 @@ struct PlanVsActualView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
         }
-        .frame(width: size.width, height: size.height)
-        .componentBackground(color: .white)
+        .padding()
+        .componentBackground(gradient: .yellowGradient, size: size)
+        .shadow()
     }
 }
 
 #Preview {
-    PlanVsActualView(size: CGSize(width: 187, height: 106))
+    PlanVsActualView(size: CGSize(width: 211, height: 146))
 }
