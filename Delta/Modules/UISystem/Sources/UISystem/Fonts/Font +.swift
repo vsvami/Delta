@@ -24,11 +24,11 @@ public extension Font {
         .system(size: size, weight: .regular, design: .none)
     }
     
-    static func bodyText2(_ size: CGFloat = 15) -> Font {
+    static func bodyText1(_ size: CGFloat = 15) -> Font {
         .system(size: size, weight: .semibold, design: .none)
     }
     
-    static func bodyText3(_ size: CGFloat = 15) -> Font {
+    static func bodyText2(_ size: CGFloat = 15) -> Font {
         .system(size: size, weight: .regular, design: .none)
     }
     
