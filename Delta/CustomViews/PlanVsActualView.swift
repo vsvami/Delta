@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct PlanVsActualView: View {
     let size: CGSize
@@ -31,7 +32,7 @@ struct PlanVsActualView: View {
                 .aspectRatio(contentMode: .fit)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
         .shadow()
     }
 }

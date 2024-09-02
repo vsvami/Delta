@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct GoalCategoryCardView: View {
     let title: String
@@ -39,7 +40,7 @@ struct GoalCategoryCardView: View {
                 .frame(width: size.width, height: size.height / 2.3)
                 .clipped()
         }
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
         .shadow()
     }
 }

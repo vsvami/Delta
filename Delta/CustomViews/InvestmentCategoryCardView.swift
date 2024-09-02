@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+import UISystem
 
 struct Sale: Identifiable {
     var id: String = UUID().uuidString
@@ -85,7 +86,7 @@ struct InvestmentCategoryCardView: View {
                 .foregroundStyle(.textGray)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
         .shadow()
     }
 }

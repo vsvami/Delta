@@ -30,7 +30,7 @@ struct ExpenseIncomeView: View {
             Spacer(minLength: 0)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
         .shadow()
     }
 }

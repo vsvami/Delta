@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct BaseCategoryCardView: View {
     let title: String
@@ -60,7 +61,7 @@ struct BaseCategoryCardView: View {
                 .foregroundStyle(.textGray)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
         .shadow()
     }
 }

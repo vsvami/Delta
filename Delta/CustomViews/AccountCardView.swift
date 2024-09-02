@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct AccountCardView: View {
     let title: String
@@ -41,7 +42,7 @@ struct AccountCardView: View {
         title: "Sber Bank",
         amount: "₽ 10 000 000",
         image: "rublesign.circle",
-        gradient: .greenGradient,
+        gradient: AppGradient.greenGradient.value,
         size: CGSize(width: 144, height: 90)
     )
 }
