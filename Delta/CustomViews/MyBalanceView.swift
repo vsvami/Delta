@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct MyBalanceView: View {
     let balance: Double
@@ -29,7 +30,7 @@ struct MyBalanceView: View {
                 .clipShape(.circle)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
         .shadow()
     }
 }

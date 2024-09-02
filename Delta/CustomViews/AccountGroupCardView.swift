@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct AccountGroupCardView: View {
     @State private var isExpanded = false
@@ -56,7 +57,7 @@ struct AccountGroupCardView: View {
                                 title: "Основной",
                                 amount: "₽ 10 000 000",
                                 image: "rublesign.circle",
-                                gradient: .yellowGradient,
+                                gradient: AppGradient.yellowGradient.value,
                                 size: CGSize(width: size.width, height: size.height)
                             )
                         }
@@ -105,7 +106,7 @@ struct AccountGroupCardView: View {
         title: "SberBank",
         amount: "₽ 10 000 000",
         image: "building.columns",
-        gradient: .purpleGradient,
+        gradient: AppGradient.purpleGradient.value,
         size: CGSize(width: 144, height: 83),
         accounts: 2
     )
