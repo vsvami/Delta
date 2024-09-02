@@ -9,9 +9,10 @@ import SwiftUI
 
 struct AccountCardView: View {
     let title: String
-    let amount: String
+    let currency: Currency
+    let amount: Double
     let image: String
-    let gradient: LinearGradient
+    let color: LinearGradient
     let size: CGSize
     
     var body: some View {
@@ -21,7 +22,7 @@ struct AccountCardView: View {
                     Text(title)
                         .font(.headline)
                     Spacer(minLength: 0)
-                    Text(amount)
+                    Text(String(amount))
                         .font(.caption)
                 }
                 Spacer(minLength: 0)
@@ -32,16 +33,25 @@ struct AccountCardView: View {
                 .font(.headline)
         }
         .padding()
-        .componentBackground(gradient: gradient, size: size)
+        .componentBackground(gradient: color, size: size)
     }
 }
 
 #Preview {
-    AccountCardView(
-        title: "Sber Bank",
-        amount: "₽ 10 000 000",
-        image: "rublesign.circle",
-        gradient: .greenGradient,
+    let dataStore = DataStore.shared
+    let account = dataStore.accounts.first
+    let title = account?.title ?? ""
+    let currency = account?.currency ?? .rub
+    let amount = account?.amount ?? 0
+    let image = account?.image ?? ""
+    // TODO: заменить градиент на строку
+    
+    return AccountCardView(
+        title: title,
+        currency: currency,
+        amount: amount,
+        image: image,
+        color: .greenGradient,
         size: CGSize(width: 144, height: 90)
     )
 }

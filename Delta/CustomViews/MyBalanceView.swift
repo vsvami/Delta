@@ -8,17 +8,35 @@
 import SwiftUI
 
 struct MyBalanceView: View {
-    let balance: Double
+    let totalBalance: Double
+    let myBalance: Double
     let image: String
     let size: CGSize
+    
+    @State private var isBalanceSelected: Bool = true
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("My balance")
-                    .font(.caption)
+                HStack(spacing: 12) {
+                    Button(action: {
+                        isBalanceSelected = true
+                    }) {
+                        Text("Total balance")
+                            .foregroundColor(isBalanceSelected ? .black : .gray)
+                    }
+                    Button(action: {
+                        isBalanceSelected = false
+                    }) {
+                        Text("My balance")
+                            .foregroundColor(!isBalanceSelected ? .black : .gray)
+                    }
+                }
+                .font(.caption)
+                
                 Spacer(minLength: 0)
-                Text(balance, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                
+                Text(isBalanceSelected ? totalBalance : myBalance, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                     .font(.title.bold())
             }
             Spacer()
@@ -35,8 +53,13 @@ struct MyBalanceView: View {
 }
 
 #Preview {
-    MyBalanceView(
-        balance: 1200000,
+    let dataStore = DataStore.shared
+    let totalBalance = dataStore.accounts.reduce(0) { $0 + $1.amount }
+    let myBalance = dataStore.people.first?.balance
+    
+    return MyBalanceView(
+        totalBalance: totalBalance,
+        myBalance: myBalance ?? 0,
         image: "person",
         size: CGSize(width: 360, height: 78)
     )

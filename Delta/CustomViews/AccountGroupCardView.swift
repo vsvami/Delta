@@ -8,20 +8,25 @@
 import SwiftUI
 
 struct AccountGroupCardView: View {
-    @State private var isExpanded = false
-    
     let title: String
-    let amount: String
+    let currency: Currency
+    let amount: Double
     let image: String
     let gradient: LinearGradient
     let size: CGSize
-    let accounts: Int
+    let accounts: [Account]
+    
+    @State private var isExpanded = false
+    
+    var countOfAccounts: Int {
+        accounts.count
+    }
     
     var sizeOfButtons: Double {
         30
     }
     var sizeOfAccountsGroup: Double {
-        (size.width + 8) * Double(accounts) + sizeOfButtons + 16
+        (size.width + 8) * Double(countOfAccounts) + sizeOfButtons + 16
     }
     
     var body: some View {
@@ -50,13 +55,14 @@ struct AccountGroupCardView: View {
                                 .padding(.top)
                         }
                         .frame(width: sizeOfButtons)
-          
-                        ForEach(0..<accounts, id: \.self) { index in
+                        
+                        ForEach(accounts) { account in
                             AccountCardView(
-                                title: "Основной",
-                                amount: "₽ 10 000 000",
-                                image: "rublesign.circle",
-                                gradient: .yellowGradient,
+                                title: account.title,
+                                currency: account.currency,
+                                amount: account.amount,
+                                image: account.image,
+                                color: .yellowGradient, // TODO: заменить градиент на строку
                                 size: CGSize(width: size.width, height: size.height)
                             )
                         }
@@ -74,10 +80,11 @@ struct AccountGroupCardView: View {
                             .offset(y: -4)
                         
                         AccountCardView(
-                            title: title,
+                            title: title, 
+                            currency: .rub,
                             amount: amount,
                             image: image,
-                            gradient: gradient,
+                            color: gradient,
                             size: CGSize(width: size.width, height: size.height)
                         )
                     }
@@ -101,12 +108,23 @@ struct AccountGroupCardView: View {
 }
 
 #Preview {
-    AccountGroupCardView(
-        title: "SberBank",
-        amount: "₽ 10 000 000",
-        image: "building.columns",
+    let dataStore = DataStore.shared
+    let group = dataStore.groupOfAccounts
+    let title = group?.title ?? ""
+    let currency = group?.currency ?? .rub
+    let amount = group?.totalAmount ?? 0
+    let image = group?.image ?? ""
+    let accounts = group?.accounts ?? []
+ 
+    // TODO: заменить градиент на строку
+    
+    return AccountGroupCardView(
+        title: title,
+        currency: currency,
+        amount: amount,
+        image: image,
         gradient: .purpleGradient,
         size: CGSize(width: 144, height: 83),
-        accounts: 2
+        accounts: accounts
     )
 }
