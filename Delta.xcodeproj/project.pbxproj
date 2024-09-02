@@ -10,6 +10,8 @@
 		1A2A33792C80B5A1008F6414 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33782C80B5A1008F6414 /* Router.swift */; };
 		1A2A337B2C80ED06008F6414 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337A2C80ED06008F6414 /* TabBarView.swift */; };
 		1A2A337D2C80F61F008F6414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337C2C80F61F008F6414 /* ContentView.swift */; };
+		1A2A33802C85F955008F6414 /* BaseCategoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */; };
+		1A2A33832C860431008F6414 /* Double +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33822C860431008F6414 /* Double +.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
@@ -53,6 +55,8 @@
 		1A2A33782C80B5A1008F6414 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1A2A337A2C80ED06008F6414 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		1A2A337C2C80F61F008F6414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryRowView.swift; sourceTree = "<group>"; };
+		1A2A33822C860431008F6414 /* Double +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double +.swift"; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
@@ -105,6 +109,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A2A337E2C85F93E008F6414 /* RowViews */ = {
+			isa = PBXGroup;
+			children = (
+				1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */,
+			);
+			path = RowViews;
+			sourceTree = "<group>";
+		};
+		1A2A33812C860422008F6414 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1A2A33822C860431008F6414 /* Double +.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1A6725472C56D4AC004B3730 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +144,7 @@
 		64251ED42C4191ED0014D18A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				1A2A337E2C85F93E008F6414 /* RowViews */,
 				64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */,
 				640F9F412C7CFEAE007C7E7E /* ExpenseIncomeView.swift */,
 				640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */,
@@ -306,6 +327,7 @@
 		649FF6942C3C58520081BC63 /* Delta */ = {
 			isa = PBXGroup;
 			children = (
+				1A2A33812C860422008F6414 /* Extensions */,
 				640F9F4A2C7D3EC7007C7E7E /* Modifiers */,
 				64251EE02C4193F50014D18A /* Views */,
 				64251ED42C4191ED0014D18A /* CustomViews */,
@@ -415,6 +437,7 @@
 				64FB5C492C4BF4C500BBADB1 /* ProfileSettingsView.swift in Sources */,
 				64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */,
 				64FB5C532C4BF51700BBADB1 /* SeeAllView.swift in Sources */,
+				1A2A33832C860431008F6414 /* Double +.swift in Sources */,
 				647A6F3C2C811E4900927749 /* PlusButtonView.swift in Sources */,
 				64FB5C452C4BF4B100BBADB1 /* ShoppingListView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
@@ -437,6 +460,7 @@
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				640F9F422C7CFEAE007C7E7E /* ExpenseIncomeView.swift in Sources */,
 				647A6F422C8125D000927749 /* RoundedButtonView.swift in Sources */,
+				1A2A33802C85F955008F6414 /* BaseCategoryRowView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,
 				64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */,
 				64FB5C5E2C4BF64100BBADB1 /* Fonts.swift in Sources */,
