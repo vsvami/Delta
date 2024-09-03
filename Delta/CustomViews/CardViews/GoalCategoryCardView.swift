@@ -12,6 +12,7 @@ struct GoalCategoryCardView: View {
     let title: String
     let currentAmount: Double
     let plannedAmount: Double
+    let currency: Currency
     let image: String
     let size: CGSize
     
@@ -19,13 +20,14 @@ struct GoalCategoryCardView: View {
         VStack {
             VStack(alignment: .leading) {
                 Text(title)
-                    .font(.subheadline.bold())
+                    .font(.bodyText1())
                 Spacer()
                 
-                Text(currentAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .font(.subheadline.bold())
-                Text(plannedAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .font(.caption)
+                CurrencyTextView(currency: currency, amount: currentAmount)
+                    .font(.bodyText1())
+
+                CurrencyTextView(currency: currency, amount: plannedAmount)
+                    .font(.metadata3())
                     .foregroundStyle(.textGray)
                 
                 ProgressView(value: 0.7)
@@ -40,16 +42,16 @@ struct GoalCategoryCardView: View {
                 .frame(width: size.width, height: size.height / 2.3)
                 .clipped()
         }
-        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
-        .shadow()
+        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
     }
 }
 
 #Preview {
     GoalCategoryCardView(
         title: "Vision Pro",
-        currentAmount: 230000,
-        plannedAmount: 300000,
+        currentAmount: 2100,
+        plannedAmount: 3000,
+        currency: .usd, //TODO: - задать валюту цели
         image: "visionpro",
         size: CGSize(width: 144, height: 166)
     )

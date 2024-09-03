@@ -31,7 +31,7 @@ public struct AppColors {
     
 }
 
-public enum AppGradient {
+public enum AppGradient: CaseIterable {
     case blueGradient
     case purpleGradient
     case pinkGradient
@@ -221,6 +221,10 @@ public enum AppGradient {
                 endPoint: .bottomTrailing
             )
         }
+    }
+    
+    public static func getColor(from stringColor: String) -> AppGradient? {
+        AppGradient.allCases.first { $0.name == stringColor }
     }
 }
 

@@ -30,6 +30,7 @@ struct InvestmentCategoryCardView: View {
     let title: String
     let subtitle: String
     let amount: Double
+    let currency: Currency
     let percent: Double
     let image: String
     let size: CGSize
@@ -39,9 +40,9 @@ struct InvestmentCategoryCardView: View {
             HStack() {
                 VStack(alignment: .leading) {
                     Text(title)
-                        .font(.subheadline.bold())
+                        .font(.bodyText1())
                     Text(subtitle)
-                        .font(.caption)
+                        .font(.metadata3())
                         .foregroundStyle(.textGray)
                 }
                 Spacer()
@@ -51,8 +52,7 @@ struct InvestmentCategoryCardView: View {
                         .frame(height: 32)
                         .foregroundStyle(.appBackground)
                     Image(systemName: image)
-                        .font(.caption.bold())
-                        .foregroundStyle(.appBlack)
+                        .font(.bodyText1())
                 }
             }
             Spacer(minLength: 0)
@@ -79,15 +79,15 @@ struct InvestmentCategoryCardView: View {
             
             Spacer(minLength: 0)
             
-            Text(amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                .font(.subheadline.bold())
+            CurrencyTextView(currency: currency, amount: amount)
+                .font(.bodyText1())
+
             Text(percent, format: .percent)
-                .font(.caption)
+                .font(.metadata3())
                 .foregroundStyle(.textGray)
         }
         .padding()
-        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
-        .shadow()
+        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
     }
 }
 
@@ -96,6 +96,7 @@ struct InvestmentCategoryCardView: View {
         title: "BTC",
         subtitle: "Bitcoin",
         amount: 60142,
+        currency: .gbp, //TODO: - задать валюту
         percent: 0.0512,
         image: "bitcoinsign.circle.fill",
         size: CGSize(width: 144, height: 166)

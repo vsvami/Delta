@@ -14,6 +14,7 @@ struct BaseCategoryCardView: View {
     let icon: String
     let currentAmount: Double
     let plannedAmount: Double
+    let currency: Currency
     let image: String
     let size: CGSize
     
@@ -22,9 +23,9 @@ struct BaseCategoryCardView: View {
             HStack() {
                 VStack(alignment: .leading) {
                     Text(title)
-                        .font(.subheadline.bold())
+                        .font(.bodyText1())
                     Text(subtitle)
-                        .font(.caption)
+                        .font(.metadata3())
                         .foregroundStyle(.textGray)
                 }
                 
@@ -33,8 +34,8 @@ struct BaseCategoryCardView: View {
                     Circle()
                         .frame(height: 32)
                         .foregroundStyle(.appBackground)
-                    Image(systemName: image)
-                        .font(.caption.bold())
+                    Text(currency.symbol)
+                        .font(.metadata2())
                         .foregroundStyle(.appBlack)
                 }
             }
@@ -50,19 +51,20 @@ struct BaseCategoryCardView: View {
                     .stroke(.appBlack, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                     .frame(height: 40)
                 Image(systemName: icon)
-                    .font(.subheadline)
+                    .font(.bodyText1())
             }
             Spacer()
             
-            Text(currentAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                .font(.subheadline.bold())
-            Text(plannedAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                .font(.caption)
+            CurrencyTextView(currency: currency, amount: currentAmount)
+                .font(.bodyText1())
+//                .foregroundStyle(.red) //TODO: - isExceeded - red
+            
+            CurrencyTextView(currency: currency, amount: plannedAmount)
+                .font(.metadata3())
                 .foregroundStyle(.textGray)
         }
         .padding()
-        .componentBackground(gradient: AppGradient.yellowGradient.value, size: size)
-        .shadow()
+        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
     }
 }
 
@@ -73,6 +75,7 @@ struct BaseCategoryCardView: View {
         icon: "briefcase",
         currentAmount: 58000,
         plannedAmount: 37000,
+        currency: .egp, //TODO: - задать основную валюту категории
         image: "rublesign",
         size: CGSize(width: 144, height: 166)
     )
