@@ -10,6 +10,8 @@
 		1A2A33792C80B5A1008F6414 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33782C80B5A1008F6414 /* Router.swift */; };
 		1A2A337B2C80ED06008F6414 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337A2C80ED06008F6414 /* TabBarView.swift */; };
 		1A2A337D2C80F61F008F6414 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337C2C80F61F008F6414 /* ContentView.swift */; };
+		1A2A33802C85F955008F6414 /* BaseCategoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */; };
+		1A2A33832C860431008F6414 /* Double +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33822C860431008F6414 /* Double +.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
@@ -29,7 +31,7 @@
 		649FF6982C3C58520081BC63 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649FF6972C3C58520081BC63 /* MainView.swift */; };
 		649FF69A2C3C58520081BC63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF6992C3C58520081BC63 /* Assets.xcassets */; };
 		649FF69D2C3C58520081BC63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */; };
-		64E7B2FF2C56A59E00AD4533 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E7B2FE2C56A59E00AD4533 /* Tab.swift */; };
+		64B5F4282C8688D10072AC29 /* CurrencyTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B5F4272C8688D10072AC29 /* CurrencyTextView.swift */; };
 		64FB5C3F2C4BF48600BBADB1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C3E2C4BF48600BBADB1 /* OnboardingView.swift */; };
 		64FB5C412C4BF49B00BBADB1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C402C4BF49B00BBADB1 /* LoginView.swift */; };
 		64FB5C432C4BF4A600BBADB1 /* AnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C422C4BF4A600BBADB1 /* AnalyticsView.swift */; };
@@ -45,7 +47,6 @@
 		64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */; };
 		64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C582C4BF5CB00BBADB1 /* Person.swift */; };
 		64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */; };
-		64FB5C5E2C4BF64100BBADB1 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C5D2C4BF64100BBADB1 /* Fonts.swift */; };
 		64FEDB742C8109AC004F4E4E /* CustomShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		1A2A33782C80B5A1008F6414 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1A2A337A2C80ED06008F6414 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		1A2A337C2C80F61F008F6414 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryRowView.swift; sourceTree = "<group>"; };
+		1A2A33822C860431008F6414 /* Double +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double +.swift"; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
@@ -72,8 +75,8 @@
 		649FF6972C3C58520081BC63 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		649FF6992C3C58520081BC63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		649FF69C2C3C58520081BC63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		64B5F4272C8688D10072AC29 /* CurrencyTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextView.swift; sourceTree = "<group>"; };
 		64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGroupCardView.swift; sourceTree = "<group>"; };
-		64E7B2FE2C56A59E00AD4533 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		64FB5C3E2C4BF48600BBADB1 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		64FB5C402C4BF49B00BBADB1 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		64FB5C422C4BF4A600BBADB1 /* AnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsView.swift; sourceTree = "<group>"; };
@@ -89,7 +92,6 @@
 		64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceView.swift; sourceTree = "<group>"; };
 		64FB5C582C4BF5CB00BBADB1 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		64FB5C5D2C4BF64100BBADB1 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShadowModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A2A337E2C85F93E008F6414 /* RowViews */ = {
+			isa = PBXGroup;
+			children = (
+				1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */,
+			);
+			path = RowViews;
+			sourceTree = "<group>";
+		};
+		1A2A33812C860422008F6414 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1A2A33822C860431008F6414 /* Double +.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		1A6725472C56D4AC004B3730 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,18 +142,10 @@
 		64251ED42C4191ED0014D18A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */,
-				640F9F412C7CFEAE007C7E7E /* ExpenseIncomeView.swift */,
-				640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */,
-				640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */,
-				640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */,
-				640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */,
-				640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */,
-				64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */,
-				647A6F3B2C811E4900927749 /* PlusButtonView.swift */,
-				647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */,
-				647A6F412C8125D000927749 /* RoundedButtonView.swift */,
-				647A6F3F2C8123E100927749 /* ChevronButtonView.swift */,
+				64D71CBF2C86883A009B5CC5 /* CardViews */,
+				1A2A337E2C85F93E008F6414 /* RowViews */,
+				64D71CC02C86886B009B5CC5 /* ButtonViews */,
+				64B5F4272C8688D10072AC29 /* CurrencyTextView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -146,7 +156,6 @@
 				64FB5C582C4BF5CB00BBADB1 /* Person.swift */,
 				6457CA4C2C517D54008C56DE /* User.swift */,
 				6457CA4E2C518375008C56DE /* Settings.swift */,
-				64E7B2FE2C56A59E00AD4533 /* Tab.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,12 +315,12 @@
 		649FF6942C3C58520081BC63 /* Delta */ = {
 			isa = PBXGroup;
 			children = (
+				1A2A33812C860422008F6414 /* Extensions */,
 				640F9F4A2C7D3EC7007C7E7E /* Modifiers */,
 				64251EE02C4193F50014D18A /* Views */,
 				64251ED42C4191ED0014D18A /* CustomViews */,
 				64251ED52C4191F50014D18A /* Models */,
 				64251ED62C41920E0014D18A /* Services */,
-				64FB5C5C2C4BF5F400BBADB1 /* Helpers */,
 				649FF6952C3C58520081BC63 /* DeltaApp.swift */,
 				1A2A337C2C80F61F008F6414 /* ContentView.swift */,
 				649FF6992C3C58520081BC63 /* Assets.xcassets */,
@@ -328,12 +337,30 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		64FB5C5C2C4BF5F400BBADB1 /* Helpers */ = {
+		64D71CBF2C86883A009B5CC5 /* CardViews */ = {
 			isa = PBXGroup;
 			children = (
-				64FB5C5D2C4BF64100BBADB1 /* Fonts.swift */,
+				64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */,
+				640F9F412C7CFEAE007C7E7E /* ExpenseIncomeView.swift */,
+				640F9F4D2C7D3F53007C7E7E /* AccountCardView.swift */,
+				640F9F4E2C7D3F53007C7E7E /* PlanVsActualView.swift */,
+				640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */,
+				640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */,
+				640EBB4D2C7F742700244B24 /* InvestmentCategoryCardView.swift */,
+				64DAA0992C7FA90F0089D789 /* AccountGroupCardView.swift */,
 			);
-			path = Helpers;
+			path = CardViews;
+			sourceTree = "<group>";
+		};
+		64D71CC02C86886B009B5CC5 /* ButtonViews */ = {
+			isa = PBXGroup;
+			children = (
+				647A6F3B2C811E4900927749 /* PlusButtonView.swift */,
+				647A6F3D2C8120C000927749 /* CapsuleButtonView.swift */,
+				647A6F412C8125D000927749 /* RoundedButtonView.swift */,
+				647A6F3F2C8123E100927749 /* ChevronButtonView.swift */,
+			);
+			path = ButtonViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,18 +442,19 @@
 				64FB5C492C4BF4C500BBADB1 /* ProfileSettingsView.swift in Sources */,
 				64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */,
 				64FB5C532C4BF51700BBADB1 /* SeeAllView.swift in Sources */,
+				1A2A33832C860431008F6414 /* Double +.swift in Sources */,
 				647A6F3C2C811E4900927749 /* PlusButtonView.swift in Sources */,
 				64FB5C452C4BF4B100BBADB1 /* ShoppingListView.swift in Sources */,
 				640EBB4E2C7F742700244B24 /* InvestmentCategoryCardView.swift in Sources */,
 				647A6F3A2C81141000927749 /* AccountGroupCardView.swift in Sources */,
 				647A6F402C8123E100927749 /* ChevronButtonView.swift in Sources */,
-				64E7B2FF2C56A59E00AD4533 /* Tab.swift in Sources */,
 				64FB5C4B2C4BF4CC00BBADB1 /* AppDesignSettingsView.swift in Sources */,
 				64FB5C4F2C4BF4ED00BBADB1 /* AccountGroupSettingsView.swift in Sources */,
 				1A2A337D2C80F61F008F6414 /* ContentView.swift in Sources */,
 				64FB5C3F2C4BF48600BBADB1 /* OnboardingView.swift in Sources */,
 				640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */,
 				649FF6982C3C58520081BC63 /* MainView.swift in Sources */,
+				64B5F4282C8688D10072AC29 /* CurrencyTextView.swift in Sources */,
 				64FB5C412C4BF49B00BBADB1 /* LoginView.swift in Sources */,
 				647A6F3E2C8120C000927749 /* CapsuleButtonView.swift in Sources */,
 				64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */,
@@ -437,9 +465,9 @@
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				640F9F422C7CFEAE007C7E7E /* ExpenseIncomeView.swift in Sources */,
 				647A6F422C8125D000927749 /* RoundedButtonView.swift in Sources */,
+				1A2A33802C85F955008F6414 /* BaseCategoryRowView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,
 				64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */,
-				64FB5C5E2C4BF64100BBADB1 /* Fonts.swift in Sources */,
 				640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */,
 				640F9F502C7D3F53007C7E7E /* PlanVsActualView.swift in Sources */,
 				64FB5C552C4BF52500BBADB1 /* TransferView.swift in Sources */,
@@ -587,6 +615,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -616,6 +645,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

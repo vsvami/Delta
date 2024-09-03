@@ -13,7 +13,7 @@ struct ChevronButtonView: View {
     var body: some View {
         Button(action: {}) {
         Label("See all", systemImage: "chevron.right.circle.fill")
-            .font(.subheadline)
+            .font(.bodyText2())
             .labelStyle(IconTrailingLabelStyle())
             .foregroundStyle(.appBlack)
         }

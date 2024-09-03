@@ -14,14 +14,13 @@ struct CapsuleButtonView: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.caption)
+                .font(.metadata3())
                 .padding()
                 .frame(height: 32)
                 .foregroundStyle(.appBlack)
         }
         .background(.appBackgroundMini)
         .clipShape(Capsule())
-        .shadow()
     }
 }
 

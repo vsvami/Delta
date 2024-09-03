@@ -6,29 +6,30 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct ComponentBackgroundModifier: ViewModifier {
-    let gradient: LinearGradient
+    let color: AppGradient
     let size: CGSize
     
-    init(gradient: LinearGradient, size: CGSize) {
-        self.gradient = gradient
+    init(color: String, size: CGSize) {
+        self.color = AppGradient.getColor(from: color) ?? .appWhite
         self.size = size
     }
     
     func body(content: Content) -> some View {
         content
             .frame(width: size.width, height: size.height)
-            .background(gradient)
+            .background(color.value)
             .cornerRadius(16)
     }
 }
 
 extension View {
     func componentBackground(
-        gradient: LinearGradient,
+        color: String,
         size: CGSize
     ) -> some View {
-        modifier(ComponentBackgroundModifier(gradient: gradient, size: size))
+        modifier(ComponentBackgroundModifier(color: color, size: size))
     }
 }

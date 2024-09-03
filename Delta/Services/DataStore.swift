@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UISystem
 
 final class DataStore {
     static let shared = DataStore()
@@ -26,7 +27,7 @@ final class DataStore {
             currency: .rub,
             amount: 1208342.54,
             image: "creditcard",
-            color: "appRed",
+            color: AppGradient.appRed.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -38,7 +39,7 @@ final class DataStore {
             currency: .rub,
             amount: 41320.91,
             image: "rublesign.circle",
-            color: "appGray",
+            color: AppGradient.appGray.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -50,7 +51,7 @@ final class DataStore {
             currency: .rub,
             amount: 45714.51,
             image: "rublesign.circle",
-            color: "appWhite",
+            color: AppGradient.appWhite.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -62,7 +63,7 @@ final class DataStore {
             currency: .usd,
             amount: 23523.51,
             image: "dollarsign.circle",
-            color: "appWhite",
+            color: AppGradient.appWhite.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -94,7 +95,7 @@ final class DataStore {
             title: "Sber bank",
             currency: .rub,
             image: "building.columns",
-            color: "appGreen",
+            color: AppGradient.appGreen.name,
             accounts: [basic, currency],
             categoryType: .groupOfAccounts
         )

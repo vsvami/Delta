@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct MyBalanceView: View {
     let totalBalance: Double
     let myBalance: Double
+    let currency: Currency
     let image: String
     let size: CGSize
     
@@ -23,21 +25,24 @@ struct MyBalanceView: View {
                         isBalanceSelected = true
                     }) {
                         Text("Total balance")
-                            .foregroundColor(isBalanceSelected ? .black : .gray)
+                            .foregroundColor(isBalanceSelected ? .appBlack : .gray)
                     }
                     Button(action: {
                         isBalanceSelected = false
                     }) {
                         Text("My balance")
-                            .foregroundColor(!isBalanceSelected ? .black : .gray)
+                            .foregroundColor(!isBalanceSelected ? .appBlack : .gray)
                     }
                 }
-                .font(.caption)
+                .font(.metadata3())
                 
                 Spacer(minLength: 0)
                 
-                Text(isBalanceSelected ? totalBalance : myBalance, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .font(.title.bold())
+                CurrencyTextView(
+                    currency: currency,
+                    amount: isBalanceSelected ? totalBalance : myBalance
+                )
+                .font(.heading1())
             }
             Spacer()
             
@@ -47,7 +52,7 @@ struct MyBalanceView: View {
                 .clipShape(.circle)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
         .shadow()
     }
 }
@@ -60,6 +65,7 @@ struct MyBalanceView: View {
     return MyBalanceView(
         totalBalance: totalBalance,
         myBalance: myBalance ?? 0,
+        currency: .gel, //TODO: - задать основную валюту приложения
         image: "person",
         size: CGSize(width: 360, height: 78)
     )

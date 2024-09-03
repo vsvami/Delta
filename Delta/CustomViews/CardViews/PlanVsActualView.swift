@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct PlanVsActualView: View {
     let size: CGSize
@@ -17,12 +18,12 @@ struct PlanVsActualView: View {
                     .foregroundStyle(.textGray)
                     .frame(width: 4, height: 4)
                 Text("Plan")
-                    .font(.caption)
+                    .font(.metadata3())
                 Circle()
                     .foregroundStyle(.appBlack)
                     .frame(width: 4, height: 4)
                 Text("Actual")
-                    .font(.caption)
+                    .font(.metadata3())
                 Spacer()
             }
             
@@ -31,7 +32,7 @@ struct PlanVsActualView: View {
                 .aspectRatio(contentMode: .fit)
         }
         .padding()
-        .componentBackground(gradient: .yellowGradient, size: size)
+        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
         .shadow()
     }
 }

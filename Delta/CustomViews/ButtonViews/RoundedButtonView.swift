@@ -14,7 +14,7 @@ struct RoundedButtonView: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.subheadline)
+                .font(.bodyText2())
                 .foregroundStyle(.appWhite)
         }
         .padding()
