@@ -38,11 +38,12 @@ struct MyBalanceView: View {
                 
                 Spacer(minLength: 0)
                 
-                CurrencyTextView(
-                    currency: currency,
-                    amount: isBalanceSelected ? totalBalance : myBalance
+                Text(
+                    isBalanceSelected
+                    ? totalBalance.formattedAmount(for: currency)
+                    : myBalance.formattedAmount(for: currency)
                 )
-                .font(.heading1())
+                    .font(.heading1())
             }
             Spacer()
             

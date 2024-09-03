@@ -79,7 +79,7 @@ struct InvestmentCategoryCardView: View {
             
             Spacer(minLength: 0)
             
-            CurrencyTextView(currency: currency, amount: amount)
+            Text(amount.formattedAmount(for: currency))
                 .font(.bodyText1())
 
             Text(percent, format: .percent)

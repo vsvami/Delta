@@ -43,23 +43,29 @@ struct BaseCategoryCardView: View {
             
             ZStack {
                 Circle()
-                    .stroke(.appBackground, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    .stroke(
+                        .appBackground,
+                        style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
+                    )
                     .frame(height: 40)
                 Circle()
                     .trim(from: 0, to: 0.65)
                     .rotation(.degrees(-90))
-                    .stroke(.appBlack, style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                    .stroke(
+                        .appBlack,
+                        style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
+                    )
                     .frame(height: 40)
                 Image(systemName: icon)
                     .font(.bodyText1())
             }
             Spacer()
             
-            CurrencyTextView(currency: currency, amount: currentAmount)
+            Text(currentAmount.formattedAmount(for: currency))
                 .font(.bodyText1())
 //                .foregroundStyle(.red) //TODO: - isExceeded - red
             
-            CurrencyTextView(currency: currency, amount: plannedAmount)
+            Text(plannedAmount.formattedAmount(for: currency))
                 .font(.metadata3())
                 .foregroundStyle(.textGray)
         }
