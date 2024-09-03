@@ -23,10 +23,10 @@ struct GoalCategoryCardView: View {
                     .font(.bodyText1())
                 Spacer()
                 
-                CurrencyTextView(currency: currency, amount: currentAmount)
+                Text(currentAmount.formattedAmount(for: currency))
                     .font(.bodyText1())
 
-                CurrencyTextView(currency: currency, amount: plannedAmount)
+                Text(plannedAmount.formattedAmount(for: currency))
                     .font(.metadata3())
                     .foregroundStyle(.textGray)
                 

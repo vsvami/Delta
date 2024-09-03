@@ -24,7 +24,7 @@ struct AccountCardView: View {
                         .font(.subheading1())
                     Spacer(minLength: 0)
                     
-                    CurrencyTextView(currency: currency, amount: amount)
+                    Text(amount.formattedAmount(for: currency))
                         .font(.metadata3())
                 }
                 Spacer(minLength: 0)

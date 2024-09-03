@@ -23,12 +23,12 @@ struct ExpenseIncomeView: View {
                 
                 Spacer(minLength: 4)
                 
-                CurrencyTextView(currency: currency, amount: currentAmount)
+                Text(currentAmount.formattedAmount(for: currency))
                     .font(.bodyText1())
                 
                 Spacer(minLength: 0)
                 
-                CurrencyTextView(currency: currency, amount: plannedAmount)
+                Text(plannedAmount.formattedAmount(for: currency))
                     .font(.bodyText2())
                     .foregroundStyle(.textGray)
                 
