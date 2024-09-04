@@ -11,12 +11,12 @@ import UISystem
 struct IncomesView: View {
     let incomes: [Income]
     
-    init(incomes: [Income]) {
+    init() {
         self.incomes = IncomesMockData().incomes
     }
     
     var body: some View {
-        ZStack {
+        VStack {
             List(incomes, id: \.self) { income in
                 BaseCategoryRowView(
                     color: AppGradient.getColor(from: income.color)?.value ?? AppGradient.appGray.value,
@@ -31,10 +31,13 @@ struct IncomesView: View {
                 .padding(.vertical, 5)
             }
         }
+        .navigationTitle("Incomes")
+        .navigationBarTitleDisplayMode(.large)
+        .toolbarBackground(Color.appBackgroundMini, for: .navigationBar)
         .background(.appBackground)
     }
 }
 
 #Preview {
-    IncomesView(incomes: IncomesMockData().incomes)
+    IncomesView()
 }

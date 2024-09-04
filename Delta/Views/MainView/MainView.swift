@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var router: Router
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button("Incomes") {
+                router.navigateTo(.incomes)
+            }
         }
         .padding()
     }
