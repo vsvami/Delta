@@ -20,12 +20,12 @@ struct BaseCategoryRowView: View {
         HStack(spacing: 10) {
             ZStack {
                 Circle()
-                    .frame(width: 34)
+                    .frame(width: 38)
                     .foregroundStyle(color)
                 
                 Image(systemName: icon)
                     .resizable()
-                    .frame(width: 16, height: 14)
+                    .frame(width: 18, height: 16)
             }
             
             Text(title)
@@ -33,20 +33,17 @@ struct BaseCategoryRowView: View {
             
             Spacer()
             
-            VStack(alignment: .trailing) {
-                HStack(alignment: .bottom, spacing: 0) {
-                    Text("\(currentAmount.formattedAmount(for: currency)) / ")
-                        .font(.bodyText1())
-                    
-                    Text("\(plannedAmount.formattedAmount(for: currency))")
-                        .font(.metadata2())
-                        .foregroundStyle(AppGradient.textGray.value)
-                }
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("\(currentAmount.formattedAmount(for: currency))")
+                    .font(.bodyText1())
                 
-                ProgressView(value: currentAmount, total: plannedAmount)
-                    .progressViewStyle(LinearProgressViewStyle(tint: .appBlack))
-                    .frame(minWidth: 80, maxWidth: 120)
+                Text("\(plannedAmount.formattedAmount(for: currency))")
+                    .font(.metadata2())
+                    .foregroundStyle(AppGradient.textGray.value)
             }
+            
+            CircularProgressView(progress: currentAmount/plannedAmount)
+                .padding(.leading, 4)
         }
     }
 }
