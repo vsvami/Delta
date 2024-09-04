@@ -15,6 +15,8 @@
 		1A2A33852C888FEF008F6414 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33842C888FEF008F6414 /* CircularProgressView.swift */; };
 		1A2A33872C8893EB008F6414 /* GoalCategoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33862C8893EB008F6414 /* GoalCategoryRowView.swift */; };
 		1A2A33892C88983F008F6414 /* InvestmentCategoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33882C88983F008F6414 /* InvestmentCategoryRowView.swift */; };
+		1A2A338C2C889E45008F6414 /* IncomesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A338B2C889E45008F6414 /* IncomesView.swift */; };
+		1A2A338E2C889EC8008F6414 /* IncomesMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A338D2C889EC8008F6414 /* IncomesMockData.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
@@ -62,6 +64,8 @@
 		1A2A33842C888FEF008F6414 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		1A2A33862C8893EB008F6414 /* GoalCategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryRowView.swift; sourceTree = "<group>"; };
 		1A2A33882C88983F008F6414 /* InvestmentCategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentCategoryRowView.swift; sourceTree = "<group>"; };
+		1A2A338B2C889E45008F6414 /* IncomesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesView.swift; sourceTree = "<group>"; };
+		1A2A338D2C889EC8008F6414 /* IncomesMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesMockData.swift; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
@@ -129,6 +133,15 @@
 				1A2A33822C860431008F6414 /* Double +.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1A2A338A2C889E2F008F6414 /* IncomesView */ = {
+			isa = PBXGroup;
+			children = (
+				1A2A338B2C889E45008F6414 /* IncomesView.swift */,
+				1A2A338D2C889EC8008F6414 /* IncomesMockData.swift */,
+			);
+			path = IncomesView;
 			sourceTree = "<group>";
 		};
 		1A6725472C56D4AC004B3730 /* Frameworks */ = {
@@ -246,6 +259,7 @@
 		64251EE02C4193F50014D18A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A2A338A2C889E2F008F6414 /* IncomesView */,
 				64251ED72C41927F0014D18A /* OnboardingView */,
 				64251ED82C4192980014D18A /* LoginView */,
 				64251EDA2C4192B20014D18A /* MainView */,
@@ -474,6 +488,8 @@
 				640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */,
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				640F9F422C7CFEAE007C7E7E /* ExpenseIncomeView.swift in Sources */,
+				1A2A338E2C889EC8008F6414 /* IncomesMockData.swift in Sources */,
+				1A2A338C2C889E45008F6414 /* IncomesView.swift in Sources */,
 				647A6F422C8125D000927749 /* RoundedButtonView.swift in Sources */,
 				1A2A33802C85F955008F6414 /* BaseCategoryRowView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,

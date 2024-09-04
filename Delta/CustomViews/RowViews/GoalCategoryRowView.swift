@@ -18,7 +18,7 @@ struct GoalCategoryRowView: View {
     
     var body: some View {
         VStack {
-            HStack(spacing: 16) {
+            HStack(spacing: 12) {
                 Text(title)
                     .font(.subheading1())
                 

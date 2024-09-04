@@ -671,8 +671,47 @@ final class Expense: Category, Identifiable {
     }
 }
 
-final class Income: Category {
+final class Income: Category, Hashable {
+    var image: String = ""
+    var plannedAmount: Double = 0.0
+    var color: String = ""
     
+    init(
+        id: UUID,
+        title: String,
+        currency: Currency,
+        amount: Double,
+        categoryType: CategoryType,
+        image: String,
+        plannedAmount: Double,
+        color: String
+    ) {
+        self.image = image
+        self.plannedAmount = plannedAmount
+        self.color = color
+        
+        super.init(
+            id: id,
+            title: title,
+            currency: currency,
+            amount: amount,
+            categoryType: categoryType
+        )
+    }
+    
+    static func == (lhs: Income, rhs: Income) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.image == rhs.image &&
+        lhs.plannedAmount == rhs.plannedAmount &&
+        lhs.color == rhs.color
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(image)
+        hasher.combine(plannedAmount)
+        hasher.combine(color)
+    }
 }
 
 final class Goal: Category {
