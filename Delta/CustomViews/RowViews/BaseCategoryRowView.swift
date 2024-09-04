@@ -12,6 +12,7 @@ struct BaseCategoryRowView: View {
     let color: LinearGradient
     let icon: String
     let title: String
+    let currency: Currency
     let currentAmount: Double
     let plannedAmount: Double
     
@@ -34,10 +35,10 @@ struct BaseCategoryRowView: View {
             
             VStack(alignment: .trailing) {
                 HStack(alignment: .bottom, spacing: 0) {
-                    Text("\(currentAmount.formattedAmount()) / ")
+                    Text("\(currentAmount.formattedAmount(for: currency)) / ")
                         .font(.bodyText1())
                     
-                    Text("\(plannedAmount.formattedAmount())")
+                    Text("\(plannedAmount.formattedAmount(for: currency))")
                         .font(.metadata2())
                         .foregroundStyle(AppGradient.textGray.value)
                 }
@@ -54,7 +55,8 @@ struct BaseCategoryRowView: View {
     BaseCategoryRowView(
         color: AppGradient.appGray.value,
         icon: "house",
-        title: "Аренда",
+        title: "Аренда", 
+        currency: .usd,
         currentAmount: 58000,
         plannedAmount: 78000
     )

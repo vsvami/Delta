@@ -8,19 +8,6 @@
 import Foundation
 
 extension Double {
-    func formattedAmount() -> String {
-        let roundedAmount = self.rounded()
-        let formatter = NumberFormatter()
-        
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current
-        formatter.minimumFractionDigits = 0
-
-        return formatter.string(from: roundedAmount as NSNumber) ?? "\(roundedAmount)"
-    }
-}
-
-extension Double {
     func formattedAmount(for currency: Currency) -> String {
         let roundedAmount = self.rounded()
         let formatter = NumberFormatter()
