@@ -36,7 +36,7 @@ struct GoalCategoryRowView: View {
                 CircularProgressView(progress: currentAmount/plannedAmount)
             }
             
-            Image("iphone")
+            Image(image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 175)
@@ -48,7 +48,7 @@ struct GoalCategoryRowView: View {
 #Preview {
     GoalCategoryRowView(
         color: AppGradient.appGray.value,
-        image: "house",
+        image: "iphone",
         title: "IPhone",
         currency: .usd,
         currentAmount: 58000,
