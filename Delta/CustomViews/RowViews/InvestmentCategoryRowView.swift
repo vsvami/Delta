@@ -19,7 +19,7 @@ struct InvestmentCategoryRowView: View {
     let percent: Double
     
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 12) {
             ZStack {
                 Circle()
                     .frame(width: 38)
