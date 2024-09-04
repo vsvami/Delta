@@ -17,7 +17,7 @@ struct BaseCategoryRowView: View {
     let plannedAmount: Double
     
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 16) {
             ZStack {
                 Circle()
                     .frame(width: 38)
@@ -43,7 +43,6 @@ struct BaseCategoryRowView: View {
             }
             
             CircularProgressView(progress: currentAmount/plannedAmount)
-                .padding(.leading, 4)
         }
     }
 }
