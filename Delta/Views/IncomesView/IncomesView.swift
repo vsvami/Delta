@@ -26,16 +26,14 @@ struct IncomesView: View {
                     currentAmount: income.amount,
                     plannedAmount: income.plannedAmount
                 )
-                .listRowSeparatorTint(Color.gray)
-                .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+                .listRowSeparatorTint(Color.clear)
                 .padding(.vertical, 5)
             }
-            .padding(.top, 0)
         }
         .navigationTitle("Incomes")
         .navigationBarTitleDisplayMode(.large)
-        .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarBackground(Color.appBackgroundMini, for: .navigationBar)
+//        .toolbarBackground(.visible, for: .navigationBar)
+//        .toolbarBackground(Color.appBackgroundMini, for: .navigationBar)
         .background(.appBackground)
     }
 }
