@@ -30,9 +30,11 @@ struct IncomesView: View {
                 .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
                 .padding(.vertical, 5)
             }
+            .padding(.top, 0)
         }
         .navigationTitle("Incomes")
         .navigationBarTitleDisplayMode(.large)
+        .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(Color.appBackgroundMini, for: .navigationBar)
         .background(.appBackground)
     }

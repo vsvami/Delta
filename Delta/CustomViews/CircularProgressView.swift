@@ -28,7 +28,7 @@ struct CircularProgressView: View {
                 .foregroundStyle(.textGray)
             
         }
-        .frame(width: 38, height: 38)
+        .frame(width: 40, height: 40)
     }
 }
 
