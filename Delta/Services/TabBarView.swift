@@ -19,25 +19,25 @@ struct TabBarView: View {
         TabView(selection: $selectedTab) {
             MainView()
                 .tabItem {
-                    Label("Главная", systemImage: "house")
+                    setTabItem(icon: "house", title: "Main")
                 }
                 .tag(TabRoute.main)
             
             AnalyticsView()
                 .tabItem {
-                    Label("Аналитика", systemImage: "chart.pie")
+                    setTabItem(icon: "chartPie", title: "Analytics")
                 }
                 .tag(TabRoute.analytic)
             
             ShoppingListView()
                 .tabItem {
-                    Label("Список покупок", systemImage: "list.bullet")
+                    setTabItem(icon: "list", title: "Shopping List")
                 }
                 .tag(TabRoute.shoppingList)
             
             SettingsView()
                 .tabItem {
-                    Label("Настройки", systemImage: "gearshape")
+                    setTabItem(icon: "gearshape", title: "Settings")
                 }
                 .tag(TabRoute.settings)
         }
@@ -45,6 +45,14 @@ struct TabBarView: View {
 }
 
 extension TabBarView {
+    private func setTabItem(icon: String, title: String) -> some View {
+        VStack {
+            Image(icon)
+            Text(title)
+                .font(.metadata2())
+        }
+    }
+    
     private func setupTabBarAppearance() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()

@@ -12,19 +12,20 @@ struct BaseCategoryRowView: View {
     let color: LinearGradient
     let icon: String
     let title: String
+    let currency: Currency
     let currentAmount: Double
     let plannedAmount: Double
     
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 12) {
             ZStack {
                 Circle()
-                    .frame(width: 34)
+                    .frame(width: 38)
                     .foregroundStyle(color)
                 
                 Image(systemName: icon)
                     .resizable()
-                    .frame(width: 16, height: 14)
+                    .frame(width: 18, height: 16)
             }
             
             Text(title)
@@ -32,20 +33,16 @@ struct BaseCategoryRowView: View {
             
             Spacer()
             
-            VStack(alignment: .trailing) {
-                HStack(alignment: .bottom, spacing: 0) {
-                    Text("\(currentAmount.formattedAmount()) / ")
-                        .font(.bodyText1())
-                    
-                    Text("\(plannedAmount.formattedAmount())")
-                        .font(.metadata2())
-                        .foregroundStyle(AppGradient.textGray.value)
-                }
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("\(currentAmount.formattedAmount(for: currency))")
+                    .font(.bodyText1())
                 
-                ProgressView(value: currentAmount, total: plannedAmount)
-                    .progressViewStyle(LinearProgressViewStyle(tint: .appBlack))
-                    .frame(minWidth: 80, maxWidth: 120)
+                Text("\(plannedAmount.formattedAmount(for: currency))")
+                    .font(.metadata2())
+                    .foregroundStyle(AppGradient.textGray.value)
             }
+            
+            CircularProgressView(progress: currentAmount/plannedAmount)
         }
     }
 }
@@ -54,7 +51,8 @@ struct BaseCategoryRowView: View {
     BaseCategoryRowView(
         color: AppGradient.appGray.value,
         icon: "house",
-        title: "Аренда",
+        title: "Аренда", 
+        currency: .usd,
         currentAmount: 58000,
         plannedAmount: 78000
     )
