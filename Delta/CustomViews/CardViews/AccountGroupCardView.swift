@@ -112,7 +112,7 @@ struct AccountGroupCardView: View {
     let group = dataStore.groupOfAccounts
     let title = group?.title ?? ""
     let currency = group?.currency ?? .rub
-    let amount = group?.totalAmount ?? 0
+    let amount = group?.amount ?? 0
     let image = group?.image ?? ""
     let accounts = group?.accounts ?? []
     let backgroundColor = group?.color ?? ""

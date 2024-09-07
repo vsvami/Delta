@@ -14,6 +14,7 @@ final class DataStore {
     var people: [Person] = []
     var accounts: [Account] = []
     var groupOfAccounts: GroupOfAccounts?
+    var transactions: [Transaction] = []
     
     private init() {
         initializeTestData()
@@ -25,7 +26,6 @@ final class DataStore {
             id: UUID(),
             title: "Alfa bank",
             currency: .rub,
-            amount: 1208342.54,
             image: "creditcard",
             color: AppGradient.appRed.name,
             users: [],
@@ -37,7 +37,6 @@ final class DataStore {
             id: UUID(),
             title: "Cash",
             currency: .rub,
-            amount: 41320.91,
             image: "rublesign.circle",
             color: AppGradient.appGray.name,
             users: [],
@@ -49,7 +48,6 @@ final class DataStore {
             id: UUID(),
             title: "Basic",
             currency: .rub,
-            amount: 45714.51,
             image: "rublesign.circle",
             color: AppGradient.appWhite.name,
             users: [],
@@ -61,7 +59,6 @@ final class DataStore {
             id: UUID(),
             title: "Currency",
             currency: .usd,
-            amount: 23523.51,
             image: "dollarsign.circle",
             color: AppGradient.appWhite.name,
             users: [],
@@ -108,5 +105,8 @@ final class DataStore {
         accounts.append(currency)
         groupOfAccounts = group
         
+        let taxi = Transaction()
+        
+        transactions.append(taxi)
     }
 }

@@ -45,7 +45,6 @@
 		64FB5C532C4BF51700BBADB1 /* SeeAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C522C4BF51700BBADB1 /* SeeAllView.swift */; };
 		64FB5C552C4BF52500BBADB1 /* TransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C542C4BF52500BBADB1 /* TransferView.swift */; };
 		64FB5C572C4BF56400BBADB1 /* MyBalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */; };
-		64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C582C4BF5CB00BBADB1 /* Person.swift */; };
 		64FB5C5B2C4BF5DB00BBADB1 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */; };
 		64FEDB742C8109AC004F4E4E /* CustomShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */; };
 /* End PBXBuildFile section */
@@ -90,7 +89,6 @@
 		64FB5C522C4BF51700BBADB1 /* SeeAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllView.swift; sourceTree = "<group>"; };
 		64FB5C542C4BF52500BBADB1 /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
 		64FB5C562C4BF56400BBADB1 /* MyBalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBalanceView.swift; sourceTree = "<group>"; };
-		64FB5C582C4BF5CB00BBADB1 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		64FB5C5A2C4BF5DB00BBADB1 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		64FEDB732C8109AC004F4E4E /* CustomShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomShadowModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,7 +151,6 @@
 		64251ED52C4191F50014D18A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				64FB5C582C4BF5CB00BBADB1 /* Person.swift */,
 				6457CA4C2C517D54008C56DE /* User.swift */,
 				6457CA4E2C518375008C56DE /* Settings.swift */,
 			);
@@ -467,7 +464,6 @@
 				647A6F422C8125D000927749 /* RoundedButtonView.swift in Sources */,
 				1A2A33802C85F955008F6414 /* BaseCategoryRowView.swift in Sources */,
 				64FB5C512C4BF4F600BBADB1 /* SettingsCategoryView.swift in Sources */,
-				64FB5C592C4BF5CB00BBADB1 /* Person.swift in Sources */,
 				640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */,
 				640F9F502C7D3F53007C7E7E /* PlanVsActualView.swift in Sources */,
 				64FB5C552C4BF52500BBADB1 /* TransferView.swift in Sources */,

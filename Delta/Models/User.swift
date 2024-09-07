@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum RepeatInterval: String {
-    case daily
-    case weekly
-    case monthly
-    case yearly
-}
-
 enum Currency: String {
     case kes = "KES"
     case uah = "UAH"
@@ -483,10 +476,68 @@ enum Currency: String {
     }
 }
 
-//enum TransactionType: String {
-//    case random
-//    case certain
+// Нужен ли вообще тип транзакции?
+
+//enum TransactionType{
+//    case transfer
+//    case income
+//    case expense
+//    case goal
+//    case loan
+//    case repayLoan
+//    case lend
+//    case repayLend
+//    case credit
+//    case repayment
+//    case investment
+//    case dividends
+//    case service
 //}
+
+enum CategoryType: String, CaseIterable {
+    case account = "Account"
+    case groupOfAccounts = "GroupOfAccounts"
+    case income = "Income"
+    case expense = "Expense"
+    case goal = "Goal"
+    case loan = "Loan"
+    case credit = "Credit"
+    case investment = "Investment"
+    
+    static func getCategory() -> [String] {
+        CategoryType.allCases
+            .filter { $0 != .account }
+            .map { $0.rawValue }
+    }
+}
+
+enum Period {
+    case day
+    case week
+    case month
+    case quarter
+    case year
+
+    var calendarComponent: Calendar.Component {
+        switch self {
+        case .day:
+            .day
+        case .week:
+            .weekOfYear
+        case .month:
+            .month
+        case .quarter:
+            .quarter
+        case .year:
+            .year
+        }
+    }
+}
+
+enum RepeatingType: String {
+    case random
+    case certain
+}
 
 final class User {
     var mail: String = ""
@@ -504,11 +555,11 @@ final class Person {
     var accounts: [Account] = []
     
     var isAdult: Bool {
-        return age >= 18
+        age >= 18
     }
     
     var balance: Double {
-        return accounts.reduce(0) { $0 + $1.amount }
+        accounts.reduce(0) { $0 + $1.amount }
     }
     
     init(id: UUID, photo: String, name: String, age: Int, accounts: [Account] = []) {
@@ -520,144 +571,82 @@ final class Person {
     }
 }
 
-enum TransactionType{
-    case transfer
-    case income
-    case expense
-    case goal
-    case loan
-    case repayLoan
-    case lend
-    case repayLend
-    case credit
-    case repayment
-    case investment
-    case dividends
-    case service
-}
-
-class DebtTransaction: Transaction {
-    var isMyDebt = false
-    var interestRate: Double = 0.0
-    
-    override func determineTransactionType() -> TransactionType {
-        switch (source, destination) {
-        case (CategoryType.account.rawValue, CategoryType.loan.rawValue):
-            isMyDebt ? .repayLoan : .lend
-        case (CategoryType.loan.rawValue, CategoryType.account.rawValue):
-            isMyDebt ? .loan : .repayLend
-        case (CategoryType.loan.rawValue, CategoryType.account.rawValue):
-                .credit
-        case (CategoryType.account.rawValue, CategoryType.credit.rawValue):
-                .repayment
-        default:
-                .service
-        }
-    }
-}
-
 class Transaction {
     var id: UUID = UUID()
     var amount: Double = 0.0
     var date: Date = Date()
-    var source: String = ""
-    var destination: String = ""
-    var tags: String = ""
+    var sourceID: UUID = UUID()
+    var destinationID: UUID = UUID()
+//    var transactionType: TransactionType = .income
+    var tags: [String] = []
     var currency: Currency = .rub
     var person: Person?
-    
-    var type: TransactionType {
-        return determineTransactionType()
-    }
-    
-    func determineTransactionType() -> TransactionType {
-        switch (source, destination) {
-        case (CategoryType.account.rawValue, CategoryType.account.rawValue):
-                .transfer
-        case (CategoryType.income.rawValue, CategoryType.account.rawValue):
-                .income
-        case (CategoryType.account.rawValue, CategoryType.expense.rawValue):
-                .expense
-        case (CategoryType.account.rawValue, CategoryType.goal.rawValue):
-                .goal
-        case (CategoryType.account.rawValue, CategoryType.investment.rawValue):
-                .investment
-        case (CategoryType.investment.rawValue, CategoryType.account.rawValue):
-                .dividends
-        default:
-                .service
-        }
-    }
 }
 
-enum CategoryType: String, CaseIterable {
-    case account = "Account"
-    case groupOfAccounts = "GroupOfAccounts"
-    case income = "Income"
-    case expense = "Expense"
-    case goal = "Goal"
-    case loan = "Loan"
-    case credit = "Credit"
-    case investment = "Investment"
-    
-    static func getCategory() -> [String] {
-        return CategoryType.allCases
-            .filter { $0 != .account }
-            .map { $0.rawValue }
-    }
-}
+//final class DebtTransaction: Transaction {
+//    var isMyDebt = false
+//    var interestRate: Double = 0.0
+//}
 
 class Category {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd
-    var amount: Double = 0.0 // TODO: - удалить свойство
-    var categoryType: String = ""
+    var categoryType: CategoryType = .account
     
     init(
         id: UUID,
         title: String,
         currency: Currency,
-        amount: Double,
         categoryType: CategoryType
     ) {
         self.id = id
         self.title = title
         self.currency = currency
-        self.amount = amount
-        self.categoryType = categoryType.rawValue
+        self.categoryType = categoryType
     }
 }
 
 final class SubCategory: Category {
-    var date: Date = Date()
-    var dateOfCompletion: Date = Date() // для долгов
-    var notification: Bool = false
-    var autoTransaction: Bool = false
+    var amount: Double = 0
+    var date: Date?
+    var notification: Bool?
+    var autoTransaction: Bool?
     var transaction: Transaction?
 }
 
-final class Expense: Category, Identifiable {
+final class IncomeExpense: Category, Identifiable {
     var image: String = ""
-    var plannedAmount: Double = 0.0
-    var transactions: [Transaction] = []
+    var repeatingType: RepeatingType = .random
     var subCategories: [SubCategory] = []
+    var transactions: [Transaction] = []
     
+    var plannedAmount: Double {
+        subCategories.reduce(0) { $0 + $1.amount }
+    }
+    
+    // проверить обнуления amount при начале нового периода
+    var amount: Double {
+        let filteredTransactions = DataManager.filterTransactions(transactions, for: .month, startDay: 1, fromMonthOffset: 0)
+        return filteredTransactions.reduce(0) { $0 + $1.amount }
+    }
+
     var isExceeded: Bool {
-        return amount >= plannedAmount
+        amount >= plannedAmount
     }
     
-    func calculatePlannedAmount() {
-        plannedAmount = subCategories.reduce(0) { $0 + $1.amount }
+    var amountsAndDates: [(amount: Double, date: Date)] {
+        repeatingType == .random ? getAmountsByDate() : getAmountsByPeriod()
     }
-    func getAmountsByDate() -> [(amount: Double, date: Date)] {
-        return subCategories.map { ($0.amount, $0.date) }
-    }
+    
+    // методы для построения графика "План"
     func getAmountsByPeriod() -> [(amount: Double, date: Date)] {
         let calendar = Calendar.current
         let currentDate = Date()
+        
         let range = calendar.range(of: .day, in: .month, for: currentDate)!
         let numberOfDaysInMonth = range.count
+        
         let dailyAmount = plannedAmount / Double(numberOfDaysInMonth)
         let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
         
@@ -669,26 +658,10 @@ final class Expense: Category, Identifiable {
         }
         return result
     }
-}
-
-final class Income: Category {
     
-}
-
-final class Goal: Category {
-    
-}
-
-final class Loan: Category {
-    
-}
-
-final class Credit: Category {
-    
-}
-
-final class Investment: Category {
-    
+    func getAmountsByDate() -> [(amount: Double, date: Date)] {
+        return subCategories.map { ($0.amount, $0.date ?? Date()) }
+    }
 }
 
 final class Account: Category, Identifiable {
@@ -697,15 +670,23 @@ final class Account: Category, Identifiable {
     var users: [Person] = []
     var transactions: [Transaction] = []
     
-    var currentAmount: Double {
-        transactions.reduce(0) { $0 + $1.amount }
-    } // изменить можно добавив транзакцию (сервисную)
+    var incomingTransactions: [Transaction] {
+        transactions.filter { $0.destinationID == self.id }
+    }
+    
+    var outgoingTransactions: [Transaction] {
+        transactions.filter { $0.sourceID == self.id }
+    }
+
+    var amount: Double {
+        incomingTransactions.reduce(0) { $0 + $1.amount } - outgoingTransactions.reduce(0) { $0 + $1.amount }
+    }
+    // изменить balance можно добавив транзакцию (сервисную), в зависимости от знака либо в incomingAmount, либо в outgoingAmount
     
     init(
         id: UUID,
         title: String,
         currency: Currency,
-        amount: Double,
         image: String,
         color: String,
         users: [Person],
@@ -716,7 +697,7 @@ final class Account: Category, Identifiable {
         self.color = color
         self.users = users
         self.transactions = transactions
-        super.init(id: id, title: title, currency: currency, amount: amount, categoryType: categoryType)
+        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
 }
 
@@ -725,8 +706,8 @@ final class GroupOfAccounts: Category, Identifiable {
     var color: String = ""
     var accounts: [Account] = []
     
-    var totalAmount: Double {
-        return accounts.reduce(0) { $0 + $1.amount }
+    var amount: Double {
+        accounts.reduce(0) { $0 + $1.amount }
     }
     
     init(
@@ -741,6 +722,117 @@ final class GroupOfAccounts: Category, Identifiable {
         self.image = image
         self.color = color
         self.accounts = accounts
-        super.init(id: id, title: title, currency: currency, amount: 0.0, categoryType: categoryType)
+        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
+}
+
+//final class Goal: Category {
+//    
+//}
+
+//final class Loan: Category {
+//    
+//}
+
+//final class Credit: Category {
+//    
+//}
+
+//final class Investment: Category {
+//    
+//}
+
+struct DataManager {
+    static func filterTransactions(
+        _ transactions: [Transaction],
+        sourceID: UUID? = nil,
+        destinationID: UUID? = nil
+    ) -> [Transaction] {
+        return transactions.filter { transaction in
+            var matchesSource = true
+            var matchesDestination = true
+            
+            if let sourceID = sourceID {
+                matchesSource = transaction.sourceID == sourceID
+            }
+            
+            if let destinationID = destinationID {
+                matchesDestination = transaction.destinationID == destinationID
+            }
+            
+            return matchesSource && matchesDestination
+        }
+    }
+    
+    static func filterTransactions(
+        _ transactions: [Transaction],
+        customStartDate: Date,
+        customEndDate: Date
+    ) -> [Transaction] {
+        return transactions.filter { $0.date >= customStartDate && $0.date <= customEndDate }
+    }
+    
+    static func filterTransactions(
+        _ transactions: [Transaction],
+        for period: Calendar.Component,
+        startDay: Int,
+        fromMonthOffset offset: Int
+    ) -> [Transaction] {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        guard let startOfCurrentPeriod = calendar.date(byAdding: period, value: -offset, to: today) else {
+            return []
+        }
+        
+        var startOfPeriod: Date
+        
+        if let startDateOfPeriod = calendar.date(bySetting: .day, value: startDay, of: startOfCurrentPeriod) {
+            if startDateOfPeriod > today {
+                startOfPeriod = calendar.date(byAdding: period, value: -1, to: startDateOfPeriod)!
+            } else {
+                startOfPeriod = startDateOfPeriod
+            }
+        } else {
+            return []
+        }
+        
+        let endOfPeriod = calendar.date(byAdding: period, value: 1, to: startOfPeriod)!
+        
+        return transactions.filter { $0.date >= startOfPeriod && $0.date < endOfPeriod }
+    }
+    
+//    static func determineTransactionType(source: Category, destination: Category) -> TransactionType {
+//        switch (source.categoryType, destination.categoryType) {
+//        case (.account, .account):
+//                .transfer
+//        case (.income, .account):
+//                .income
+//        case (.account, .expense):
+//                .expense
+//        case (.account, .goal):
+//                .goal
+//        case (.account, .investment):
+//                .investment
+//        case (.investment, .account):
+//                .dividends
+//        default:
+//                .service
+//        }
+//    }
+    
+//    static func determineTransactionType(source: Category, destination: Category, isMyDebt: Bool) -> TransactionType {
+//        switch (source.categoryType, destination.categoryType) {
+//        case (.account, .loan):
+//            isMyDebt ? .repayLoan : .lend
+//        case (.loan, .account):
+//            isMyDebt ? .loan : .repayLend
+//        case (.credit, .account):
+//                .credit
+//        case (.account, .credit):
+//                .repayment
+//        default:
+//                .service
+//        }
+//    }
 }
