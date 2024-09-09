@@ -13,31 +13,28 @@ struct ExpenseIncomeView: View {
     let currentAmount: Double
     let plannedAmount: Double
     let currency: Currency
-    let size: CGSize
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(title)
                     .font(.metadata3())
-                
-                Spacer(minLength: 4)
-                
-                Text(currentAmount.formattedAmount(for: currency))
-                    .font(.bodyText1())
-                
                 Spacer(minLength: 0)
+                Text(currentAmount.formattedAmount(for: currency))
+                    .font(.metadata1())
                 
                 Text(plannedAmount.formattedAmount(for: currency))
-                    .font(.bodyText2())
+                    .font(.metadata3())
                     .foregroundStyle(.textGray)
-                
             }
             Spacer(minLength: 0)
         }
-        .padding()
-        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
-        .shadow()
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: Constants.widthTwo, height: Constants.heightOne)
+        )
     }
 }
 
@@ -46,7 +43,6 @@ struct ExpenseIncomeView: View {
         title: "Расходы",
         currentAmount: 120000.87,
         plannedAmount: 78000.57,
-        currency: .jpy, //TODO: - задать основную валюту приложения
-        size: CGSize(width: 144, height: 78)
+        currency: .jpy
     )
 }

@@ -33,11 +33,10 @@ struct InvestmentCategoryCardView: View {
     let currency: Currency
     let percent: Double
     let image: String
-    let size: CGSize
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack() {
+            HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     Text(title)
                         .font(.bodyText1())
@@ -45,15 +44,10 @@ struct InvestmentCategoryCardView: View {
                         .font(.metadata3())
                         .foregroundStyle(.textGray)
                 }
-                Spacer()
+                Spacer(minLength: 4)
                 
-                ZStack {
-                    Circle()
-                        .frame(height: 32)
-                        .foregroundStyle(.appBackground)
-                    Image(systemName: image)
-                        .font(.bodyText1())
-                }
+                Image(systemName: image)
+                    .font(.heading1())
             }
             Spacer(minLength: 0)
             
@@ -80,14 +74,17 @@ struct InvestmentCategoryCardView: View {
             Spacer(minLength: 0)
             
             Text(amount.formattedAmount(for: currency))
-                .font(.bodyText1())
-
+                .font(.metadata1())
+            
             Text(percent, format: .percent)
                 .font(.metadata3())
                 .foregroundStyle(.textGray)
         }
         .padding()
-        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: Constants.widthTwo, height: Constants.heightTwo)
+        )
     }
 }
 
@@ -98,7 +95,6 @@ struct InvestmentCategoryCardView: View {
         amount: 60142,
         currency: .gbp, //TODO: - задать валюту
         percent: 0.0512,
-        image: "bitcoinsign.circle.fill",
-        size: CGSize(width: 144, height: 166)
+        image: "bitcoinsign.circle.fill"
     )
 }

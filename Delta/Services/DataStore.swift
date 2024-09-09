@@ -13,7 +13,7 @@ final class DataStore {
     
     var people: [Person] = []
     var accounts: [Account] = []
-    var groupOfAccounts: GroupOfAccounts?
+    var categories: [Category] = []
     var transactions: [Transaction] = []
     
     private init() {
@@ -38,7 +38,7 @@ final class DataStore {
             title: "Cash",
             currency: .rub,
             image: "rublesign.circle",
-            color: AppGradient.appGray.name,
+            color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -49,7 +49,7 @@ final class DataStore {
             title: "Basic",
             currency: .rub,
             image: "rublesign.circle",
-            color: AppGradient.appWhite.name,
+            color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -60,7 +60,7 @@ final class DataStore {
             title: "Currency",
             currency: .usd,
             image: "dollarsign.circle",
-            color: AppGradient.appWhite.name,
+            color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -99,14 +99,24 @@ final class DataStore {
         
         people.append(person1)
         people.append(person2)
-        accounts.append(alfabank)
-        accounts.append(cash)
-        accounts.append(basic)
-        accounts.append(currency)
-        groupOfAccounts = group
+        categories.append(alfabank)
+        categories.append(group) 
+        categories.append(cash)
+        categories.append(basic)
+        categories.append(currency)
         
-        let taxi = Transaction()
+        let taxi = IncomeExpense(
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Taxi",
+            currency: .rub,
+            categoryType: .expense
+        )
         
-        transactions.append(taxi)
+        categories.append(taxi)
+        
     }
 }

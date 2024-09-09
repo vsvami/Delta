@@ -8,22 +8,47 @@
 import SwiftUI
 
 struct CapsuleButtonView: View {
-    let title: String
-    let action: () -> Void
+    let categoryType: CategoryType
+    let animation: Namespace.ID
+    @Binding var activeTab: CategoryType
     
     var body: some View {
-        Button(action: action) {
-            Text(title)
+        Button(action: {
+            withAnimation(.snappy) {
+                activeTab = categoryType
+            }
+        }) {
+            Text(categoryType.rawValue)
                 .font(.metadata3())
                 .padding()
                 .frame(height: 32)
-                .foregroundStyle(.appBlack)
+                .foregroundStyle(activeTab == categoryType ? .appWhite : .appBlack)
+                .background(
+                    ZStack {
+                        if activeTab == categoryType {
+                            Capsule()
+                                .fill(Color.appBlack)
+                                .matchedGeometryEffect(id: "background", in: animation)
+                        } else {
+                            Capsule()
+                                .fill(Color.appWhite)
+                        }
+                    }
+                )
         }
-        .background(.appBackgroundMini)
-        .clipShape(Capsule())
+        .buttonStyle(.plain)
     }
 }
 
 #Preview {
-    CapsuleButtonView(title: "Income", action: {})
+    struct CapsuleButtonPreview: View {
+        @State var activeTab = CategoryType.expense
+        @Namespace private var animation
+        
+        var body: some View {
+            CapsuleButtonView(categoryType: .expense, animation: animation, activeTab: $activeTab)
+        }
+    }
+    
+    return CapsuleButtonPreview()
 }

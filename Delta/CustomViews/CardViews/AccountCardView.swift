@@ -27,33 +27,31 @@ struct AccountCardView: View {
                     Text(amount.formattedAmount(for: currency))
                         .font(.metadata3())
                 }
+                .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
+                
                 Spacer(minLength: 0)
             }
             Spacer(minLength: 0)
             
             Image(systemName: image)
-                .font(.subheading1())
+                .font(.bodyText2())
+                .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
         }
         .padding()
-        .componentBackground(color: color, size: size)
+        .componentBackground(
+            color: color,
+            size: CGSize(width: size.width, height: size.height)
+        )
     }
 }
 
 #Preview {
-    let dataStore = DataStore.shared
-    let account = dataStore.accounts.first
-    let title = account?.title ?? ""
-    let currency = account?.currency ?? .usd
-    let amount = account?.amount ?? 0
-    let image = account?.image ?? ""
-    let backgroundColor = account?.color ?? ""
-    
-    return AccountCardView(
-        title: title,
-        currency: currency,
-        amount: amount,
-        image: image,
-        color: backgroundColor,
-        size: CGSize(width: 144, height: 90)
+    AccountCardView(
+        title: "title",
+        currency: .rub,
+        amount: 15533,
+        image: "creditcard",
+        color: "appRed",
+        size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
     )
 }

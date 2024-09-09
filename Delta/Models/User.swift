@@ -476,24 +476,6 @@ enum Currency: String {
     }
 }
 
-// Нужен ли вообще тип транзакции?
-
-//enum TransactionType{
-//    case transfer
-//    case income
-//    case expense
-//    case goal
-//    case loan
-//    case repayLoan
-//    case lend
-//    case repayLend
-//    case credit
-//    case repayment
-//    case investment
-//    case dividends
-//    case service
-//}
-
 enum CategoryType: String, CaseIterable {
     case account = "Account"
     case groupOfAccounts = "GroupOfAccounts"
@@ -504,10 +486,10 @@ enum CategoryType: String, CaseIterable {
     case credit = "Credit"
     case investment = "Investment"
     
-    static func getCategory() -> [String] {
+    static func getCategoryTypes() -> [CategoryType] {
         CategoryType.allCases
-            .filter { $0 != .account }
-            .map { $0.rawValue }
+            .filter { $0 != .account && $0 != .groupOfAccounts }
+            .map { $0 }
     }
 }
 
@@ -577,7 +559,6 @@ class Transaction {
     var date: Date = Date()
     var sourceID: UUID = UUID()
     var destinationID: UUID = UUID()
-//    var transactionType: TransactionType = .income
     var tags: [String] = []
     var currency: Currency = .rub
     var person: Person?
@@ -588,7 +569,7 @@ class Transaction {
 //    var interestRate: Double = 0.0
 //}
 
-class Category {
+class Category: Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String = ""
     var currency: Currency = .usd
@@ -605,6 +586,14 @@ class Category {
         self.currency = currency
         self.categoryType = categoryType
     }
+    
+    static func == (lhs: Category, rhs: Category) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 final class SubCategory: Category {
@@ -615,7 +604,7 @@ final class SubCategory: Category {
     var transaction: Transaction?
 }
 
-final class IncomeExpense: Category, Identifiable {
+final class IncomeExpense: Category {
     var image: String = ""
     var repeatingType: RepeatingType = .random
     var subCategories: [SubCategory] = []
@@ -637,6 +626,14 @@ final class IncomeExpense: Category, Identifiable {
     
     var amountsAndDates: [(amount: Double, date: Date)] {
         repeatingType == .random ? getAmountsByDate() : getAmountsByPeriod()
+    }
+    
+    init(image: String, repeatingType: RepeatingType, subCategories: [SubCategory], transactions: [Transaction], id: UUID, title: String, currency: Currency, categoryType: CategoryType) {
+        self.image = image
+        self.repeatingType = repeatingType
+        self.subCategories = subCategories
+        self.transactions = transactions
+        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
     }
     
     // методы для построения графика "План"
@@ -664,7 +661,7 @@ final class IncomeExpense: Category, Identifiable {
     }
 }
 
-final class Account: Category, Identifiable {
+final class Account: Category {
     var image: String = ""
     var color: String = ""
     var users: [Person] = []
@@ -701,7 +698,7 @@ final class Account: Category, Identifiable {
     }
 }
 
-final class GroupOfAccounts: Category, Identifiable {
+final class GroupOfAccounts: Category {
     var image: String = ""
     var color: String = ""
     var accounts: [Account] = []
@@ -726,113 +723,18 @@ final class GroupOfAccounts: Category, Identifiable {
     }
 }
 
-//final class Goal: Category {
-//    
-//}
-
-//final class Loan: Category {
-//    
-//}
-
-//final class Credit: Category {
-//    
-//}
-
-//final class Investment: Category {
-//    
-//}
-
-struct DataManager {
-    static func filterTransactions(
-        _ transactions: [Transaction],
-        sourceID: UUID? = nil,
-        destinationID: UUID? = nil
-    ) -> [Transaction] {
-        return transactions.filter { transaction in
-            var matchesSource = true
-            var matchesDestination = true
-            
-            if let sourceID = sourceID {
-                matchesSource = transaction.sourceID == sourceID
-            }
-            
-            if let destinationID = destinationID {
-                matchesDestination = transaction.destinationID == destinationID
-            }
-            
-            return matchesSource && matchesDestination
-        }
-    }
+final class Goal: Category {
     
-    static func filterTransactions(
-        _ transactions: [Transaction],
-        customStartDate: Date,
-        customEndDate: Date
-    ) -> [Transaction] {
-        return transactions.filter { $0.date >= customStartDate && $0.date <= customEndDate }
-    }
+}
+
+final class Loan: Category {
     
-    static func filterTransactions(
-        _ transactions: [Transaction],
-        for period: Calendar.Component,
-        startDay: Int,
-        fromMonthOffset offset: Int
-    ) -> [Transaction] {
-        let calendar = Calendar.current
-        let today = Date()
-        
-        guard let startOfCurrentPeriod = calendar.date(byAdding: period, value: -offset, to: today) else {
-            return []
-        }
-        
-        var startOfPeriod: Date
-        
-        if let startDateOfPeriod = calendar.date(bySetting: .day, value: startDay, of: startOfCurrentPeriod) {
-            if startDateOfPeriod > today {
-                startOfPeriod = calendar.date(byAdding: period, value: -1, to: startDateOfPeriod)!
-            } else {
-                startOfPeriod = startDateOfPeriod
-            }
-        } else {
-            return []
-        }
-        
-        let endOfPeriod = calendar.date(byAdding: period, value: 1, to: startOfPeriod)!
-        
-        return transactions.filter { $0.date >= startOfPeriod && $0.date < endOfPeriod }
-    }
+}
+
+final class Credit: Category {
     
-//    static func determineTransactionType(source: Category, destination: Category) -> TransactionType {
-//        switch (source.categoryType, destination.categoryType) {
-//        case (.account, .account):
-//                .transfer
-//        case (.income, .account):
-//                .income
-//        case (.account, .expense):
-//                .expense
-//        case (.account, .goal):
-//                .goal
-//        case (.account, .investment):
-//                .investment
-//        case (.investment, .account):
-//                .dividends
-//        default:
-//                .service
-//        }
-//    }
+}
+
+final class Investment: Category {
     
-//    static func determineTransactionType(source: Category, destination: Category, isMyDebt: Bool) -> TransactionType {
-//        switch (source.categoryType, destination.categoryType) {
-//        case (.account, .loan):
-//            isMyDebt ? .repayLoan : .lend
-//        case (.loan, .account):
-//            isMyDebt ? .loan : .repayLend
-//        case (.credit, .account):
-//                .credit
-//        case (.account, .credit):
-//                .repayment
-//        default:
-//                .service
-//        }
-//    }
 }

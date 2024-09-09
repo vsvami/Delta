@@ -15,12 +15,10 @@ struct BaseCategoryCardView: View {
     let currentAmount: Double
     let plannedAmount: Double
     let currency: Currency
-    let image: String
-    let size: CGSize
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack() {
+
                 VStack(alignment: .leading) {
                     Text(title)
                         .font(.bodyText1())
@@ -28,17 +26,6 @@ struct BaseCategoryCardView: View {
                         .font(.metadata3())
                         .foregroundStyle(.textGray)
                 }
-                
-                Spacer()
-                ZStack {
-                    Circle()
-                        .frame(height: 32)
-                        .foregroundStyle(.appBackground)
-                    Text(currency.symbol)
-                        .font(.metadata2())
-                        .foregroundStyle(.appBlack)
-                }
-            }
             Spacer()
             
             ZStack {
@@ -47,7 +34,7 @@ struct BaseCategoryCardView: View {
                         .appBackground,
                         style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
                     )
-                    .frame(height: 40)
+                    .frame(height: 50)
                 Circle()
                     .trim(from: 0, to: 0.65)
                     .rotation(.degrees(-90))
@@ -55,14 +42,14 @@ struct BaseCategoryCardView: View {
                         .appBlack,
                         style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
                     )
-                    .frame(height: 40)
+                    .frame(height: 50)
                 Image(systemName: icon)
-                    .font(.bodyText1())
+                    .font(.bodyText2())
             }
             Spacer()
             
             Text(currentAmount.formattedAmount(for: currency))
-                .font(.bodyText1())
+                .font(.metadata1())
 //                .foregroundStyle(.red) //TODO: - isExceeded - red
             
             Text(plannedAmount.formattedAmount(for: currency))
@@ -70,7 +57,10 @@ struct BaseCategoryCardView: View {
                 .foregroundStyle(.textGray)
         }
         .padding()
-        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: Constants.widthTwo, height: Constants.heightTwo)
+        )
     }
 }
 
@@ -81,8 +71,6 @@ struct BaseCategoryCardView: View {
         icon: "briefcase",
         currentAmount: 58000,
         plannedAmount: 37000,
-        currency: .egp, //TODO: - задать основную валюту категории
-        image: "rublesign",
-        size: CGSize(width: 144, height: 166)
+        currency: .egp
     )
 }

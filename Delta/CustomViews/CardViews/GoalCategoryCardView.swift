@@ -14,7 +14,6 @@ struct GoalCategoryCardView: View {
     let plannedAmount: Double
     let currency: Currency
     let image: String
-    let size: CGSize
     
     var body: some View {
         VStack {
@@ -24,7 +23,7 @@ struct GoalCategoryCardView: View {
                 Spacer()
                 
                 Text(currentAmount.formattedAmount(for: currency))
-                    .font(.bodyText1())
+                    .font(.metadata1())
 
                 Text(plannedAmount.formattedAmount(for: currency))
                     .font(.metadata3())
@@ -39,10 +38,13 @@ struct GoalCategoryCardView: View {
             Image("visionpro")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: size.width, height: size.height / 2.3)
+                .frame(width: Constants.widthTwo, height: Constants.heightTwo / 2)
                 .clipped()
         }
-        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: Constants.widthTwo, height: Constants.heightTwo)
+        )
     }
 }
 
@@ -52,7 +54,6 @@ struct GoalCategoryCardView: View {
         currentAmount: 2100,
         plannedAmount: 3000,
         currency: .usd, //TODO: - задать валюту цели
-        image: "visionpro",
-        size: CGSize(width: 144, height: 166)
+        image: "visionpro"
     )
 }

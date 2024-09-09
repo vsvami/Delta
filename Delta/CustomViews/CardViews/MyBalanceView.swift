@@ -13,25 +13,25 @@ struct MyBalanceView: View {
     let myBalance: Double
     let currency: Currency
     let image: String
-    let size: CGSize
     
-    @State private var isBalanceSelected: Bool = true
+    @State private var isSelected: Bool = true
+    @Namespace private var animation
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 HStack(spacing: 12) {
                     Button(action: {
-                        isBalanceSelected = true
+                        isSelected = true
                     }) {
                         Text("Total balance")
-                            .foregroundColor(isBalanceSelected ? .appBlack : .gray)
+                            .foregroundStyle(isSelected ? .appBlack : .gray)
                     }
                     Button(action: {
-                        isBalanceSelected = false
+                        isSelected = false
                     }) {
                         Text("My balance")
-                            .foregroundColor(!isBalanceSelected ? .appBlack : .gray)
+                            .foregroundStyle(!isSelected ? .appBlack : .gray)
                     }
                 }
                 .font(.metadata3())
@@ -39,12 +39,14 @@ struct MyBalanceView: View {
                 Spacer(minLength: 0)
                 
                 Text(
-                    isBalanceSelected
+                    isSelected
                     ? totalBalance.formattedAmount(for: currency)
                     : myBalance.formattedAmount(for: currency)
                 )
                     .font(.heading1())
             }
+            .animation(.default, value: isSelected)
+            
             Spacer()
             
             Image(image)
@@ -53,21 +55,18 @@ struct MyBalanceView: View {
                 .clipShape(.circle)
         }
         .padding()
-        .componentBackground(color: AppGradient.appBackgroundMini.name, size: size)
-        .shadow()
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: Constants.widthFive, height: Constants.heightOne)
+        )
     }
 }
 
 #Preview {
-    let dataStore = DataStore.shared
-    let totalBalance = dataStore.accounts.reduce(0) { $0 + $1.amount }
-    let myBalance = dataStore.people.first?.balance
-    
-    return MyBalanceView(
-        totalBalance: totalBalance,
-        myBalance: myBalance ?? 0,
-        currency: .gel, //TODO: - задать основную валюту приложения
-        image: "person",
-        size: CGSize(width: 360, height: 78)
+    MyBalanceView(
+        totalBalance: 1234843,
+        myBalance: 24353,
+        currency: .gel,
+        image: "person"
     )
 }

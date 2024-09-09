@@ -12,10 +12,15 @@ struct PlusButtonView: View {
     
     var body: some View {
         Button(action: action) {
-            Image(systemName: "plus.circle.fill")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .foregroundStyle(.appBlack)
+            ZStack {
+                Circle()
+                    .frame(width: Constants.widthOne)
+                    .foregroundStyle(.appBlack)
+                
+                Image(systemName: "plus")
+                    .font(.subheading1())
+                    .foregroundStyle(.appWhite)
+            }
         }
     }
 }
