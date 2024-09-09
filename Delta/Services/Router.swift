@@ -18,6 +18,7 @@ enum Route: Hashable {
     case categorySettings
     case seeAll
     case transfer
+    case incomes
 }
 
 enum TabRoute: Hashable {
@@ -67,6 +68,8 @@ final class Router: ObservableObject {
         case .transfer:
             TransferView()
                 .navigationBarBackButtonHidden()
+        case .incomes:
+            IncomesView()
         }
             
     }
