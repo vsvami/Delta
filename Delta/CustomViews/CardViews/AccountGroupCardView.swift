@@ -9,35 +9,29 @@ import SwiftUI
 import UISystem
 
 struct AccountGroupCardView: View {
-    let title: String
-    let currency: Currency
-    let amount: Double
-    let image: String
-    let color: String
-    let size: CGSize
-    let accounts: [Account]
+    let accountsGroup: GroupOfAccounts
     
     @State private var isExpanded = false
     
     var countOfAccounts: Int {
-        accounts.count
+        accountsGroup.accounts.count
     }
     
     var sizeOfButtons: Double {
         30
     }
     var sizeOfAccountsGroup: Double {
-        (size.width + 8) * Double(countOfAccounts) + sizeOfButtons + 16
+        (Constants.widthTwo + 16) * Double(countOfAccounts) + sizeOfButtons + 32
     }
     
     var backgroundColor: LinearGradient {
-        AppGradient.getColor(from: color)?.value ?? AppGradient.appWhite.value
+        AppGradient.getColor(from: accountsGroup.color)?.value ?? AppGradient.appWhite.value
     }
     
     var body: some View {
         VStack{
             if isExpanded {
-                HStack(spacing: 8) {
+                HStack(spacing: 16) {
                     VStack {
                         Button(action: {
                             withAnimation(.spring()) {
@@ -46,48 +40,48 @@ struct AccountGroupCardView: View {
                         }) {
                             Image(systemName: "arrow.backward")
                                 .font(.subheadline)
-                                .foregroundStyle(.appBlack)
+                                .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
                         }
                         .padding(.bottom)
                         
                         //TODO: - Кнопку сделать
                         Image(systemName: "gearshape")
                             .font(.subheadline)
-                            .foregroundStyle(.appBlack)
+                            .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
                             .padding(.top)
                     }
                     .frame(width: sizeOfButtons)
                     
-                    ForEach(accounts) { account in
+                    ForEach(accountsGroup.accounts) { account in
                         AccountCardView(
                             title: account.title,
                             currency: account.currency,
                             amount: account.amount,
                             image: account.image,
                             color: account.color,
-                            size: CGSize(width: size.width, height: size.height)
+                            size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                         )
                     }
                 }
             } else {
                 ZStack{
                     backgroundColor.brightness(-0.1)
-                        .frame(width: size.width - 32, height: size.height)
+                        .frame(width: Constants.widthTwo - 32, height: Constants.heightThree)
                         .cornerRadius(16)
                         .offset(y: -8)
                     
                     backgroundColor.brightness(-0.07)
-                        .frame(width: size.width - 16, height: size.height)
+                        .frame(width: Constants.widthTwo - 16, height: Constants.heightThree)
                         .cornerRadius(16)
                         .offset(y: -4)
                     
                     AccountCardView(
-                        title: title,
-                        currency: currency,
-                        amount: amount,
-                        image: image,
-                        color: color,
-                        size: CGSize(width: size.width, height: size.height)
+                        title: accountsGroup.title,
+                        currency: accountsGroup.currency,
+                        amount: accountsGroup.amount,
+                        image: accountsGroup.image,
+                        color: accountsGroup.color,
+                        size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                     )
                 }
                 .onTapGesture {
@@ -98,8 +92,8 @@ struct AccountGroupCardView: View {
             }
         }
         .frame(
-            width: isExpanded ? sizeOfAccountsGroup : size.width,
-            height: size.height + 16
+            width: isExpanded ? sizeOfAccountsGroup : Constants.widthTwo,
+            height: Constants.heightThree + 16
         )
         .background(isExpanded ? backgroundColor : nil)
         .cornerRadius(isExpanded ? 24 : 16)
@@ -108,22 +102,7 @@ struct AccountGroupCardView: View {
 }
 
 #Preview {
-    let dataStore = DataStore.shared
-    let group = dataStore.groupOfAccounts
-    let title = group?.title ?? ""
-    let currency = group?.currency ?? .rub
-    let amount = group?.totalAmount ?? 0
-    let image = group?.image ?? ""
-    let accounts = group?.accounts ?? []
-    let backgroundColor = group?.color ?? ""
+    let group = DataManager.shared.getCategories(with: .groupOfAccounts).first as? GroupOfAccounts
     
-    return AccountGroupCardView(
-        title: title,
-        currency: currency,
-        amount: amount,
-        image: image,
-        color: backgroundColor,
-        size: CGSize(width: 144, height: 90),
-        accounts: accounts
-    )
+    return AccountGroupCardView(accountsGroup: group!)
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct IncomesView: View {
-    let incomes: [Income]
+    let incomes: [IncomeExpense]
     
     init() {
         self.incomes = IncomesMockData().incomes
@@ -19,7 +19,7 @@ struct IncomesView: View {
         VStack {
             List(incomes, id: \.self) { income in
                 BaseCategoryRowView(
-                    color: AppGradient.getColor(from: income.color)?.value ?? AppGradient.appGray.value,
+                    color: /*AppGradient.getColor(from: income.color)?.value ??*/ AppGradient.appGray.value,
                     icon: income.image,
                     title: income.title,
                     currency: income.currency,

@@ -13,7 +13,8 @@ final class DataStore {
     
     var people: [Person] = []
     var accounts: [Account] = []
-    var groupOfAccounts: GroupOfAccounts?
+    var categories: [Category] = []
+    var transactions: [Transaction] = []
     
     private init() {
         initializeTestData()
@@ -25,7 +26,6 @@ final class DataStore {
             id: UUID(),
             title: "Alfa bank",
             currency: .rub,
-            amount: 1208342.54,
             image: "creditcard",
             color: AppGradient.appRed.name,
             users: [],
@@ -37,9 +37,8 @@ final class DataStore {
             id: UUID(),
             title: "Cash",
             currency: .rub,
-            amount: 41320.91,
             image: "rublesign.circle",
-            color: AppGradient.appGray.name,
+            color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -49,9 +48,8 @@ final class DataStore {
             id: UUID(),
             title: "Basic",
             currency: .rub,
-            amount: 45714.51,
             image: "rublesign.circle",
-            color: AppGradient.appWhite.name,
+            color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -61,9 +59,8 @@ final class DataStore {
             id: UUID(),
             title: "Currency",
             currency: .usd,
-            amount: 23523.51,
             image: "dollarsign.circle",
-            color: AppGradient.appWhite.name,
+            color: AppGradient.appBlack.name,
             users: [],
             transactions: [],
             categoryType: .account
@@ -102,11 +99,24 @@ final class DataStore {
         
         people.append(person1)
         people.append(person2)
-        accounts.append(alfabank)
-        accounts.append(cash)
-        accounts.append(basic)
-        accounts.append(currency)
-        groupOfAccounts = group
+        categories.append(alfabank)
+        categories.append(group) 
+        categories.append(cash)
+        categories.append(basic)
+        categories.append(currency)
+        
+        let taxi = IncomeExpense(
+            image: "creditcard",
+            repeatingType: .certain,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Taxi",
+            currency: .rub,
+            categoryType: .expense
+        )
+        
+        categories.append(taxi)
         
     }
 }

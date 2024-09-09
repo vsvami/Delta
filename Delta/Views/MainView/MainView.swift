@@ -6,17 +6,49 @@
 //
 
 import SwiftUI
+import UISystem
 
 struct MainView: View {
-    @EnvironmentObject var router: Router
+    private var dataManager = DataManager.shared // @StateObject
+    let categoryTypes = CategoryType.getCategoryTypes()
+
+    @State private var accounts: [Category] = []
+    @State private var categories: [Category] = []
+    
+    @State private var activeTab = CategoryType.expense
+    
+    init() {
+        _ = DataManager.shared
+    }
     
     var body: some View {
         VStack {
-            Button("Incomes") {
-                router.navigateTo(.incomes)
+            InfoMainView()
+            Spacer()
+            
+            HeaderMainView(text: "Accounts", action: {})
+            CategoriesScrollView(categories: accounts)
+            Spacer()
+            
+            ButtonsScrollView(categoryTypes: categoryTypes, activeTab: $activeTab)
+            Spacer()
+            
+            ForEach(categoryTypes, id: \.self) { category in
+                if category == activeTab {
+                    HeaderMainView(text: category.rawValue, action: {})
+                    CategoriesScrollView(categories: dataManager.getCategories(with: category))
+                        .frame(height: Constants.heightTwo)
+                }
             }
+
         }
-        .padding()
+        .padding(.vertical)
+        .background(AppGradient.appBackground.value)
+        .onAppear {
+            accounts = dataManager.getAccountsAndGroup()
+            categories = dataManager.getCategories(with: .expense)
+            
+        }
     }
 }
 

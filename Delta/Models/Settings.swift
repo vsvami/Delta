@@ -8,9 +8,10 @@
 import Foundation
 
 struct Settings {
+//    let personName: String = ""
     let language: String
-    let currency: String
-    let period: String
+    let currency: String = "GBP"
+    let period: Period = .month
     let startOfPeriod: Int
     let appDesign: AppDesign
     let notices: Bool
