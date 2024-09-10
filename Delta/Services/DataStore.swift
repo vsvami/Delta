@@ -12,7 +12,6 @@ final class DataStore {
     static let shared = DataStore()
     
     var people: [Person] = []
-    var accounts: [Account] = []
     var categories: [Category] = []
     var transactions: [Transaction] = []
     
