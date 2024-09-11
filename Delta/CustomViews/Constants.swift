@@ -16,4 +16,7 @@ struct Constants {
     static let heightOne = UIScreen.main.bounds.height * 0.09
     static let heightTwo = UIScreen.main.bounds.height * 0.18 + 16
     static let heightThree = UIScreen.main.bounds.height * 0.1
+    
+    static let largeAccountCardWidth = UIScreen.main.bounds.width * 0.5
+    static let largeAccountCardHeight = UIScreen.main.bounds.height * 0.15
 }

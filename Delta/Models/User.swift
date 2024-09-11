@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Currency: String {
+enum Currency: String, CaseIterable, Identifiable {
     case kes = "KES"
     case uah = "UAH"
     case bbd = "BBD"
@@ -474,6 +474,8 @@ enum Currency: String {
         case .tjs: "ЅМ" //com.
         }
     }
+    
+    var id: String { self.rawValue }
 }
 
 enum CategoryType: String, CaseIterable {
