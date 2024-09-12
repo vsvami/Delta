@@ -12,6 +12,8 @@ struct AccountSettingsView: View {
     @State private var name: String = ""
     @State private var currency: Currency = .usd
     @State private var balance: String = ""
+    @State private var selectedIcon: Icon = .dollar
+    @State private var selectedColor: AppGradient = .blueGradient
     
     let account: Account
     
@@ -35,6 +37,26 @@ struct AccountSettingsView: View {
             
             AccountSettingsBlock1(name: $name, currency: $currency, balance: $balance, account: account)
                 .padding(.top, -12)
+            
+            HStack {
+                ChosingItemView(
+                    selectedItem: $selectedIcon,
+                    items: Icon.allCases,
+                    title: "Icon",
+                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                )
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 16)
+                
+                ChosingItemView(
+                    selectedItem: $selectedColor,
+                    items: AppGradient.allCases,
+                    title: "Color",
+                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                )
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing, 16)
+            }
             
             Spacer()
         }

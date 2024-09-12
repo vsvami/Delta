@@ -10,7 +10,6 @@ import Foundation
 public enum Icon: CaseIterable {
     case dollar
     case creditcard
-    case wallet
     case book
     case bookmark
     case study
@@ -29,8 +28,6 @@ public enum Icon: CaseIterable {
             "dollarsign.circle"
         case .creditcard:
             "creditcard"
-        case .wallet:
-            "wallet.bifold"
         case .book:
             "book"
         case .bookmark:

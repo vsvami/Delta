@@ -19,4 +19,7 @@ struct Constants {
     
     static let largeAccountCardWidth = UIScreen.main.bounds.width * 0.5
     static let largeAccountCardHeight = UIScreen.main.bounds.height * 0.15
+    
+    static let itemCardWidth = UIScreen.main.bounds.width * 0.44
+    static let itemCardHeight = UIScreen.main.bounds.height * 0.14
 }

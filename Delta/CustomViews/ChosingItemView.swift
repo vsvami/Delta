@@ -12,11 +12,13 @@ struct ChosingItemView<T>: View {
     @Binding var selectedItem: T
     let items: [T]
     let title: String
+    let size: CGSize
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(title)
                 .font(.subheading2())
+                .padding(.horizontal, 20)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
@@ -50,15 +52,22 @@ struct ChosingItemView<T>: View {
                                     selectedItem = color as! T
                                 }
                         }
+                    } else {
+                        EmptyView()
                     }
-                    
                 }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                
             }
         }
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: size.width, height: size.height)
+        )
     }
 }
 
 #Preview {
-    ChosingItemView(selectedItem: .constant(Icon.creditcard), items: Icon.allCases, title: "Icons")
+    ChosingItemView(selectedItem: .constant(Icon.creditcard), items: Icon.allCases, title: "Icons", size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight))
 }
