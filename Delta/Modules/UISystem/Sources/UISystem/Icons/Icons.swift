@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Icon {
+public enum Icon: CaseIterable {
     case dollar
     case creditcard
     case wallet
