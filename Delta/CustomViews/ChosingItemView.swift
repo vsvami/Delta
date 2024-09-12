@@ -30,7 +30,7 @@ struct ChosingItemView<T>: View {
                                     .frame(width: 35)
                                     .overlay(
                                         Circle()
-                                            .stroke(selectedItem1 == icon ? Color.black : Color.clear, lineWidth: 2)
+                                            .stroke(selectedItem1 == icon ? Color.appBlack : Color.clear, lineWidth: 2.5)
                                     )
                                     .onTapGesture {
                                         selectedItem = icon as! T
@@ -46,7 +46,7 @@ struct ChosingItemView<T>: View {
                                 .frame(width: 35)
                                 .overlay(
                                     Circle()
-                                        .stroke(selectedItem1 == color ? Color.black : Color.clear, lineWidth: 2)
+                                        .stroke(selectedItem1 == color ? Color.appBlack : Color.clear, lineWidth: 2.5)
                                 )
                                 .onTapGesture {
                                     selectedItem = color as! T
@@ -57,7 +57,7 @@ struct ChosingItemView<T>: View {
                     }
                 }
                 .padding(.horizontal, 16)
-                .padding(.vertical, 8)
+                .padding(.vertical, 4)
                 
             }
         }

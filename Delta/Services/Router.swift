@@ -55,7 +55,6 @@ final class Router: ObservableObject {
                 .navigationBarBackButtonHidden()
         case .accountSettings(let account):
             AccountSettingsView(account: account)
-                .navigationBarBackButtonHidden()
         case .accountGroupSettings:
             AccountGroupSettingsView()
                 .navigationBarBackButtonHidden()

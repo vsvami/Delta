@@ -67,6 +67,15 @@ struct AccountSettingsView: View {
             
             Spacer()
         }
+        .navigationTitle(account.title)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    //сохраняем изменения
+                }
+            }
+        }
         .background(.appBackground)
     }
 }
