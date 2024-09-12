@@ -1,0 +1,58 @@
+//
+//  File.swift
+//  
+//
+//  Created by Tatiana Lazarenko on 9/12/24.
+//
+
+import Foundation
+
+public enum Icon {
+    case dollar
+    case creditcard
+    case wallet
+    case book
+    case bookmark
+    case study
+    case sport
+    case award
+    case shopping
+    case renovation
+    case health
+    case accessories
+    case travel
+    case entertainment
+    
+    public var name: String {
+        switch self {
+        case .dollar:
+            "dollarsign.circle"
+        case .creditcard:
+            "creditcard"
+        case .wallet:
+            "wallet.bifold"
+        case .book:
+            "book"
+        case .bookmark:
+            "bookmark"
+        case .study:
+            "graduationcap"
+        case .sport:
+            "dumbbell"
+        case .award:
+            "trophy"
+        case .shopping:
+            "cart"
+        case .renovation:
+            "hammer"
+        case .health:
+            "cross.case"
+        case .accessories:
+            "handbag"
+        case .travel:
+            "suitcase.rolling"
+        case .entertainment:
+            "theatermasks"
+        }
+    }
+}
