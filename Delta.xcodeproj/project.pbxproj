@@ -175,7 +175,6 @@
 		64251ED42C4191ED0014D18A /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				64445A8C2C8FA63600D35F1A /* CircularProgressView.swift */,
 				64D71CBF2C86883A009B5CC5 /* CardViews */,
 				1A2A337E2C85F93E008F6414 /* RowViews */,
 				64D71CC02C86886B009B5CC5 /* ButtonViews */,
@@ -185,6 +184,7 @@
 				648E092D2C8F027000ECA13D /* CategoriesScrollView.swift */,
 				648E092F2C8F04A700ECA13D /* ButtonsScrollView.swift */,
 				1A2A33912C9300A0008F6414 /* ChosingItemView.swift */,
+				64445A8C2C8FA63600D35F1A /* CircularProgressView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";

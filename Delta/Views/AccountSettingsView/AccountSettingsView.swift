@@ -35,8 +35,15 @@ struct AccountSettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
             
-            AccountSettingsBlock1(name: $name, currency: $currency, balance: $balance, account: account)
-                .padding(.top, -12)
+            AccountSettingsBlock1(
+                name: $name,
+                currency: $currency,
+                balance: $balance,
+                account: account,
+                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountSettingsHeight)
+            )
+            .padding(.top, 8)
+            .padding(.bottom, 16)
             
             HStack {
                 ChosingItemView(
@@ -70,43 +77,44 @@ struct AccountSettingsBlock1: View {
     @Binding var balance: String
     
     let account: Account
+    let size: CGSize
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerSize: CGSize(width: 20, height: 20))
-                .foregroundStyle(.appBackgroundMini)
-                .padding()
-                .frame(height: 200)
+        
+        VStack {
+            setRowView(title: "Account name", placeholder: account.title, value: $name)
+                .padding(.vertical, 8)
             
-            VStack {
-                setRowView(title: "Account name", placeholder: account.title, value: $name)
-                    .padding(.vertical, 8)
-                
-                Divider()
-                    .padding(.trailing, -16)
-                
-                HStack {
-                    Text("Currency")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Picker(account.currency.name, selection: $currency) {
-                        ForEach(Currency.allCases) { currency in
-                            Text(currency.rawValue).tag(currency)
-                        }
+            Divider()
+                .padding(.trailing, -16)
+            
+            HStack {
+                Text("Currency")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Picker(account.currency.name, selection: $currency) {
+                    ForEach(Currency.allCases) { currency in
+                        Text(currency.rawValue).tag(currency)
                     }
-                    .pickerStyle(.menu)
-                    .labelsHidden()
-                    .padding(.trailing, -12)
                 }
-                
-                Divider()
-                    .padding(.trailing, -16)
-                
-                setRowView(title: "Account balance", placeholder: String(account.amount), value: $balance)
-                    .padding(.vertical, 8)
+                .pickerStyle(.menu)
+                .labelsHidden()
+                .padding(.trailing, -12)
             }
-            .padding(.horizontal, 32)
+            
+            Divider()
+                .padding(.trailing, -16)
+            
+            setRowView(title: "Account balance", placeholder: String(account.amount), value: $balance)
+                .padding(.vertical, 8)
         }
+        .padding(.horizontal, 16)
+        .componentBackground(
+            color: AppGradient.appBackgroundMini.name,
+            size: CGSize(width: size.width, height: size.height)
+        )
+        
     }
+    
     
     private func setRowView(title: String, placeholder: String, value: Binding<String>) -> some View {
         HStack {

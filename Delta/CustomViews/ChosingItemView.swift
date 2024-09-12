@@ -21,7 +21,7 @@ struct ChosingItemView<T>: View {
                 .padding(.horizontal, 20)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
+                HStack(spacing: 12) {
                     if let items = items as? [Icon], let selectedItem1 = selectedItem as? Icon {
                         ForEach(items, id: \.self) { icon in
                             ZStack {
@@ -57,7 +57,7 @@ struct ChosingItemView<T>: View {
                     }
                 }
                 .padding(.horizontal, 16)
-                .padding(.vertical, 10)
+                .padding(.vertical, 8)
                 
             }
         }
