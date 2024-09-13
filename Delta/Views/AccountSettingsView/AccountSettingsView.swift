@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct AccountSettingsView: View {
+    @EnvironmentObject var router: Router
+    
     @State private var name: String = ""
     @State private var currency: Currency = .usd
     @State private var balance: String = ""
@@ -46,7 +48,7 @@ struct AccountSettingsView: View {
                 size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountSettingsHeight)
             )
             .padding(.top, 8)
-            .padding(.bottom, 16)
+            .padding(.bottom, 10)
             
             HStack {
                 ChosingItemView(
@@ -67,7 +69,7 @@ struct AccountSettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
             }
-            .padding(.bottom, 16)
+            .padding(.bottom, 10)
             
             HStack {
                 ItemPickerView(
@@ -88,6 +90,16 @@ struct AccountSettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
             }
+            .padding(.bottom, 10)
+            
+            ShowHistoryView(
+                title: "History",
+                buttonTitle: "Show",
+                action: {
+                   // router.navigateTo(.history)
+                },
+                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountPickerHeight)
+            )
             
             Spacer()
         }
