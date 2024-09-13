@@ -14,8 +14,11 @@ struct AccountSettingsView: View {
     @State private var balance: String = ""
     @State private var selectedIcon: Icon = .dollar
     @State private var selectedColor: AppGradient = .blueGradient
+    @State private var selectedGroup: GroupOfAccounts = DataStore.shared.groupsOfAccounts.first!
+    @State private var selectedUser: Person = DataStore.shared.people.first!
     
     let account: Account
+    let dataStore = DataStore.shared
     
     var body: some View {
         VStack {
@@ -64,6 +67,27 @@ struct AccountSettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
             }
+            .padding(.bottom, 16)
+            
+            HStack {
+                ItemPickerView(
+                    selectedItem: $selectedGroup,
+                    items: dataStore.groupsOfAccounts,
+                    title: "Group of Accounts",
+                    size: CGSize(width: Constants.accountPickerWidth, height: Constants.accountPickerHeight)
+                )
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 16)
+                
+                ItemPickerView(
+                    selectedItem: $selectedUser,
+                    items: dataStore.people,
+                    title: "User",
+                    size: CGSize(width: Constants.accountPickerWidth, height: Constants.accountPickerHeight)
+                )
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.trailing, 16)
+            }
             
             Spacer()
         }
@@ -106,7 +130,7 @@ struct AccountSettingsBlock1: View {
                     }
                 }
                 .pickerStyle(.menu)
-                .labelsHidden()
+                .accentColor(.appBlack)
                 .padding(.trailing, -12)
             }
             

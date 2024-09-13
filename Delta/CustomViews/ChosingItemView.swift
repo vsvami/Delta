@@ -18,7 +18,7 @@ struct ChosingItemView<T>: View {
         VStack(alignment: .leading) {
             Text(title)
                 .font(.subheading2())
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 16)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {

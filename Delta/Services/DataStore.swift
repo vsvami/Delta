@@ -14,6 +14,7 @@ final class DataStore {
     var people: [Person] = []
     var categories: [Category] = []
     var transactions: [Transaction] = []
+    var groupsOfAccounts: [GroupOfAccounts] = []
     
     private init() {
         initializeTestData()
@@ -86,7 +87,7 @@ final class DataStore {
         basic.users = [person1]
         currency.users = [person1]
         
-        let group = GroupOfAccounts(
+        let group1 = GroupOfAccounts(
             id: UUID(),
             title: "Sber bank",
             currency: .rub,
@@ -96,13 +97,25 @@ final class DataStore {
             categoryType: .groupOfAccounts
         )
         
+        let group2 = GroupOfAccounts(
+            id: UUID(),
+            title: "Main",
+            currency: .usd,
+            image: "building.columns",
+            color: AppGradient.blueGradient.name,
+            accounts: [cash, alfabank],
+            categoryType: .groupOfAccounts
+        )
+        
         people.append(person1)
         people.append(person2)
         categories.append(alfabank)
-        categories.append(group) 
+        categories.append(group1)
         categories.append(cash)
         categories.append(basic)
         categories.append(currency)
+        groupsOfAccounts.append(group1)
+        groupsOfAccounts.append(group2)
         
         let taxi = IncomeExpense(
             image: "creditcard",

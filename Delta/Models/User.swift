@@ -531,7 +531,7 @@ final class User {
     var person: Person?
 }
 
-final class Person {
+final class Person: Hashable, Identifiable {
     var id: UUID = UUID()
     var photo: String = ""
     var name: String = ""
@@ -552,6 +552,14 @@ final class Person {
         self.name = name
         self.age = age
         self.accounts = accounts
+    }
+    
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
@@ -668,6 +676,7 @@ final class Account: Category {
     var color: String = ""
     var users: [Person] = []
     var transactions: [Transaction] = []
+    var accountGroupId: String = ""
     
     var incomingTransactions: [Transaction] {
         transactions.filter { $0.destinationID == self.id }
