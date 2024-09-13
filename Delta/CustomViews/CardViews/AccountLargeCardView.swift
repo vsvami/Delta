@@ -11,7 +11,7 @@ import UISystem
 struct AccountLargeCardView: View {
     let title: String
     let currency: Currency
-    let amount: Double
+    let amount: String
     let image: String
     let color: String
     let size: CGSize
@@ -24,7 +24,7 @@ struct AccountLargeCardView: View {
                         .font(.heading2())
                         .padding(.bottom, 2)
                     
-                    Text(amount.formattedAmount(for: currency))
+                    Text(Double(amount)?.formattedAmount(for: currency) ?? "-10")
                         .font(.subheading2())
                 }
                 .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
@@ -49,7 +49,7 @@ struct AccountLargeCardView: View {
     AccountLargeCardView(
         title: "title",
         currency: .rub,
-        amount: 15533,
+        amount: "15533",
         image: "creditcard",
         color: "appRed",
         size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight)

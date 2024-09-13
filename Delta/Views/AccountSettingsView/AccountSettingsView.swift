@@ -11,26 +11,37 @@ import UISystem
 struct AccountSettingsView: View {
     @EnvironmentObject var router: Router
     
-    @State private var name: String = ""
-    @State private var currency: Currency = .usd
-    @State private var balance: String = ""
-    @State private var selectedIcon: Icon = .dollar
-    @State private var selectedColor: AppGradient = .blueGradient
+    @State private var name: String
+    @State private var currency: Currency
+    @State private var balance: String
+    @State private var selectedIcon: Icon
+    @State private var selectedColor: AppGradient
+    @State private var selectedUser: Person
     @State private var selectedGroup: GroupOfAccounts = DataStore.shared.groupsOfAccounts.first!
-    @State private var selectedUser: Person = DataStore.shared.people.first!
     
     let account: Account
     let dataStore = DataStore.shared
+    
+    init(account: Account) {
+        self.account = account
+        _name = State(initialValue: account.title)
+        _currency = State(initialValue: account.currency)
+        _balance = State(initialValue: String(account.amount))
+        _selectedIcon = State(initialValue: Icon.getIcon(from: account.image) ?? .dollar)
+        _selectedColor = State(initialValue: AppGradient.getColor(from: account.color) ?? .blueGradient)
+        _selectedUser = State(initialValue: account.users.first ?? DataStore.shared.people.first!)
+        
+    }
     
     var body: some View {
         ScrollView {
             VStack {
                 AccountLargeCardView(
-                    title: account.title,
-                    currency: account.currency,
-                    amount: account.amount,
-                    image: account.image,
-                    color: account.color,
+                    title: name,
+                    currency: currency,
+                    amount: balance,
+                    image: selectedIcon.name,
+                    color: selectedColor.name,
                     size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight)
                 )
                 .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)

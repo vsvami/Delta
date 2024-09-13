@@ -52,4 +52,8 @@ public enum Icon: CaseIterable {
             "theatermasks"
         }
     }
+    
+    public static func getIcon(from stringIcon: String) -> Icon? {
+        Icon.allCases.first { $0.name == stringIcon }
+    }
 }
