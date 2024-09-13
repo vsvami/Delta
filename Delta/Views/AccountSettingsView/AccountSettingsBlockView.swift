@@ -96,8 +96,15 @@ struct AccountSettingsBlock: View {
     
     var body: some View {
         VStack {
-            setRowView(title: "Account name", placeholder: account.title, value: $name)
-                .padding(.vertical, 8)
+            HStack {
+                Text("Account name")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                TextField(account.title, text: $name)
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.default)
+            }
+            .padding(.vertical, 8)
             
             Divider()
                 .padding(.trailing, -16)
@@ -118,8 +125,16 @@ struct AccountSettingsBlock: View {
             Divider()
                 .padding(.trailing, -16)
             
-            setRowView(title: "Account balance", placeholder: String(account.amount), value: $balance)
-                .padding(.vertical, 8)
+            HStack {
+                Text("Account balance")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                TextField(String(account.amount), text: $balance)
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(.decimalPad)
+            }
+            .padding(.vertical, 8)
+            
         }
         .padding(.horizontal, 16)
         .componentBackground(
@@ -127,16 +142,5 @@ struct AccountSettingsBlock: View {
             size: CGSize(width: size.width, height: size.height)
         )
         
-    }
-    
-    
-    private func setRowView(title: String, placeholder: String, value: Binding<String>) -> some View {
-        HStack {
-            Text(title)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            TextField(placeholder, text: value)
-                .textFieldStyle(.plain)
-                .multilineTextAlignment(.trailing)
-        }
     }
 }

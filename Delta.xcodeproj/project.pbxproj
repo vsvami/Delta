@@ -20,6 +20,7 @@
 		1A2A33942C9440BD008F6414 /* ItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33932C9440BD008F6414 /* ItemPickerView.swift */; };
 		1A2A33962C9453B2008F6414 /* ShowHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33952C9453B2008F6414 /* ShowHistoryView.swift */; };
 		1A2A33982C945A97008F6414 /* AccountSettingsBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33972C945A97008F6414 /* AccountSettingsBlockView.swift */; };
+		1A2A339A2C946025008F6414 /* View +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33992C946025008F6414 /* View +.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
 		640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */; };
 		640EBB4C2C7F65AF00244B24 /* GoalCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */; };
@@ -79,6 +80,7 @@
 		1A2A33932C9440BD008F6414 /* ItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerView.swift; sourceTree = "<group>"; };
 		1A2A33952C9453B2008F6414 /* ShowHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHistoryView.swift; sourceTree = "<group>"; };
 		1A2A33972C945A97008F6414 /* AccountSettingsBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsBlockView.swift; sourceTree = "<group>"; };
+		1A2A33992C946025008F6414 /* View +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View +.swift"; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
 		640EBB492C7DC87300244B24 /* BaseCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCategoryCardView.swift; sourceTree = "<group>"; };
 		640EBB4B2C7F65AF00244B24 /* GoalCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryCardView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				1A2A33822C860431008F6414 /* Double +.swift */,
+				1A2A33992C946025008F6414 /* View +.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				64FB5C432C4BF4A600BBADB1 /* AnalyticsView.swift in Sources */,
 				640F9F4C2C7D3EE2007C7E7E /* ComponentBackgroundModifier.swift in Sources */,
 				649FF6962C3C58520081BC63 /* DeltaApp.swift in Sources */,
+				1A2A339A2C946025008F6414 /* View +.swift in Sources */,
 				640EBB4A2C7DC87300244B24 /* BaseCategoryCardView.swift in Sources */,
 				64FB5C4D2C4BF4DD00BBADB1 /* AccountSettingsView.swift in Sources */,
 				64D4F49D2C8F66C7002C18BF /* DataManager.swift in Sources */,

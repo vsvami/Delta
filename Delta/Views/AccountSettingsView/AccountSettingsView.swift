@@ -52,7 +52,7 @@ struct AccountSettingsView: View {
                     account: account
                 )
                 
-                RoundedButtonView(title: "Delete Account", action: {})
+                RoundedButtonView(title: "Delete account", action: {})
                     .padding()
                 
                 Spacer()
@@ -68,6 +68,9 @@ struct AccountSettingsView: View {
             }
         }
         .background(.appBackground)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }
 
