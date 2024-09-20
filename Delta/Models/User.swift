@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Currency: String {
+enum Currency: String, CaseIterable, Identifiable {
     case kes = "KES"
     case uah = "UAH"
     case bbd = "BBD"
@@ -474,6 +474,8 @@ enum Currency: String {
         case .tjs: "ЅМ" //com.
         }
     }
+    
+    var id: String { self.rawValue }
 }
 
 enum CategoryType: String, CaseIterable {
@@ -529,7 +531,7 @@ final class User {
     var person: Person?
 }
 
-final class Person {
+final class Person: Hashable, Identifiable {
     var id: UUID = UUID()
     var photo: String = ""
     var name: String = ""
@@ -550,6 +552,14 @@ final class Person {
         self.name = name
         self.age = age
         self.accounts = accounts
+    }
+    
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
