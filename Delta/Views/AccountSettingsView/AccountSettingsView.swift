@@ -44,7 +44,6 @@ struct AccountSettingsView: View {
                     color: selectedColor.name,
                     size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight)
                 )
-                .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
                 .padding()
                 
                 Text("Account settings")
@@ -68,6 +67,7 @@ struct AccountSettingsView: View {
                 
                 Spacer()
             }
+            .shadow()
             .navigationTitle(account.title)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {

@@ -676,7 +676,6 @@ final class Account: Category {
     var color: String = ""
     var users: [Person] = []
     var transactions: [Transaction] = []
-    var accountGroupId: String = ""
     
     var incomingTransactions: [Transaction] {
         transactions.filter { $0.destinationID == self.id }

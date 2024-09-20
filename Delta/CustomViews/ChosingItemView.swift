@@ -28,9 +28,10 @@ struct ChosingItemView<T>: View {
                                 Circle()
                                     .fill(.appGray)
                                     .frame(width: 35)
+                                    .shadow(color: selectedItem1 == icon ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
                                     .overlay(
                                         Circle()
-                                            .stroke(selectedItem1 == icon ? Color.appBlack : Color.clear, lineWidth: 2.5)
+                                            .stroke(selectedItem1 == icon ? Color.appBlack : Color.clear, lineWidth: 2)
                                     )
                                     .onTapGesture {
                                         selectedItem = icon as! T
@@ -38,20 +39,23 @@ struct ChosingItemView<T>: View {
                                 Image(systemName: icon.name)
                                     .foregroundStyle(.appBlack)
                             }
+                            .frame(height: 40)
                         }
                     } else if let items = items as? [AppGradient], let selectedItem1 = selectedItem as? AppGradient {
                         ForEach(items, id: \.self) { color in
                             Circle()
                                 .fill(color.value)
                                 .frame(width: 35)
+                                .shadow(color: selectedItem1 == color ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
                                 .overlay(
                                     Circle()
-                                        .stroke(selectedItem1 == color ? Color.appBlack : Color.clear, lineWidth: 2.5)
+                                        .stroke(selectedItem1 == color ? Color.appBlack : Color.clear, lineWidth: 2)
                                 )
                                 .onTapGesture {
                                     selectedItem = color as! T
                                 }
                         }
+                        .frame(height: 40)
                     } else {
                         EmptyView()
                     }
