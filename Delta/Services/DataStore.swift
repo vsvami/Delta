@@ -15,6 +15,7 @@ final class DataStore {
     var categories: [Category] = []
     var transactions: [Transaction] = []
     var groupsOfAccounts: [GroupOfAccounts] = []
+    var accounts: [Account] = []
     
     private init() {
         initializeTestData()
@@ -116,6 +117,8 @@ final class DataStore {
         categories.append(currency)
         groupsOfAccounts.append(group1)
         groupsOfAccounts.append(group2)
+        accounts.append(alfabank)
+        accounts.append(cash)
         
         let taxi = IncomeExpense(
             image: "creditcard",

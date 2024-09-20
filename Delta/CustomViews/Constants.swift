@@ -25,6 +25,7 @@ struct Constants {
     
     static let accountSettingsWidth = UIScreen.main.bounds.width - 32
     static let accountSettingsHeight = UIScreen.main.bounds.height * 0.2
+    static let accountGroupSettingsHeight = UIScreen.main.bounds.height * 0.12
     
     static let accountPickerWidth = UIScreen.main.bounds.width * 0.44
     static let accountPickerHeight = UIScreen.main.bounds.height * 0.06

@@ -14,7 +14,7 @@ enum Route: Hashable {
     case profileSettings
     case appDesignSettings
     case accountSettings(account: Account)
-    case accountGroupSettings
+    case accountGroupSettings(group: GroupOfAccounts)
     case categorySettings
     case seeAll
     case transfer
@@ -55,9 +55,8 @@ final class Router: ObservableObject {
                 .navigationBarBackButtonHidden()
         case .accountSettings(let account):
             AccountSettingsView(account: account)
-        case .accountGroupSettings:
-            AccountGroupSettingsView()
-                .navigationBarBackButtonHidden()
+        case .accountGroupSettings(let group):
+            AccountGroupSettingsView(groupOfAccounts: group)
         case .categorySettings:
             SettingsCategoryView()
                 .navigationBarBackButtonHidden()
