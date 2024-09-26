@@ -37,7 +37,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedIcon,
                     items: Icon.allCases,
                     title: "Icon",
-                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
@@ -46,7 +46,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedColor,
                     items: AppGradient.allCases,
                     title: "Color",
-                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
@@ -58,7 +58,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedGroup,
                     items: dataStore.groupsOfAccounts,
                     title: "Group of Accounts",
-                    size: CGSize(width: Constants.accountPickerWidth, height: Constants.accountPickerHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
@@ -67,7 +67,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedUser,
                     items: dataStore.people,
                     title: "User",
-                    size: CGSize(width: Constants.accountPickerWidth, height: Constants.accountPickerHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
@@ -80,7 +80,7 @@ struct AccountSettingsBlockView: View {
                 action: {
                     // router.navigateTo(.history)
                 },
-                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountPickerHeight)
+                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.heightFive)
             )
         }
     }
