@@ -38,5 +38,5 @@ struct ShowHistoryView: View {
     ShowHistoryView(title: "History",
                     buttonTitle: "Show",
                     action: {},
-                    size: CGSize(width: Constants.accountSettingsWidth, height: Constants.heightFive))
+                    size: CGSize(width: Constants.widthFive, height: Constants.heightFive))
 }
