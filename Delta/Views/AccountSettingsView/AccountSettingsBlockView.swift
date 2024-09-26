@@ -26,8 +26,7 @@ struct AccountSettingsBlockView: View {
                 name: $name,
                 currency: $currency,
                 balance: $balance,
-                account: account,
-                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountSettingsHeight)
+                account: account
             )
             .padding(.top, 2)
             .padding(.bottom, 8)
@@ -92,55 +91,48 @@ struct AccountSettingsBlock: View {
     @Binding var balance: String
     
     let account: Account
-    let size: CGSize
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Account name")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(account.title, text: $name)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.default)
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.appBackgroundMini)
+                .padding(.horizontal, 16)
+            
+            List {
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Account name",
+                    type: .textfield
+                )
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Currency",
+                    type: .picker
+                )
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Account balance",
+                    type: .textfield
+                )
             }
-            .padding(.vertical, 8)
-            
-            Divider()
-                .padding(.trailing, -16)
-            
-            HStack {
-                Text("Currency")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker(account.currency.name, selection: $currency) {
-                    ForEach(Currency.allCases) { currency in
-                        Text(currency.rawValue).tag(currency)
-                    }
-                }
-                .pickerStyle(.menu)
-                .accentColor(.appBlack)
-                .padding(.trailing, -12)
-            }
-            
-            Divider()
-                .padding(.trailing, -16)
-            
-            HStack {
-                Text("Account balance")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(String(account.amount), text: $balance)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.decimalPad)
-            }
-            .padding(.vertical, 8)
-            
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .padding(.horizontal, 16)
+            .background(Color.clear)
+            .listStyle(.plain)
+            .frame(minHeight: 176)
         }
-        .padding(.horizontal, 16)
-        .componentBackground(
-            color: AppGradient.appBackgroundMini.name,
-            size: CGSize(width: size.width, height: size.height)
-        )
         
     }
+}
+
+#Preview {
+    AccountSettingsBlock(name: .constant("Cash"), currency: .constant(.usd), balance: .constant("3000"), account: DataStore.shared.accounts.first!)
 }
