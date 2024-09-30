@@ -27,16 +27,14 @@ struct AccountCardView: View {
                     Text(amount.formattedAmount(for: currency))
                         .font(.metadata3())
                 }
-                .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
-                
                 Spacer(minLength: 0)
             }
             Spacer(minLength: 0)
             
             Image(systemName: image)
                 .font(.bodyText2())
-                .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
         }
+        .foregroundStyle(color == AppGradient.appBlack.name ? .appWhite : .black)
         .padding()
         .componentBackground(
             color: color,

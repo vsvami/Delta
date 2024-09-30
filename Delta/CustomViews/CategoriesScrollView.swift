@@ -99,7 +99,7 @@ struct CategoriesScrollView: View {
                         }
                     }
                 }
-
+                
                 PlusButtonView(action: {})
             }
             .padding(.horizontal)
