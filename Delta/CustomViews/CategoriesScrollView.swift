@@ -9,6 +9,7 @@ import SwiftUI
 import UISystem
 
 struct CategoriesScrollView: View {
+    @EnvironmentObject var router: Router
     let categories: [Category]
     
     var body: some View {
@@ -26,6 +27,9 @@ struct CategoriesScrollView: View {
                                 color: account.color,
                                 size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                             )
+                            .onTapGesture {
+                                router.navigateTo(.accountSettings(account: account))
+                            }
                         }
                     case .groupOfAccounts:
                         if let group = category as? GroupOfAccounts {

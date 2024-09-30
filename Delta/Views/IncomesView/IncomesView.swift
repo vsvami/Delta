@@ -19,7 +19,7 @@ struct IncomesView: View {
         VStack {
             List(incomes, id: \.self) { income in
                 BaseCategoryRowView(
-                    color: /*AppGradient.getColor(from: income.color)?.value ??*/ AppGradient.appGray.value,
+                    color: AppGradient.appGray.value,
                     icon: income.image,
                     title: income.title,
                     currency: income.currency,

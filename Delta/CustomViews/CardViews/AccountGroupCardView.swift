@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct AccountGroupCardView: View {
+    @EnvironmentObject var router: Router
+    
     let accountsGroup: GroupOfAccounts
     
     @State private var isExpanded = false
@@ -38,10 +40,18 @@ struct AccountGroupCardView: View {
                         .padding(.bottom)
                         
                         //TODO: - Кнопку сделать
-                        Image(systemName: "gearshape")
-                            .font(.subheadline)
-                            .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
-                            .padding(.top)
+//                        Image(systemName: "gearshape")
+//                            .font(.subheadline)
+//                            .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
+//                            .padding(.top)
+                        Button(action: {
+                            router.navigateTo(.accountGroupSettings(group: accountsGroup))
+                        }) {
+                            Image(systemName: "gearshape")
+                                .font(.subheadline)
+                                .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
+                                .padding(.top)
+                        }
                     }
                     
                     ForEach(accountsGroup.accounts) { account in

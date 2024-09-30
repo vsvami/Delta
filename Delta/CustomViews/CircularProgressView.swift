@@ -13,22 +13,22 @@ struct CircularProgressView: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(lineWidth: 4)
+                .stroke(lineWidth: 2)
                 .foregroundStyle(.gray.opacity(0.3))
             
             Circle()
                 .trim(from: 0, to: progress)
-                .stroke(style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                .stroke(style: StrokeStyle(lineWidth: 2, lineCap: .round))
                 .foregroundStyle(.appBlack)
                 .rotationEffect(.degrees(-90))
             
             
             Text(String(format: "%.0f%%", progress * 100))
-                .font(.metadata2())
+                .font(.caption2)
                 .foregroundStyle(.textGray)
             
         }
-        .frame(width: 40, height: 40)
+        .frame(width: 34)
     }
 }
 
