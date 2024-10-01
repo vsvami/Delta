@@ -39,7 +39,7 @@ struct AccountGroupSettingsView: View {
                     amount: balance,
                     image: selectedIcon.name,
                     color: selectedColor.name,
-                    size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight)
+                    size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
                 )
                 .padding()
                 

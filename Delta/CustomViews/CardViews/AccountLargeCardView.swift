@@ -52,6 +52,6 @@ struct AccountLargeCardView: View {
         amount: "15533",
         image: "creditcard",
         color: "appRed",
-        size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight)
+        size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
     )
 }

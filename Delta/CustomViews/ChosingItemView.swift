@@ -73,5 +73,5 @@ struct ChosingItemView<T>: View {
 }
 
 #Preview {
-    ChosingItemView(selectedItem: .constant(Icon.creditcard), items: Icon.allCases, title: "Icons", size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight))
+    ChosingItemView(selectedItem: .constant(Icon.creditcard), items: Icon.allCases, title: "Icons", size: CGSize(width: Constants.widthThree, height: Constants.heightSix))
 }

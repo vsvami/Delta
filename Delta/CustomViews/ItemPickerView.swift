@@ -52,6 +52,6 @@ struct ItemPickerView<T: Hashable>: View {
         selectedItem: .constant(DataStore.shared.groupsOfAccounts.first),
         items: DataStore.shared.groupsOfAccounts,
         title: "Users",
-        size: CGSize(width: Constants.largeAccountCardWidth, height: Constants.largeAccountCardHeight)
+        size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
     )
 }

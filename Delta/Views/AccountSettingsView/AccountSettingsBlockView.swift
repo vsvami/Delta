@@ -26,8 +26,7 @@ struct AccountSettingsBlockView: View {
                 name: $name,
                 currency: $currency,
                 balance: $balance,
-                account: account,
-                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountSettingsHeight)
+                account: account
             )
             .padding(.top, 2)
             .padding(.bottom, 8)
@@ -37,7 +36,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedIcon,
                     items: Icon.allCases,
                     title: "Icon",
-                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
@@ -46,7 +45,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedColor,
                     items: AppGradient.allCases,
                     title: "Color",
-                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
@@ -58,7 +57,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedGroup,
                     items: dataStore.groupsOfAccounts,
                     title: "Group of Accounts",
-                    size: CGSize(width: Constants.accountPickerWidth, height: Constants.accountPickerHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
@@ -67,7 +66,7 @@ struct AccountSettingsBlockView: View {
                     selectedItem: $selectedUser,
                     items: dataStore.people,
                     title: "User",
-                    size: CGSize(width: Constants.accountPickerWidth, height: Constants.accountPickerHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
@@ -80,7 +79,7 @@ struct AccountSettingsBlockView: View {
                 action: {
                     // router.navigateTo(.history)
                 },
-                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountPickerHeight)
+                size: CGSize(width: Constants.widthFive, height: Constants.heightFive)
             )
         }
     }
@@ -92,55 +91,46 @@ struct AccountSettingsBlock: View {
     @Binding var balance: String
     
     let account: Account
-    let size: CGSize
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Account name")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(account.title, text: $name)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.default)
+            List {
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Account name",
+                    type: .textfield
+                ).listRowBackground(Color.clear)
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Currency",
+                    type: .picker
+                ).listRowBackground(Color.clear)
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Account balance",
+                    type: .textfield
+                ).listRowBackground(Color.clear)
             }
-            .padding(.vertical, 8)
-            
-            Divider()
-                .padding(.trailing, -16)
-            
-            HStack {
-                Text("Currency")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker(account.currency.name, selection: $currency) {
-                    ForEach(Currency.allCases) { currency in
-                        Text(currency.rawValue).tag(currency)
-                    }
-                }
-                .pickerStyle(.menu)
-                .accentColor(.appBlack)
-                .padding(.trailing, -12)
-            }
-            
-            Divider()
-                .padding(.trailing, -16)
-            
-            HStack {
-                Text("Account balance")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(String(account.amount), text: $balance)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.decimalPad)
-            }
-            .padding(.vertical, 8)
-            
+            .background(Color.clear)
+            .listRowBackground(Color.clear)
+            .listStyle(.plain)
+            .frame(minHeight: 176)
         }
+        .background(AppGradient.appBackgroundMini.value)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding(.horizontal, 16)
-        .componentBackground(
-            color: AppGradient.appBackgroundMini.name,
-            size: CGSize(width: size.width, height: size.height)
-        )
         
     }
+}
+
+#Preview {
+    AccountSettingsBlock(name: .constant("Cash"), currency: .constant(.usd), balance: .constant("3000"), account: DataStore.shared.accounts.first!)
 }

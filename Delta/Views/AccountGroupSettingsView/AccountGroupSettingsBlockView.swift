@@ -21,8 +21,7 @@ struct AccountGroupSettingsBlockView: View {
             AccountGroupSettingsBlock(
                 name: $name,
                 currency: $currency,
-                groupOfAccounts: groupOfAccounts,
-                size: CGSize(width: Constants.accountSettingsWidth, height: Constants.accountGroupSettingsHeight)
+                groupOfAccounts: groupOfAccounts
             )
             .padding(.top, 2)
             .padding(.bottom, 8)
@@ -32,7 +31,7 @@ struct AccountGroupSettingsBlockView: View {
                     selectedItem: $selectedIcon,
                     items: Icon.allCases,
                     title: "Icon",
-                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 16)
@@ -41,7 +40,7 @@ struct AccountGroupSettingsBlockView: View {
                     selectedItem: $selectedColor,
                     items: AppGradient.allCases,
                     title: "Color",
-                    size: CGSize(width: Constants.itemCardWidth, height: Constants.itemCardHeight)
+                    size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                 )
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 16)
@@ -56,42 +55,36 @@ struct AccountGroupSettingsBlock: View {
     @Binding var currency: Currency
     
     let groupOfAccounts: GroupOfAccounts
-    let size: CGSize
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Group name")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(groupOfAccounts.title, text: $name)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.default)
-            }
-            .padding(.vertical, 8)
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.appBackgroundMini)
+                .padding(.horizontal, 16)
             
-            Divider()
-                .padding(.trailing, -16)
-            
-            HStack {
-                Text("Currency")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Picker(groupOfAccounts.currency.name, selection: $currency) {
-                    ForEach(Currency.allCases) { currency in
-                        Text(currency.rawValue).tag(currency)
-                    }
-                }
-                .pickerStyle(.menu)
-                .accentColor(.appBlack)
-                .padding(.trailing, -12)
+            List {
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: groupOfAccounts,
+                    title: "Account name",
+                    type: .textfield
+                )
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: groupOfAccounts,
+                    title: "Currency",
+                    type: .picker
+                )
             }
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .padding(.horizontal, 16)
+            .background(Color.clear)
+            .listStyle(.plain)
+            .frame(minHeight: 116)
         }
-        .padding(.horizontal, 16)
-        .componentBackground(
-            color: AppGradient.appBackgroundMini.name,
-            size: CGSize(width: size.width, height: size.height)
-        )
-        
     }
 }
 
