@@ -93,11 +93,7 @@ struct AccountSettingsBlock: View {
     let account: Account
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.appBackgroundMini)
-                .padding(.horizontal, 16)
-            
+        VStack {
             List {
                 SettingsRowView(
                     inputValue: $name,
@@ -105,7 +101,7 @@ struct AccountSettingsBlock: View {
                     source: account,
                     title: "Account name",
                     type: .textfield
-                )
+                ).listRowBackground(Color.clear)
                 
                 SettingsRowView(
                     inputValue: $name,
@@ -113,7 +109,7 @@ struct AccountSettingsBlock: View {
                     source: account,
                     title: "Currency",
                     type: .picker
-                )
+                ).listRowBackground(Color.clear)
                 
                 SettingsRowView(
                     inputValue: $name,
@@ -121,14 +117,16 @@ struct AccountSettingsBlock: View {
                     source: account,
                     title: "Account balance",
                     type: .textfield
-                )
+                ).listRowBackground(Color.clear)
             }
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .padding(.horizontal, 16)
             .background(Color.clear)
+            .listRowBackground(Color.clear)
             .listStyle(.plain)
             .frame(minHeight: 176)
         }
+        .background(AppGradient.appBackgroundMini.value)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .padding(.horizontal, 16)
         
     }
 }
