@@ -34,7 +34,105 @@ struct AccountSettingsView: View {
     }
     
     var body: some View {
-        ScrollView {
+        List {
+            AccountLargeCardView(
+                title: name,
+                currency: currency,
+                amount: balance,
+                image: selectedIcon.name,
+                color: selectedColor.name,
+                size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
+            )
+            .frame(maxWidth: .infinity, alignment: .center)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            
+            Section {
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Account name",
+                    type: .textfield
+                )
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Currency",
+                    type: .picker
+                )
+                
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Account balance",
+                    type: .textfield
+                )
+            } header: {
+                Text("Account settings")
+            }
+            
+            Section {
+                HStack(spacing: 16) {
+                    ChosingItemView(
+                        selectedItem: $selectedIcon,
+                        items: Icon.allCases,
+                        title: "Icon",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                    )
+                    
+                    ChosingItemView(
+                        selectedItem: $selectedColor,
+                        items: AppGradient.allCases,
+                        title: "Color",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                    )
+                }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
+            
+            Section {
+                HStack(spacing: 16) {
+                    ItemPickerView(
+                        selectedItem: $selectedGroup,
+                        items: dataStore.groupsOfAccounts,
+                        title: "Group of Accounts",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
+                    )
+                    
+                    ItemPickerView(
+                        selectedItem: $selectedUser,
+                        items: dataStore.people,
+                        title: "User",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
+                    )
+                }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
+            
+            Section {
+                ShowHistoryView(
+                    title: "History",
+                    buttonTitle: "Show",
+                    action: {
+                        // router.navigateTo(.history)
+                    },
+                    size: CGSize(width: Constants.widthFive, height: Constants.heightFive)
+                )
+                .listRowBackground(Color.clear)
+            }
+            
+            RoundedButtonView(title: "Delete account", action: {})
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+        }
+        
+        /*ScrollView {
             VStack {
                 AccountLargeCardView(
                     title: name,
@@ -81,7 +179,7 @@ struct AccountSettingsView: View {
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
-        }
+        }*/
     }
 }
 
