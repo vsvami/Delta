@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoundedButtonView: View {
     let title: String
-    let action: () -> Void
+    var action: () -> Void
     
     var body: some View {
         Button(action: action) {

@@ -19,13 +19,6 @@ struct AccountGroupCardView: View {
         accountsGroup.accounts.count
     }
     
-    var sizeOfButtons: Double {
-        30
-    }
-    var sizeOfAccountsGroup: Double {
-        (Constants.widthTwo + 16) * Double(countOfAccounts) + sizeOfButtons + 32
-    }
-    
     var backgroundColor: LinearGradient {
         AppGradient.getColor(from: accountsGroup.color)?.value ?? AppGradient.appWhite.value
     }
@@ -60,7 +53,6 @@ struct AccountGroupCardView: View {
                                 .padding(.top)
                         }
                     }
-                    .frame(width: sizeOfButtons)
                     
                     ForEach(accountsGroup.accounts) { account in
                         AccountCardView(
@@ -73,6 +65,7 @@ struct AccountGroupCardView: View {
                         )
                     }
                 }
+                .padding()
             } else {
                 ZStack{
                     backgroundColor.brightness(-0.1)
@@ -102,7 +95,6 @@ struct AccountGroupCardView: View {
             }
         }
         .frame(
-            width: isExpanded ? sizeOfAccountsGroup : Constants.widthTwo,
             height: Constants.heightThree + 16
         )
         .background(isExpanded ? backgroundColor : nil)
