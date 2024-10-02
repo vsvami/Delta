@@ -45,7 +45,7 @@ struct AccountSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
             
             Section {
                 SettingsRowView(
@@ -53,7 +53,8 @@ struct AccountSettingsView: View {
                     currency: $currency,
                     source: account,
                     title: "Account name",
-                    type: .textfield
+                    type: .textfield, 
+                    keyboardType: .default
                 )
                 
                 SettingsRowView(
@@ -61,18 +62,23 @@ struct AccountSettingsView: View {
                     currency: $currency,
                     source: account,
                     title: "Currency",
-                    type: .picker
+                    type: .picker, 
+                    keyboardType: .default
                 )
                 
                 SettingsRowView(
-                    inputValue: $name,
+                    inputValue: $balance,
                     currency: $currency,
                     source: account,
                     title: "Account balance",
-                    type: .textfield
+                    type: .textfield, 
+                    keyboardType: .decimalPad
                 )
             } header: {
                 Text("Account settings")
+                    .font(.subheading1())
+                    .padding(.leading, -18)
+                    .foregroundStyle(AppGradient.appBlack.value)
             }
             
             Section {
@@ -94,6 +100,7 @@ struct AccountSettingsView: View {
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
             }
+            .padding(.vertical, 8)
             
             Section {
                 HStack(spacing: 16) {
@@ -114,6 +121,7 @@ struct AccountSettingsView: View {
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
             }
+            .padding(.bottom, 8)
             
             Section {
                 ShowHistoryView(
@@ -124,64 +132,34 @@ struct AccountSettingsView: View {
                     },
                     size: CGSize(width: Constants.widthFive, height: Constants.heightFive)
                 )
+                .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
             }
             
             RoundedButtonView(title: "Delete account", action: {})
                 .listRowBackground(Color.clear)
                 .listRowInsets(EdgeInsets())
+                .padding(.top, 8)
         }
-        
-        /*ScrollView {
-            VStack {
-                AccountLargeCardView(
-                    title: name,
-                    currency: currency,
-                    amount: balance,
-                    image: selectedIcon.name,
-                    color: selectedColor.name,
-                    size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
-                )
-                .padding()
-                
-                Text("Account settings")
-                    .font(.heading1())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 16)
-                
-                AccountSettingsBlockView(
-                    name: $name,
-                    currency: $currency,
-                    balance: $balance,
-                    selectedIcon: $selectedIcon,
-                    selectedColor: $selectedColor,
-                    selectedGroup: $selectedGroup,
-                    selectedUser: $selectedUser,
-                    account: account
-                )
-                
-                RoundedButtonView(title: "Delete account", action: {})
-                    .padding()
-                
-                Spacer()
-            }
-            .shadow()
-            .navigationTitle(account.title)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        //сохраняем изменения
-                    }
+        .buttonStyle(BorderlessButtonStyle())
+        .listSectionSpacing(.compact)
+        .navigationTitle(account.title)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    //сохраняем изменения
                 }
             }
         }
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
-        }*/
+        }
     }
 }
+
+
 
 #Preview {
     AccountSettingsView(
