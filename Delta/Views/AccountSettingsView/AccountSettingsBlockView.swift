@@ -119,8 +119,6 @@ struct AccountSettingsBlock: View {
                     type: .textfield
                 ).listRowBackground(Color.clear)
             }
-            .background(Color.clear)
-            .listRowBackground(Color.clear)
             .listStyle(.plain)
             .frame(minHeight: 176)
         }
