@@ -48,32 +48,24 @@ struct AccountSettingsView: View {
             .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
             
             Section {
-                SettingsRowView(
+                TextFieldRowView(
                     inputValue: $name,
-                    currency: $currency,
                     source: account,
                     title: "Account name",
-                    type: .textfield, 
                     keyboardType: .default, 
                     placeholder: account.title
                 )
                 
-                SettingsRowView(
-                    inputValue: $name,
+                PickerRowView(
                     currency: $currency,
                     source: account,
-                    title: "Currency",
-                    type: .picker, 
-                    keyboardType: .default, 
-                    placeholder: account.title
+                    title: "Currency"
                 )
                 
-                SettingsRowView(
+                TextFieldRowView(
                     inputValue: $balance,
-                    currency: $currency,
                     source: account,
                     title: "Account balance",
-                    type: .textfield, 
                     keyboardType: .decimalPad, 
                     placeholder: String(account.amount)
                 )

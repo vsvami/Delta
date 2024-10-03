@@ -614,6 +614,25 @@ final class SubCategory: Category {
     var notification: Bool?
     var autoTransaction: Bool?
     var transaction: Transaction?
+    
+    init(
+        id: UUID,
+        title: String,
+        currency: Currency,
+        categoryType: CategoryType,
+        amount: Double,
+        date: Date? = nil,
+        notification: Bool? = nil,
+        autoTransaction: Bool? = nil,
+        transaction: Transaction? = nil
+    ) {
+        self.amount = amount
+        self.date = date
+        self.notification = notification
+        self.autoTransaction = autoTransaction
+        self.transaction = transaction
+        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+    }
 }
 
 final class IncomeExpense: Category {
@@ -640,7 +659,16 @@ final class IncomeExpense: Category {
         repeatingType == .random ? getAmountsByDate() : getAmountsByPeriod()
     }
     
-    init(image: String, repeatingType: RepeatingType, subCategories: [SubCategory], transactions: [Transaction], id: UUID, title: String, currency: Currency, categoryType: CategoryType) {
+    init(
+        image: String,
+        repeatingType: RepeatingType,
+        subCategories: [SubCategory],
+        transactions: [Transaction],
+        id: UUID,
+        title: String,
+        currency: Currency,
+        categoryType: CategoryType
+    ) {
         self.image = image
         self.repeatingType = repeatingType
         self.subCategories = subCategories

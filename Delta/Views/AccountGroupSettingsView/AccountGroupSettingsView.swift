@@ -57,24 +57,18 @@ struct AccountGroupSettingsView: View {
             }
             
             Section {
-                SettingsRowView(
+                TextFieldRowView(
                     inputValue: $name,
-                    currency: $currency,
                     source: groupOfAccounts,
                     title: "Account name",
-                    type: .textfield,
                     keyboardType: .default, 
                     placeholder: groupOfAccounts.title
                 )
                 
-                SettingsRowView(
-                    inputValue: $name,
+                PickerRowView(
                     currency: $currency,
                     source: groupOfAccounts,
-                    title: "Currency",
-                    type: .picker,
-                    keyboardType: .numberPad, 
-                    placeholder: groupOfAccounts.title
+                    title: "Currency"
                 )
             } header: {
                 Text("Account settings")

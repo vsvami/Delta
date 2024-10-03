@@ -20,7 +20,7 @@
 		1A2A33942C9440BD008F6414 /* ItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33932C9440BD008F6414 /* ItemPickerView.swift */; };
 		1A2A33962C9453B2008F6414 /* ShowHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33952C9453B2008F6414 /* ShowHistoryView.swift */; };
 		1A2A339A2C946025008F6414 /* View +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33992C946025008F6414 /* View +.swift */; };
-		1A2A339E2CA57D19008F6414 /* SettingsRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A339D2CA57D19008F6414 /* SettingsRowView.swift */; };
+		1A2A339E2CA57D19008F6414 /* TextFieldRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A339D2CA57D19008F6414 /* TextFieldRowView.swift */; };
 		1A2A33A02CAE9523008F6414 /* IncomeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A339F2CAE9523008F6414 /* IncomeSettingsView.swift */; };
 		1A2A33A22CAE9DAD008F6414 /* CustomSegmentedControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */; };
 		1A6725492C56D4AC004B3730 /* UISystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1A6725482C56D4AC004B3730 /* UISystem */; };
@@ -89,7 +89,7 @@
 		1A2A33932C9440BD008F6414 /* ItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerView.swift; sourceTree = "<group>"; };
 		1A2A33952C9453B2008F6414 /* ShowHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHistoryView.swift; sourceTree = "<group>"; };
 		1A2A33992C946025008F6414 /* View +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View +.swift"; sourceTree = "<group>"; };
-		1A2A339D2CA57D19008F6414 /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
+		1A2A339D2CA57D19008F6414 /* TextFieldRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldRowView.swift; sourceTree = "<group>"; };
 		1A2A339F2CAE9523008F6414 /* IncomeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeSettingsView.swift; sourceTree = "<group>"; };
 		1A2A33A12CAE9DAD008F6414 /* CustomSegmentedControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControlView.swift; sourceTree = "<group>"; };
 		1A6725462C56D426004B3730 /* UISystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UISystem; path = Delta/Modules/UISystem; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				1A2A337F2C85F955008F6414 /* BaseCategoryRowView.swift */,
 				1A2A33862C8893EB008F6414 /* GoalCategoryRowView.swift */,
 				1A2A33882C88983F008F6414 /* InvestmentCategoryRowView.swift */,
-				1A2A339D2CA57D19008F6414 /* SettingsRowView.swift */,
+				1A2A339D2CA57D19008F6414 /* TextFieldRowView.swift */,
 			);
 			path = RowViews;
 			sourceTree = "<group>";
@@ -563,7 +563,7 @@
 				640F9F4F2C7D3F53007C7E7E /* AccountCardView.swift in Sources */,
 				64E00AF22CA599B7000092CB /* AccountGroupCapsuleView.swift in Sources */,
 				649FF6982C3C58520081BC63 /* MainView.swift in Sources */,
-				1A2A339E2CA57D19008F6414 /* SettingsRowView.swift in Sources */,
+				1A2A339E2CA57D19008F6414 /* TextFieldRowView.swift in Sources */,
 				648E092E2C8F027000ECA13D /* CategoriesScrollView.swift in Sources */,
 				64FB5C412C4BF49B00BBADB1 /* LoginView.swift in Sources */,
 				647A6F3E2C8120C000927749 /* CapsuleButtonView.swift in Sources */,
