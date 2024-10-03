@@ -16,7 +16,7 @@ struct CustomSegmentedControlView: View {
             ForEach(RepeatingType.allCases) { type in
                 ZStack {
                     Rectangle()
-                        .fill(AppGradient.appBackground.value)
+                        .fill(AppGradient.appBackgroundMini.value)
                     
                     Rectangle()
                         .fill(AppGradient.appBlack.value)

@@ -13,24 +13,41 @@ struct IncomeSettingsView: View {
     @State private var incomeTitle: String = ""
     @State private var currency: Currency = .usd
     @State private var amount: String = ""
+    @State private var selectedIcon: Icon = .award
     
     let income: IncomeExpense
     
     var body: some View {
         VStack {
             CustomSegmentedControlView(selection: $selection)
+                .padding(.horizontal, 20)
             
             switch selection {
             case .random:
                 RandomIncomesView(
                     incomeTitle: $incomeTitle,
                     currency: $currency,
-                    amount: $amount,
+                    amount: $amount, 
+                    selectedIcon: $selectedIcon,
                     income: income
                 )
+                .padding(.top, -10)
             case .certain:
                 CertainIncomesView()
             }
+        }
+        .navigationTitle(income.title)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    //сохраняем изменения
+                }
+            }
+        }
+        .background(.appBackground)
+        .onTapGesture {
+            hideKeyboard()
         }
     }
 }
@@ -39,6 +56,7 @@ struct RandomIncomesView: View {
     @Binding var incomeTitle: String
     @Binding var currency: Currency
     @Binding var amount: String
+    @Binding var selectedIcon: Icon
     
     let income: IncomeExpense
     
@@ -75,7 +93,19 @@ struct RandomIncomesView: View {
                     placeholder: String(income.amount)
                 )
             }
+            
+            ChosingItemView(
+                selectedItem: $selectedIcon,
+                items: Icon.allCases,
+                title: "Icon",
+                size: CGSize(width: Constants.widthSix, height: Constants.heightFour)
+            )
+            .listRowInsets(EdgeInsets())
+            .listRowBackground(Color.clear)
+            .padding(.vertical, 8)
         }
+        .buttonStyle(BorderlessButtonStyle())
+        .listSectionSpacing(.compact)
     }
 }
 
