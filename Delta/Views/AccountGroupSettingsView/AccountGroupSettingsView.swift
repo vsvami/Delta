@@ -28,62 +28,99 @@ struct AccountGroupSettingsView: View {
         _balance = State(initialValue: String(groupOfAccounts.amount))
         _selectedIcon = State(initialValue: Icon.getIcon(from: groupOfAccounts.image) ?? .dollar)
         _selectedColor = State(initialValue: AppGradient.getColor(from: groupOfAccounts.color) ?? .blueGradient)
+        _accounts = State(initialValue: dataManager.getAccounts())
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                AccountLargeCardView(
-                    title: name,
-                    currency: currency,
-                    amount: balance,
-                    image: selectedIcon.name,
-                    color: selectedColor.name,
-                    size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
-                )
-                .padding()
-                
-                Text("Accounts")
-                    .font(.heading1())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 16)
-                
+        List {
+            AccountLargeCardView(
+                title: name,
+                currency: currency,
+                amount: balance,
+                image: selectedIcon.name,
+                color: selectedColor.name,
+                size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
+            )
+            .frame(maxWidth: .infinity, alignment: .center)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            
+            Section {
                 CategoriesScrollView(categories: accounts)
-                
-                Text("Accounts group settings")
-                    .font(.heading1())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 16)
-                
-                AccountGroupSettingsBlockView(
-                    name: $name,
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
+            } header: {
+                Text("Accounts")
+                    .font(.subheading1())
+                    .padding(.leading, -18)
+                    .foregroundStyle(AppGradient.appBlack.value)
+            }
+            
+            Section {
+                SettingsRowView(
+                    inputValue: $name,
                     currency: $currency,
-                    selectedIcon: $selectedIcon,
-                    selectedColor: $selectedColor,
-                    groupOfAccounts: groupOfAccounts
+                    source: groupOfAccounts,
+                    title: "Account name",
+                    type: .textfield,
+                    keyboardType: .default
                 )
                 
-                RoundedButtonView(title: "Delete group", action: {})
-                    .padding()
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: groupOfAccounts,
+                    title: "Currency",
+                    type: .picker,
+                    keyboardType: .numberPad
+                )
+            } header: {
+                Text("Account settings")
+                    .font(.subheading1())
+                    .padding(.leading, -18)
+                    .foregroundStyle(AppGradient.appBlack.value)
             }
-            .shadow()
-            .navigationTitle(groupOfAccounts.title)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        //сохраняем изменения
-                    }
+            
+            Section {
+                HStack(spacing: 16) {
+                    ChosingItemView(
+                        selectedItem: $selectedIcon,
+                        items: Icon.allCases,
+                        title: "Icon",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                    )
+                    
+                    ChosingItemView(
+                        selectedItem: $selectedColor,
+                        items: AppGradient.allCases,
+                        title: "Color",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                    )
+                }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
+            .padding(.vertical, 8)
+            
+            RoundedButtonView(title: "Delete group", action: {})
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+                .padding(.top, 8)
+        }
+        .buttonStyle(BorderlessButtonStyle())
+        .listSectionSpacing(.compact)
+        .navigationTitle(groupOfAccounts.title)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    //сохраняем изменения
                 }
             }
         }
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
-        }
-        .onAppear {
-            accounts = dataManager.getAccounts()
         }
     }
 }

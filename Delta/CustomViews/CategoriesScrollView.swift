@@ -106,7 +106,7 @@ struct CategoriesScrollView: View {
                 
                 PlusButtonView(action: {})
             }
-            .padding(.horizontal)
+            //.padding(.horizontal)
         }
         .shadow()
     }

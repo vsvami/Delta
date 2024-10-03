@@ -23,6 +23,7 @@ struct ItemPickerView<T: Hashable>: View {
                     }
                 }
                 .pickerStyle(.menu)
+                .labelsHidden()
                 .accentColor(.appBlack)
                 .padding(.leading, 4)
             }
@@ -34,6 +35,7 @@ struct ItemPickerView<T: Hashable>: View {
                     }
                 }
                 .pickerStyle(.menu)
+                .labelsHidden()
                 .accentColor(.appBlack)
                 .padding(.leading, 4)
             }

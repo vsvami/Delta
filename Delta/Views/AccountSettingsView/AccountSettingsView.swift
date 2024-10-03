@@ -34,47 +34,121 @@ struct AccountSettingsView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                AccountLargeCardView(
-                    title: name,
-                    currency: currency,
-                    amount: balance,
-                    image: selectedIcon.name,
-                    color: selectedColor.name,
-                    size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
-                )
-                .padding()
-                
-                Text("Account settings")
-                    .font(.heading1())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 16)
-                
-                AccountSettingsBlockView(
-                    name: $name,
+        List {
+            AccountLargeCardView(
+                title: name,
+                currency: currency,
+                amount: balance,
+                image: selectedIcon.name,
+                color: selectedColor.name,
+                size: CGSize(width: Constants.widthThree, height: Constants.heightSix)
+            )
+            .frame(maxWidth: .infinity, alignment: .center)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            
+            Section {
+                SettingsRowView(
+                    inputValue: $name,
                     currency: $currency,
-                    balance: $balance,
-                    selectedIcon: $selectedIcon,
-                    selectedColor: $selectedColor,
-                    selectedGroup: $selectedGroup,
-                    selectedUser: $selectedUser,
-                    account: account
+                    source: account,
+                    title: "Account name",
+                    type: .textfield, 
+                    keyboardType: .default
                 )
                 
-                RoundedButtonView(title: "Delete account", action: {})
-                    .padding()
+                SettingsRowView(
+                    inputValue: $name,
+                    currency: $currency,
+                    source: account,
+                    title: "Currency",
+                    type: .picker, 
+                    keyboardType: .default
+                )
                 
-                Spacer()
+                SettingsRowView(
+                    inputValue: $balance,
+                    currency: $currency,
+                    source: account,
+                    title: "Account balance",
+                    type: .textfield, 
+                    keyboardType: .decimalPad
+                )
+            } header: {
+                Text("Account settings")
+                    .font(.subheading1())
+                    .padding(.leading, -18)
+                    .foregroundStyle(AppGradient.appBlack.value)
             }
-            .shadow()
-            .navigationTitle(account.title)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        //сохраняем изменения
-                    }
+            
+            Section {
+                HStack(spacing: 16) {
+                    ChosingItemView(
+                        selectedItem: $selectedIcon,
+                        items: Icon.allCases,
+                        title: "Icon",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                    )
+                    
+                    ChosingItemView(
+                        selectedItem: $selectedColor,
+                        items: AppGradient.allCases,
+                        title: "Color",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                    )
+                }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
+            .padding(.vertical, 8)
+            
+            Section {
+                HStack(spacing: 16) {
+                    ItemPickerView(
+                        selectedItem: $selectedGroup,
+                        items: dataStore.groupsOfAccounts,
+                        title: "Group of Accounts",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
+                    )
+                    
+                    ItemPickerView(
+                        selectedItem: $selectedUser,
+                        items: dataStore.people,
+                        title: "User",
+                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFive)
+                    )
+                }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
+            .padding(.bottom, 8)
+            
+            Section {
+                ShowHistoryView(
+                    title: "History",
+                    buttonTitle: "Show",
+                    action: {
+                        // router.navigateTo(.history)
+                    },
+                    size: CGSize(width: Constants.widthFive, height: Constants.heightFive)
+                )
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
+            
+            RoundedButtonView(title: "Delete account", action: {})
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+                .padding(.top, 8)
+        }
+        .buttonStyle(BorderlessButtonStyle())
+        .listSectionSpacing(.compact)
+        .navigationTitle(account.title)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    //сохраняем изменения
                 }
             }
         }
@@ -84,6 +158,8 @@ struct AccountSettingsView: View {
         }
     }
 }
+
+
 
 #Preview {
     AccountSettingsView(
