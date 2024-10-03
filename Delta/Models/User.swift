@@ -518,9 +518,11 @@ enum Period {
     }
 }
 
-enum RepeatingType: String {
-    case random
-    case certain
+enum RepeatingType: String, CaseIterable, Identifiable {
+    case random = "Random"
+    case certain = "Certain"
+    
+    var id: String { self.rawValue }
 }
 
 final class User {
