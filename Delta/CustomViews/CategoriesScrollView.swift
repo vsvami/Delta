@@ -104,7 +104,9 @@ struct CategoriesScrollView: View {
                     }
                 }
                 
-                PlusButtonView(action: {})
+                PlusButtonView {
+                    router.navigateTo(.incomeSettings)
+                }
             }
             //.padding(.horizontal)
         }

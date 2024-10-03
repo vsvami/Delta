@@ -16,6 +16,7 @@ final class DataStore {
     var transactions: [Transaction] = []
     var groupsOfAccounts: [GroupOfAccounts] = []
     var accounts: [Account] = []
+    var incomes: [IncomeExpense] = []
     
     private init() {
         initializeTestData()
@@ -131,7 +132,44 @@ final class DataStore {
             categoryType: .expense
         )
         
+        let award = IncomeExpense(
+            image: "trophy",
+            repeatingType: .random,
+            subCategories: [],
+            transactions: [],
+            id: UUID(),
+            title: "Award",
+            currency: .usd,
+            categoryType: .income
+        )
+        
+        let salary = IncomeExpense(
+            image: "handbag",
+            repeatingType: .certain,
+            subCategories: [SubCategory(
+                id: UUID(),
+                title: "Avance",
+                currency: .rub,
+                categoryType: .income,
+                amount: 2000,
+                date: Date(),
+                notification: false,
+                autoTransaction:  true,
+                transaction: nil
+            )],
+            transactions: [],
+            id: UUID(),
+            title: "Salary",
+            currency: .rub,
+            categoryType: .income
+        )
+        
+        incomes.append(award)
+        incomes.append(salary)
+        
         categories.append(taxi)
+        categories.append(award)
+        categories.append(salary)
         
     }
 }

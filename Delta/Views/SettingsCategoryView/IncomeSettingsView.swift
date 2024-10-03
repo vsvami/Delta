@@ -13,20 +13,20 @@ struct IncomeSettingsView: View {
     @State private var incomeTitle: String = ""
     @State private var currency: Currency = .usd
     @State private var amount: String = ""
-    @State private var selectedIcon: Icon = .award
+    @State private var selectedIcon: Icon = .dollar
     
     @State private var certainIncomeTitle: String = ""
     @State private var date: Date = Date()
     @State private var notificationIsOn: Bool = false
     @State private var isAutotransaction: Bool = false
     
-    let income: IncomeExpense
-    let certainIncome: SubCategory
+    let income: IncomeExpense = DataStore.shared.incomes.last!
     
     var body: some View {
         VStack {
             CustomSegmentedControlView(selection: $selection)
                 .padding(.horizontal, 20)
+                .padding(.top, 16)
             
             switch selection {
             case .random:
@@ -49,12 +49,12 @@ struct IncomeSettingsView: View {
                     notificationIsOn: $notificationIsOn,
                     isAutotransaction: $isAutotransaction,
                     income: income,
-                    certainIncome: certainIncome
+                    certainIncome: income.subCategories.last! //TODO: fix optional
                 )
                 .padding(.top, -10)
             }
         }
-        .navigationTitle(income.title)
+        .navigationTitle("Income source")
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -169,6 +169,14 @@ struct CertainIncomesView: View {
                 isAutotransaction: $isAutotransaction,
                 certainIncome: certainIncome
             )
+            
+            PlusButtonView {
+                
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            
         }
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
@@ -220,7 +228,7 @@ struct CertainIncomeSettingsView: View {
                 title: "Autotransaction"
             )
         } header: {
-            Text("Add certain income")
+            Text("Certain income")
                 .font(.bodyText1())
                 .padding(.leading, -18)
         }
@@ -228,23 +236,5 @@ struct CertainIncomeSettingsView: View {
 }
 
 #Preview {
-    IncomeSettingsView(
-        income: IncomeExpense(
-            image: "",
-            repeatingType: .random,
-            subCategories: [],
-            transactions: [],
-            id: UUID(),
-            title: "Award",
-            currency: .usd,
-            categoryType: .income
-        ),
-        certainIncome: SubCategory(
-            id: UUID(),
-            title: "Award 1",
-            currency: .usd,
-            categoryType: .income,
-            amount: 2000
-        )
-    )
+    IncomeSettingsView()
 }
