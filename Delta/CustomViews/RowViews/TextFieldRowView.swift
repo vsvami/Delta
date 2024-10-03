@@ -106,6 +106,8 @@ struct PickerRowView<T>: View {
                 .accentColor(.appBlack)
             }
         }
+        .padding(.vertical, 8)
+        .frame(height: 37)
     }
 }
 
@@ -127,6 +129,8 @@ struct DateRowView<T>: View {
                     .accentColor(.appBlack)
             }
         }
+        .padding(.vertical, 8)
+        .frame(height: 37)
     }
 }
 
@@ -144,6 +148,8 @@ struct NotificationRowView<T>: View {
                 Toggle("", isOn: $notificationIsOn)
             }
         }
+        .padding(.vertical, 8)
+        .frame(height: 37)
     }
 }
 

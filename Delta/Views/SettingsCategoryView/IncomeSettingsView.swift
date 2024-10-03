@@ -15,7 +15,13 @@ struct IncomeSettingsView: View {
     @State private var amount: String = ""
     @State private var selectedIcon: Icon = .award
     
+    @State private var certainIncomeTitle: String = ""
+    @State private var date: Date = Date()
+    @State private var notificationIsOn: Bool = false
+    @State private var isAutotransaction: Bool = false
+    
     let income: IncomeExpense
+    let certainIncome: SubCategory
     
     var body: some View {
         VStack {
@@ -36,9 +42,14 @@ struct IncomeSettingsView: View {
                 CertainIncomesView(
                     incomeTitle: $incomeTitle,
                     currency: $currency,
-                    amount: $amount,
                     selectedIcon: $selectedIcon,
-                    income: income
+                    certainIncomeTitle: $certainIncomeTitle,
+                    amount: $amount,
+                    date: $date,
+                    notificationIsOn: $notificationIsOn,
+                    isAutotransaction: $isAutotransaction,
+                    income: income,
+                    certainIncome: certainIncome
                 )
                 .padding(.top, -10)
             }
@@ -111,10 +122,16 @@ struct RandomIncomesView: View {
 struct CertainIncomesView: View {
     @Binding var incomeTitle: String
     @Binding var currency: Currency
-    @Binding var amount: String
     @Binding var selectedIcon: Icon
     
+    @Binding var certainIncomeTitle: String
+    @Binding var amount: String
+    @Binding var date: Date
+    @Binding var notificationIsOn: Bool
+    @Binding var isAutotransaction: Bool
+    
     let income: IncomeExpense
+    let certainIncome: SubCategory
     
     var body: some View {
         List {
@@ -144,7 +161,14 @@ struct CertainIncomesView: View {
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
             
-            
+            CertainIncomeSettingsView(
+                incomeTitle: $certainIncomeTitle,
+                amount: $amount,
+                date: $date,
+                notificationIsOn: $notificationIsOn,
+                isAutotransaction: $isAutotransaction,
+                certainIncome: certainIncome
+            )
         }
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
@@ -153,9 +177,10 @@ struct CertainIncomesView: View {
 
 struct CertainIncomeSettingsView: View {
     @Binding var incomeTitle: String
-    @Binding var currency: Currency
     @Binding var amount: String
-    @Binding var selectedIcon: Icon
+    @Binding var date: Date
+    @Binding var notificationIsOn: Bool
+    @Binding var isAutotransaction: Bool
     
     let certainIncome: SubCategory
     
@@ -176,11 +201,28 @@ struct CertainIncomeSettingsView: View {
                 keyboardType: .decimalPad,
                 placeholder: String(certainIncome.amount)
             )
+            
+            DateRowView(
+                date: $date,
+                source: certainIncome,
+                title: "Choose date"
+            )
+            
+            NotificationRowView(
+                notificationIsOn: $notificationIsOn,
+                source: certainIncome,
+                title: "Notifications"
+            )
+            
+            NotificationRowView(
+                notificationIsOn: $isAutotransaction,
+                source: certainIncome,
+                title: "Autotransaction"
+            )
         } header: {
             Text("Add certain income")
                 .font(.bodyText1())
                 .padding(.leading, -18)
-                .foregroundStyle(AppGradient.appBlack.value)
         }
     }
 }
@@ -196,6 +238,13 @@ struct CertainIncomeSettingsView: View {
             title: "Award",
             currency: .usd,
             categoryType: .income
+        ),
+        certainIncome: SubCategory(
+            id: UUID(),
+            title: "Award 1",
+            currency: .usd,
+            categoryType: .income,
+            amount: 2000
         )
     )
 }
