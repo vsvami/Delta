@@ -19,6 +19,7 @@ struct SettingsRowView<T>: View {
     let source: T
     let title: String
     let type: InputType
+    let keyboardType: UIKeyboardType
     
     var body: some View {
         HStack {
@@ -28,7 +29,7 @@ struct SettingsRowView<T>: View {
                 TextField(source.title, text: $inputValue)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.trailing)
-                    .keyboardType(.default)
+                    .keyboardType(keyboardType)
             }
             
             if let source = source as? Account, type == .picker {
@@ -50,7 +51,7 @@ struct SettingsRowView<T>: View {
                 TextField(source.title, text: $inputValue)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.trailing)
-                    .keyboardType(.default)
+                    .keyboardType(keyboardType)
             }
             
             if let source = source as? GroupOfAccounts, type == .picker {
@@ -72,5 +73,5 @@ struct SettingsRowView<T>: View {
 }
 
 #Preview {
-    SettingsRowView(inputValue: .constant("Cash"), currency: .constant(.usd), source: DataStore.shared.accounts.first, title: "Account Name", type: .picker)
+    SettingsRowView(inputValue: .constant("Cash"), currency: .constant(.usd), source: DataStore.shared.accounts.first, title: "Account Name", type: .picker, keyboardType: .numberPad)
 }

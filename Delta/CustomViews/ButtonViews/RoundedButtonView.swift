@@ -20,7 +20,7 @@ struct RoundedButtonView: View {
         .padding()
         .frame(maxWidth: .infinity)
         .background(.appBlack)
-        .clipShape(RoundedRectangle(cornerRadius: 18))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 
