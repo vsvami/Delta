@@ -63,7 +63,8 @@ struct AccountGroupSettingsView: View {
                     source: groupOfAccounts,
                     title: "Account name",
                     type: .textfield,
-                    keyboardType: .default
+                    keyboardType: .default, 
+                    placeholder: groupOfAccounts.title
                 )
                 
                 SettingsRowView(
@@ -72,7 +73,8 @@ struct AccountGroupSettingsView: View {
                     source: groupOfAccounts,
                     title: "Currency",
                     type: .picker,
-                    keyboardType: .numberPad
+                    keyboardType: .numberPad, 
+                    placeholder: groupOfAccounts.title
                 )
             } header: {
                 Text("Account settings")

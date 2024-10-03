@@ -54,7 +54,8 @@ struct AccountSettingsView: View {
                     source: account,
                     title: "Account name",
                     type: .textfield, 
-                    keyboardType: .default
+                    keyboardType: .default, 
+                    placeholder: account.title
                 )
                 
                 SettingsRowView(
@@ -63,7 +64,8 @@ struct AccountSettingsView: View {
                     source: account,
                     title: "Currency",
                     type: .picker, 
-                    keyboardType: .default
+                    keyboardType: .default, 
+                    placeholder: account.title
                 )
                 
                 SettingsRowView(
@@ -72,7 +74,8 @@ struct AccountSettingsView: View {
                     source: account,
                     title: "Account balance",
                     type: .textfield, 
-                    keyboardType: .decimalPad
+                    keyboardType: .decimalPad, 
+                    placeholder: String(account.amount)
                 )
             } header: {
                 Text("Account settings")

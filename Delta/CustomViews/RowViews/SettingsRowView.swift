@@ -20,13 +20,14 @@ struct SettingsRowView<T>: View {
     let title: String
     let type: InputType
     let keyboardType: UIKeyboardType
+    let placeholder: String
     
     var body: some View {
         HStack {
             if let source = source as? Account, type == .textfield {
                 Text(title)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(source.title, text: $inputValue)
+                TextField(placeholder, text: $inputValue)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(keyboardType)
@@ -48,13 +49,35 @@ struct SettingsRowView<T>: View {
             if let source = source as? GroupOfAccounts, type == .textfield {
                 Text(title)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                TextField(source.title, text: $inputValue)
+                TextField(placeholder, text: $inputValue)
                     .textFieldStyle(.plain)
                     .multilineTextAlignment(.trailing)
                     .keyboardType(keyboardType)
             }
             
             if let source = source as? GroupOfAccounts, type == .picker {
+                Text(title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Picker(source.currency.name, selection: $currency) {
+                    ForEach(Currency.allCases) { currency in
+                        Text(currency.rawValue).tag(currency)
+                    }
+                }
+                .pickerStyle(.menu)
+                .labelsHidden()
+                .accentColor(.appBlack)
+            }
+            
+            if let source = source as? IncomeExpense, type == .textfield {
+                Text(title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                TextField(placeholder, text: $inputValue)
+                    .textFieldStyle(.plain)
+                    .multilineTextAlignment(.trailing)
+                    .keyboardType(keyboardType)
+            }
+            
+            if let source = source as? IncomeExpense, type == .picker {
                 Text(title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Picker(source.currency.name, selection: $currency) {
@@ -73,5 +96,5 @@ struct SettingsRowView<T>: View {
 }
 
 #Preview {
-    SettingsRowView(inputValue: .constant("Cash"), currency: .constant(.usd), source: DataStore.shared.accounts.first, title: "Account Name", type: .picker, keyboardType: .numberPad)
+    SettingsRowView(inputValue: .constant("Cash"), currency: .constant(.usd), source: DataStore.shared.accounts.first, title: "Account Name", type: .picker, keyboardType: .numberPad, placeholder: "Alpha")
 }
