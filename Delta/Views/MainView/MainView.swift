@@ -28,9 +28,11 @@ struct MainView: View {
             
             HeaderMainView(text: "Accounts", action: {})
             CategoriesScrollView(categories: accounts)
+                .safeAreaPadding(.horizontal)
             Spacer()
             
             ButtonsScrollView(categoryTypes: categoryTypes, activeTab: $activeTab)
+                .safeAreaPadding(.horizontal)
             Spacer()
             
             ForEach(categoryTypes, id: \.self) { category in
@@ -38,9 +40,9 @@ struct MainView: View {
                     HeaderMainView(text: category.rawValue, action: {})
                     CategoriesScrollView(categories: dataManager.getCategories(with: category))
                         .frame(height: Constants.heightTwo)
+                        .safeAreaPadding(.horizontal)
                 }
             }
-
         }
         .padding(.vertical)
         .background(AppGradient.appBackground.value)

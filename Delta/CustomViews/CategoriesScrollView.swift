@@ -9,7 +9,6 @@ import SwiftUI
 import UISystem
 
 struct CategoriesScrollView: View {
-    @EnvironmentObject var router: Router
     let categories: [Category]
     
     var body: some View {
@@ -20,16 +19,9 @@ struct CategoriesScrollView: View {
                     case .account:
                         if let account = category as? Account {
                             AccountCardView(
-                                title: account.title,
-                                currency: account.currency,
-                                amount: account.amount,
-                                image: account.image,
-                                color: account.color,
+                                account: account,
                                 size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                             )
-                            .onTapGesture {
-                                router.navigateTo(.accountSettings(account: account))
-                            }
                         }
                     case .groupOfAccounts:
                         if let group = category as? GroupOfAccounts {
@@ -106,7 +98,6 @@ struct CategoriesScrollView: View {
                 
                 PlusButtonView(action: {})
             }
-            //.padding(.horizontal)
         }
         .shadow()
     }

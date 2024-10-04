@@ -19,7 +19,6 @@ struct ButtonsScrollView: View {
                     CapsuleButtonView(categoryType: categoryType, animation: animation, activeTab: $activeTab)
                 }
             }
-            .padding(.horizontal)
         }
         .shadow()
     }

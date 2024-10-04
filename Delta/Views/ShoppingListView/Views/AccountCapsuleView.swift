@@ -41,16 +41,7 @@ struct AccountCapsuleView: View {
 }
 
 #Preview {
-    let account = Account(
-        id: UUID(),
-        title: "SberBank",
-        currency: .rub,
-        image: "creditcard",
-        color: "appGreen",
-        users: [],
-        transactions: [],
-        categoryType: .account
-    )
+    let account = DataStore.shared.accounts.first!
     
     return AccountCapsuleView(
         account: account,

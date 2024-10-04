@@ -31,6 +31,6 @@ struct ShoppingListItemView: View {
 }
 
 #Preview {
-    @State var item = ShoppingListItem(name: "Bread", isCompleted: false)
+    @Previewable var item = ShoppingListItem(name: "Bread", isCompleted: false)
     return ShoppingListItemView(item: item)
 }
