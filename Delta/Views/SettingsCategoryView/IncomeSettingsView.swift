@@ -200,7 +200,7 @@ struct CertainIncomeSettingsView: View {
                 source: certainIncome,
                 title: "Income title",
                 keyboardType: .default,
-                placeholder: certainIncome.title
+                placeholder: "New income"
             )
             
             TextFieldRowView(

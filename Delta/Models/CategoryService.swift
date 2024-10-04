@@ -19,7 +19,7 @@ final class CategoryService {
     func createSubCategory() {
         let newSubCategory = SubCategory(
             id: UUID(),
-            title: "New Income",
+            title: "",
             currency: .usd,
             categoryType: .income,
             amount: 5000,
