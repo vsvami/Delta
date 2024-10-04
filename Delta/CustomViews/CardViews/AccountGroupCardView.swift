@@ -39,11 +39,6 @@ struct AccountGroupCardView: View {
                         }
                         .padding(.bottom)
                         
-                        //TODO: - Кнопку сделать
-//                        Image(systemName: "gearshape")
-//                            .font(.subheadline)
-//                            .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
-//                            .padding(.top)
                         Button(action: {
                             router.navigateTo(.accountGroupSettings(group: accountsGroup))
                         }) {
@@ -56,42 +51,19 @@ struct AccountGroupCardView: View {
                     
                     ForEach(accountsGroup.accounts) { account in
                         AccountCardView(
-                            title: account.title,
-                            currency: account.currency,
-                            amount: account.amount,
-                            image: account.image,
-                            color: account.color,
+                            account: account,
                             size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                         )
                     }
                 }
                 .padding()
             } else {
-                ZStack{
-                    backgroundColor.brightness(-0.1)
-                        .frame(width: Constants.widthTwo - 32, height: Constants.heightThree)
-                        .cornerRadius(16)
-                        .offset(y: -8)
-                    
-                    backgroundColor.brightness(-0.07)
-                        .frame(width: Constants.widthTwo - 16, height: Constants.heightThree)
-                        .cornerRadius(16)
-                        .offset(y: -4)
-                    
-                    AccountCardView(
-                        title: accountsGroup.title,
-                        currency: accountsGroup.currency,
-                        amount: accountsGroup.amount,
-                        image: accountsGroup.image,
-                        color: accountsGroup.color,
-                        size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
-                    )
-                }
-                .onTapGesture {
-                    withAnimation(.spring()) {
-                        isExpanded.toggle()
+                GroupCardView(group: accountsGroup, size: CGSize(width: Constants.widthTwo, height: Constants.heightThree))
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            isExpanded.toggle()
+                        }
                     }
-                }
             }
         }
         .frame(

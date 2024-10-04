@@ -35,6 +35,7 @@ struct AccountGroupCapsuleView: View {
                             .font(.subheadline)
                             .foregroundStyle(accountsGroup.color == AppGradient.appBlack.name ? .appWhite : .black)
                     }
+                    .padding(.leading, 12)
                     ForEach(accountsGroup.accounts) { account in
                         AccountCapsuleView(
                             account: account,
@@ -45,7 +46,7 @@ struct AccountGroupCapsuleView: View {
                         )
                     }
                 }
-                .padding()
+                .padding(8)
             } else {
                 GroupCapsuleView(group: accountsGroup)
                     .onTapGesture {
@@ -55,7 +56,7 @@ struct AccountGroupCapsuleView: View {
                     }
             }
         }
-        .frame(height: 92)
+        .frame(height: 76)
         .background(isExpanded ? backgroundColor : nil)
         .clipShape(Capsule())
         .animation(.spring(), value: isExpanded)
