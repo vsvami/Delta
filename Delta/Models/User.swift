@@ -5,7 +5,7 @@
 //  Created by Vladimir Dmitriev on 24.07.24.
 //
 
-import Foundation
+import SwiftUI
 
 enum Currency: String, CaseIterable, Identifiable {
     case kes = "KES"
@@ -636,18 +636,22 @@ final class SubCategory: Category {
     }
 }
 
+@Observable
 final class IncomeExpense: Category {
+    var amount: Double
     var image: String = ""
     var repeatingType: RepeatingType = .random
     var subCategories: [SubCategory] = []
     var transactions: [Transaction] = []
+    
+    private var categoryService: CategoryService
     
     var plannedAmount: Double {
         subCategories.reduce(0) { $0 + $1.amount }
     }
     
     // проверить обнуления amount при начале нового периода
-    var amount: Double {
+    var totalAmount: Double {
         let filteredTransactions = DataManager.filterTransactions(transactions, for: .month, startDay: 1, fromMonthOffset: 0)
         return filteredTransactions.reduce(0) { $0 + $1.amount }
     }
@@ -661,20 +665,29 @@ final class IncomeExpense: Category {
     }
     
     init(
+        amount: Double,
         image: String,
         repeatingType: RepeatingType,
         subCategories: [SubCategory],
         transactions: [Transaction],
+        categoryService: CategoryService,
         id: UUID,
         title: String,
         currency: Currency,
         categoryType: CategoryType
     ) {
+        self.amount = amount
         self.image = image
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
+        self.categoryService = categoryService
         super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+        updateSubCategories()
+    }
+    
+    func updateSubCategories() {
+        subCategories = categoryService.getIncomes()
     }
     
     // методы для построения графика "План"

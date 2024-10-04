@@ -9,42 +9,22 @@ import SwiftUI
 import UISystem
 
 struct IncomeSettingsView: View {
-    @State private var selection: RepeatingType = .random
-    @State private var incomeTitle: String = ""
-    @State private var currency: Currency = .usd
-    @State private var amount: String = ""
-    @State private var selectedIcon: Icon = .dollar
+    @Environment(CategoryService.self) private var categoryService
     
-    @State private var certainIncomeTitle: String = ""
-    @State private var date: Date = Date()
-    @State private var notificationIsOn: Bool = false
-    @State private var isAutotransaction: Bool = false
-    
-    let income: IncomeExpense = DataStore.shared.incomes.last!
-    
+    @Bindable var income: IncomeExpense
+
     var body: some View {
         VStack {
-            CustomSegmentedControlView(selection: $selection)
+            CustomSegmentedControlView(selection: $income.repeatingType)
                 .padding(.horizontal, 20)
-                .padding(.top, 16)
+                .padding(.vertical, 16)
             
-            switch selection {
+            switch income.repeatingType {
             case .random:
-                RandomIncomesView(
-                    incomeTitle: $incomeTitle,
-                    currency: $currency,
-                    amount: $amount, 
-                    selectedIcon: $selectedIcon,
-                    income: income
-                )
+                RandomIncomesView(income: income)
                 .padding(.top, -10)
             case .certain:
-                CertainIncomesView(
-                    income: income,
-                    incomeTitle: $incomeTitle,
-                    currency: $currency,
-                    selectedIcon: $selectedIcon
-                )
+                CertainIncomesView(income: income)
                 .padding(.top, -10)
             }
         }
@@ -65,26 +45,24 @@ struct IncomeSettingsView: View {
 }
 
 struct RandomIncomesView: View {
-    @Binding var incomeTitle: String
-    @Binding var currency: Currency
-    @Binding var amount: String
-    @Binding var selectedIcon: Icon
+    @Bindable var income: IncomeExpense
     
-    let income: IncomeExpense
+    @State private var amount: String = ""
+    @State private var icon: Icon = .dollar
     
     var body: some View {
         List {
             Section {
                 TextFieldRowView(
-                    inputValue: $incomeTitle,
+                    inputValue: $income.title,
                     source: income,
                     title: "Income title",
                     keyboardType: .default, 
-                    placeholder: income.title
+                    placeholder: "New income"
                 )
                 
                 PickerRowView(
-                    currency: $currency,
+                    currency: $income.currency,
                     source: income,
                     title: "Currency"
                 )
@@ -96,10 +74,17 @@ struct RandomIncomesView: View {
                     keyboardType: .decimalPad, 
                     placeholder: String(income.amount)
                 )
+                .onChange(of: amount) { oldValue, newValue in
+                    income.amount = Double(newValue) ?? 0
+                }
+            } header: {
+                Text("Income main info")
+                    .font(.bodyText1())
+                    .padding(.bottom, 6)
             }
             
             ChosingItemView(
-                selectedItem: $selectedIcon,
+                selectedItem: $icon,
                 items: Icon.allCases,
                 title: "Icon",
                 size: CGSize(width: Constants.widthSix, height: Constants.heightFour)
@@ -107,6 +92,9 @@ struct RandomIncomesView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
+            .onChange(of: icon) { oldValue, newValue in
+                income.image = newValue.name
+            }
         }
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
@@ -115,30 +103,15 @@ struct RandomIncomesView: View {
 
 struct CertainIncomesView: View {
     @Environment(CategoryService.self) private var categoryService
+    @Bindable var income: IncomeExpense
     
-    @Binding var incomeTitle: String
-    @Binding var currency: Currency
-    @Binding var selectedIcon: Icon
-    
-    let income: IncomeExpense
-    
-    init(
-        income: IncomeExpense,
-        incomeTitle: Binding<String>,
-        currency: Binding<Currency>,
-        selectedIcon: Binding<Icon>
-    ) {
-        self.income = income
-        self._incomeTitle = incomeTitle
-        self._currency = currency
-        self._selectedIcon = selectedIcon
-    }
+    @State private var icon: Icon = .dollar
     
     var body: some View {
         List {
             Section {
                 TextFieldRowView(
-                    inputValue: $incomeTitle,
+                    inputValue: $income.title,
                     source: income,
                     title: "Income title",
                     keyboardType: .default,
@@ -146,14 +119,18 @@ struct CertainIncomesView: View {
                 )
                 
                 PickerRowView(
-                    currency: $currency,
+                    currency: $income.currency,
                     source: income,
                     title: "Currency"
                 )
+            } header: {
+                Text("Income main info")
+                    .font(.bodyText1())
+                    .padding(.bottom, 6)
             }
             
             ChosingItemView(
-                selectedItem: $selectedIcon,
+                selectedItem: $icon,
                 items: Icon.allCases,
                 title: "Icon",
                 size: CGSize(width: Constants.widthSix, height: Constants.heightFour)
@@ -161,6 +138,9 @@ struct CertainIncomesView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
+            .onChange(of: icon) { oldValue, newValue in
+                income.image = newValue.name
+            }
             
             ForEach(categoryService.subCategories.indices, id: \.self) { index in
                 CertainIncomeSettingsView(
@@ -172,7 +152,7 @@ struct CertainIncomesView: View {
             }
             
             PlusButtonView {
-                categoryService.createSubCategory()
+                categoryService.createSubIncome()
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
@@ -182,7 +162,7 @@ struct CertainIncomesView: View {
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
         .onAppear {
-            categoryService.createSubCategory()
+            categoryService.createSubIncome()
         }
     }
 }
@@ -253,6 +233,17 @@ struct CertainIncomeSettingsView: View {
 
 
 #Preview {
-    IncomeSettingsView()
+    IncomeSettingsView(income: IncomeExpense(
+        amount: 10000,
+        image: "dollar",
+        repeatingType: .random,
+        subCategories: [],
+        transactions: [],
+        categoryService: CategoryService(),
+        id: UUID(),
+        title: "",
+        currency: .usd,
+        categoryType: .income
+    ))
         .environment(CategoryService())
 }

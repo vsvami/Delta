@@ -121,55 +121,57 @@ final class DataStore {
         accounts.append(alfabank)
         accounts.append(cash)
         
-        let taxi = IncomeExpense(
-            image: "creditcard",
-            repeatingType: .certain,
-            subCategories: [],
-            transactions: [],
-            id: UUID(),
-            title: "Taxi",
-            currency: .rub,
-            categoryType: .expense
-        )
-        
-        let award = IncomeExpense(
-            image: "trophy",
-            repeatingType: .random,
-            subCategories: [],
-            transactions: [],
-            id: UUID(),
-            title: "Award",
-            currency: .usd,
-            categoryType: .income
-        )
-        
-        let salary = IncomeExpense(
-            image: "handbag",
-            repeatingType: .certain,
-            subCategories: [SubCategory(
-                id: UUID(),
-                title: "Avance",
-                currency: .rub,
-                categoryType: .income,
-                amount: 2000,
-                date: Date(),
-                notification: false,
-                autoTransaction:  true,
-                transaction: nil
-            )],
-            transactions: [],
-            id: UUID(),
-            title: "Salary",
-            currency: .rub,
-            categoryType: .income
-        )
-        
-        incomes.append(award)
-        incomes.append(salary)
-        
-        categories.append(taxi)
-        categories.append(award)
-        categories.append(salary)
+//        let taxi = IncomeExpense(
+//            image: "creditcard",
+//            repeatingType: .certain,
+//            subCategories: [],
+//            transactions: [],
+//            id: UUID(),
+//            title: "Taxi",
+//            currency: .rub,
+//            categoryType: .expense
+//        )
+//        
+//        let award = IncomeExpense(
+//            image: "trophy",
+//            repeatingType: .random,
+//            subCategories: [],
+//            transactions: [],
+//            id: UUID(),
+//            title: "Award",
+//            currency: .usd,
+//            categoryType: .income
+//        )
+//        
+//        let salary = IncomeExpense(
+//            amount: 5000,
+//            image: "handbag",
+//            repeatingType: .certain,
+//            subCategories: [SubCategory(
+//                id: UUID(),
+//                title: "Avance",
+//                currency: .rub,
+//                categoryType: .income,
+//                amount: 2000,
+//                date: Date(),
+//                notification: false,
+//                autoTransaction:  true,
+//                transaction: nil
+//            )],
+//            transactions: [],
+//            id: UUID(),
+//            title: "Salary",
+//            currency: .rub,
+//            categoryType: .income, 
+//            categoryService: <#CategoryService#>
+//        )
+//        
+//        incomes.append(award)
+//        incomes.append(salary)
+//        
+//        categories.append(taxi)
+//        categories.append(award)
+//        categories.append(salary)
         
     }
 }

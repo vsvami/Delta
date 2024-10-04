@@ -9,14 +9,19 @@ import SwiftUI
 
 @Observable
 final class CategoryService {
+    var incomes: [IncomeExpense] = []
     var subCategories: [SubCategory] = []
+    
+    func createIncome(_ draftIncome: IncomeExpense) {
+        incomes.append(draftIncome)
+    }
     
     func removeSubCategory(at index: Int) {
         guard index >= 0 && index < subCategories.count else { return }
         subCategories.remove(at: index)
     }
     
-    func createSubCategory() {
+    func createSubIncome() {
         let newSubCategory = SubCategory(
             id: UUID(),
             title: "",
@@ -31,4 +36,10 @@ final class CategoryService {
         
         subCategories.append(newSubCategory)
     }
+    
+    func getIncomes() -> [SubCategory] {
+        subCategories.filter { $0.categoryType == .income }
+    }
 }
+
+
