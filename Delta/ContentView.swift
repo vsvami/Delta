@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var router = Router()
+    @State private var categoryService = CategoryService()
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -18,6 +19,7 @@ struct ContentView: View {
                 }
         }
         .environmentObject(router)
+        .environment(categoryService)
     }
 }
 

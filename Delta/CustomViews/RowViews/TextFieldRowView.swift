@@ -188,7 +188,10 @@ struct NotificationRowView<T>: View {
             title: "Avance",
             currency: .usd,
             categoryType: .income,
-            amount: 3000
+            amount: 3000,
+            date: Date(),
+            notification: false,
+            autoTransaction: true
         ),
         title: "Notifications"
     )

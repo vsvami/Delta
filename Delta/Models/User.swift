@@ -580,7 +580,7 @@ class Transaction {
 //    var isMyDebt = false
 //    var interestRate: Double = 0.0
 //}
-
+@Observable
 class Category: Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String = ""
@@ -608,11 +608,12 @@ class Category: Identifiable, Hashable {
     }
 }
 
+@Observable
 final class SubCategory: Category {
     var amount: Double = 0
-    var date: Date?
-    var notification: Bool?
-    var autoTransaction: Bool?
+    var date: Date
+    var notification: Bool
+    var autoTransaction: Bool
     var transaction: Transaction?
     
     init(
@@ -621,9 +622,9 @@ final class SubCategory: Category {
         currency: Currency,
         categoryType: CategoryType,
         amount: Double,
-        date: Date? = nil,
-        notification: Bool? = nil,
-        autoTransaction: Bool? = nil,
+        date: Date,
+        notification: Bool,
+        autoTransaction: Bool,
         transaction: Transaction? = nil
     ) {
         self.amount = amount
@@ -697,7 +698,7 @@ final class IncomeExpense: Category {
     }
     
     func getAmountsByDate() -> [(amount: Double, date: Date)] {
-        return subCategories.map { ($0.amount, $0.date ?? Date()) }
+        return subCategories.map { ($0.amount, $0.date) }
     }
 }
 

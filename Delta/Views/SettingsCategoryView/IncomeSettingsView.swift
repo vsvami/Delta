@@ -40,16 +40,10 @@ struct IncomeSettingsView: View {
                 .padding(.top, -10)
             case .certain:
                 CertainIncomesView(
+                    income: income,
                     incomeTitle: $incomeTitle,
                     currency: $currency,
-                    selectedIcon: $selectedIcon,
-                    certainIncomeTitle: $certainIncomeTitle,
-                    amount: $amount,
-                    date: $date,
-                    notificationIsOn: $notificationIsOn,
-                    isAutotransaction: $isAutotransaction,
-                    income: income,
-                    certainIncome: income.subCategories.last! //TODO: fix optional
+                    selectedIcon: $selectedIcon
                 )
                 .padding(.top, -10)
             }
@@ -120,18 +114,25 @@ struct RandomIncomesView: View {
 }
 
 struct CertainIncomesView: View {
+    @Environment(CategoryService.self) private var categoryService
+    
     @Binding var incomeTitle: String
     @Binding var currency: Currency
     @Binding var selectedIcon: Icon
     
-    @Binding var certainIncomeTitle: String
-    @Binding var amount: String
-    @Binding var date: Date
-    @Binding var notificationIsOn: Bool
-    @Binding var isAutotransaction: Bool
-    
     let income: IncomeExpense
-    let certainIncome: SubCategory
+    
+    init(
+        income: IncomeExpense,
+        incomeTitle: Binding<String>,
+        currency: Binding<Currency>,
+        selectedIcon: Binding<Icon>
+    ) {
+        self.income = income
+        self._incomeTitle = incomeTitle
+        self._currency = currency
+        self._selectedIcon = selectedIcon
+    }
     
     var body: some View {
         List {
@@ -161,17 +162,17 @@ struct CertainIncomesView: View {
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
             
-            CertainIncomeSettingsView(
-                incomeTitle: $certainIncomeTitle,
-                amount: $amount,
-                date: $date,
-                notificationIsOn: $notificationIsOn,
-                isAutotransaction: $isAutotransaction,
-                certainIncome: certainIncome
-            )
+            ForEach(categoryService.subCategories.indices, id: \.self) { index in
+                CertainIncomeSettingsView(
+                    certainIncome: categoryService.subCategories[index],
+                    action: {
+                        categoryService.removeSubCategory(at: index)
+                    }
+                )
+            }
             
             PlusButtonView {
-                
+                categoryService.createSubCategory()
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
@@ -180,22 +181,22 @@ struct CertainIncomesView: View {
         }
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
+        .onAppear {
+            categoryService.createSubCategory()
+        }
     }
 }
 
 struct CertainIncomeSettingsView: View {
-    @Binding var incomeTitle: String
-    @Binding var amount: String
-    @Binding var date: Date
-    @Binding var notificationIsOn: Bool
-    @Binding var isAutotransaction: Bool
+    @Bindable var certainIncome: SubCategory
+    @State private var amount: String = ""
     
-    let certainIncome: SubCategory
+    let action: () -> Void
     
     var body: some View {
-        Section {
+        Section(header: headerView) {
             TextFieldRowView(
-                inputValue: $incomeTitle,
+                inputValue: $certainIncome.title,
                 source: certainIncome,
                 title: "Income title",
                 keyboardType: .default,
@@ -209,32 +210,49 @@ struct CertainIncomeSettingsView: View {
                 keyboardType: .decimalPad,
                 placeholder: String(certainIncome.amount)
             )
+            .onChange(of: amount) { oldValue, newValue in
+                certainIncome.amount = Double(newValue) ?? 0
+            }
             
             DateRowView(
-                date: $date,
+                date: $certainIncome.date,
                 source: certainIncome,
                 title: "Choose date"
             )
             
             NotificationRowView(
-                notificationIsOn: $notificationIsOn,
+                notificationIsOn: $certainIncome.notification,
                 source: certainIncome,
                 title: "Notifications"
             )
             
             NotificationRowView(
-                notificationIsOn: $isAutotransaction,
+                notificationIsOn: $certainIncome.autoTransaction,
                 source: certainIncome,
                 title: "Autotransaction"
             )
-        } header: {
+        }
+    }
+    
+    private var headerView: some View {
+        HStack {
             Text("Certain income")
                 .font(.bodyText1())
-                .padding(.leading, -18)
+            
+            Spacer()
+            
+            Button(action: action) {
+                Image(systemName: "trash")
+                    .foregroundStyle(.appBlack)
+            }
         }
     }
 }
+    
+
+
 
 #Preview {
     IncomeSettingsView()
+        .environment(CategoryService())
 }
