@@ -16,9 +16,13 @@ final class CategoryService {
         incomes.append(draftIncome)
     }
     
-    func removeSubCategory(at index: Int) {
-        guard index >= 0 && index < subCategories.count else { return }
-        subCategories.remove(at: index)
+    func getIncomes() -> [SubCategory] {
+        subCategories.filter { $0.categoryType == .income }
+    }
+    
+    func removeIncome(at index: Int) {
+        guard index >= 0 && index < incomes.count else { return }
+        incomes.remove(at: index)
     }
     
     func createSubIncome() {
@@ -37,8 +41,9 @@ final class CategoryService {
         subCategories.append(newSubCategory)
     }
     
-    func getIncomes() -> [SubCategory] {
-        subCategories.filter { $0.categoryType == .income }
+    func removeSubCategory(at index: Int) {
+        guard index >= 0 && index < subCategories.count else { return }
+        subCategories.remove(at: index)
     }
 }
 

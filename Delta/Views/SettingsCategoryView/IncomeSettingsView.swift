@@ -76,7 +76,7 @@ struct RandomIncomesView: View {
                     keyboardType: .decimalPad, 
                     placeholder: String(income.amount)
                 )
-                .onChange(of: amount) { oldValue, newValue in
+                .onChange(of: amount) { _, newValue in
                     income.amount = Double(newValue) ?? 0
                 }
             } header: {
@@ -94,7 +94,7 @@ struct RandomIncomesView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
-            .onChange(of: icon) { oldValue, newValue in
+            .onChange(of: icon) { _, newValue in
                 income.image = newValue.name
             }
         }
@@ -140,7 +140,7 @@ struct CertainIncomesView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
-            .onChange(of: icon) { oldValue, newValue in
+            .onChange(of: icon) { _, newValue in
                 income.image = newValue.name
             }
             
@@ -192,7 +192,7 @@ struct CertainIncomeSettingsView: View {
                 keyboardType: .decimalPad,
                 placeholder: String(certainIncome.amount)
             )
-            .onChange(of: amount) { oldValue, newValue in
+            .onChange(of: amount) { _, newValue in
                 certainIncome.amount = Double(newValue) ?? 0
             }
             
