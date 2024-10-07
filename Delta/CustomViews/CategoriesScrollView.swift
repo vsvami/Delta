@@ -10,7 +10,7 @@ import UISystem
 
 struct CategoriesScrollView: View {
     @Environment(CategoryService.self) private var categoryService
-    @EnvironmentObject var router: Router
+    @Environment(Router.self) private var router
     
     let categories: [Category]
     

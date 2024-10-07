@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct AccountGroupSettingsView: View {
-    @EnvironmentObject var router: Router
+    @Environment(Router.self) private var router
     
     @State private var name: String
     @State private var currency: Currency
@@ -133,4 +133,5 @@ struct AccountGroupSettingsView: View {
             categoryType: .account
         )
     )
+    .environment(Router())
 }
