@@ -10,6 +10,7 @@ import UISystem
 
 struct IncomeSettingsView: View {
     @Environment(CategoryService.self) private var categoryService
+    @Environment(\.dismiss) private var dismiss
     
     @Bindable var income: IncomeExpense
 
@@ -34,6 +35,7 @@ struct IncomeSettingsView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     //сохраняем изменения
+                    dismiss()
                 }
             }
         }
