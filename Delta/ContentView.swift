@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+@MainActor
 struct ContentView: View {
-    @StateObject private var router = Router()
+    @State private var router = Router()
+    @State private var categoryService = CategoryService()
     
     var body: some View {
         NavigationStack(path: $router.path) {
@@ -17,7 +19,8 @@ struct ContentView: View {
                     router.view(for: route)
                 }
         }
-        .environmentObject(router)
+        .environment(router)
+        .environment(categoryService)
     }
 }
 

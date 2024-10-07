@@ -8,7 +8,10 @@
 import SwiftUI
 import UISystem
 
-struct CategoriesScrollView: View {
+struct CategoriesScrollView: View { income
+    @Environment(CategoryService.self) private var categoryService
+    @Environment(Router.self) private var router
+    
     let categories: [Category]
     
     var body: some View {
@@ -96,7 +99,22 @@ struct CategoriesScrollView: View {
                     }
                 }
                 
-                PlusButtonView(action: {})
+                PlusButtonView {
+                    let draftIncome = IncomeExpense(
+                        amount: 10000,
+                        image: "dollar",
+                        repeatingType: .random,
+                        subCategories: [],
+                        transactions: [], 
+                        categoryService: categoryService,
+                        id: UUID(),
+                        title: "",
+                        currency: .usd,
+                        categoryType: .income
+                    )
+                    categoryService.createIncome(draftIncome)
+                    router.navigateTo(.incomeSettings(income: draftIncome))
+                }
             }
         }
         .shadow()

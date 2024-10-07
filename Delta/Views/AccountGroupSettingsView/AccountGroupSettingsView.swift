@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct AccountGroupSettingsView: View {
-    @EnvironmentObject var router: Router
+    @Environment(Router.self) private var router
     
     @State private var name: String
     @State private var currency: Currency
@@ -57,22 +57,18 @@ struct AccountGroupSettingsView: View {
             }
             
             Section {
-                SettingsRowView(
+                TextFieldRowView(
                     inputValue: $name,
-                    currency: $currency,
                     source: groupOfAccounts,
                     title: "Account name",
-                    type: .textfield,
-                    keyboardType: .default
+                    keyboardType: .default, 
+                    placeholder: groupOfAccounts.title
                 )
                 
-                SettingsRowView(
-                    inputValue: $name,
+                PickerRowView(
                     currency: $currency,
                     source: groupOfAccounts,
-                    title: "Currency",
-                    type: .picker,
-                    keyboardType: .numberPad
+                    title: "Currency"
                 )
             } header: {
                 Text("Account settings")
@@ -137,4 +133,5 @@ struct AccountGroupSettingsView: View {
             categoryType: .account
         )
     )
+    .environment(Router())
 }
