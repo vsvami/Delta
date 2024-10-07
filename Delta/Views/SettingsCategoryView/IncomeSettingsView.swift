@@ -117,7 +117,7 @@ struct CertainIncomesView: View {
                     source: income,
                     title: "Income title",
                     keyboardType: .default,
-                    placeholder: income.title
+                    placeholder: "New Income"
                 )
                 
                 PickerRowView(
