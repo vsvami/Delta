@@ -21,7 +21,7 @@ struct ComponentBackgroundModifier: ViewModifier {
         content
             .frame(width: size.width, height: size.height)
             .background(color.value)
-            .cornerRadius(12)
+            .cornerRadius(16)
     }
 }
 

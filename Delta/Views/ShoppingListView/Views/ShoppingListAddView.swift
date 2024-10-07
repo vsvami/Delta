@@ -30,7 +30,7 @@ struct ShoppingListAddView: View {
 }
 
 #Preview {
-    @State var category = ShoppingListCategory(
+    @Previewable var category = ShoppingListCategory(
         name: "home",
         items: [ShoppingListItem(name: "Table", isCompleted: false)]
     )

@@ -30,16 +30,7 @@ struct GroupCapsuleView: View {
 }
 
 #Preview {
-    let group = GroupOfAccounts(
-        id: UUID(),
-        title: "SberBank",
-        currency: .rub,
-        image: "creditcard",
-        color: "appGreen",
-        accounts: [],
-        categoryType: .groupOfAccounts
-    )
-    
+    let group = DataStore.shared.groupsOfAccounts.first!
     return GroupCapsuleView(group: group)
 }
 

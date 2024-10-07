@@ -24,5 +24,5 @@ struct ShoppingListAmountRowView: View {
 }
 
 //#Preview {
-//    ShoppingListAmountRowView()
+//    ShoppingListAmountRowView(category: )
 //}
