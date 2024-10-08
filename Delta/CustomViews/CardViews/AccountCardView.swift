@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct AccountCardView: View {
-    @EnvironmentObject var router: Router
+    @Environment(Router.self) private var router
     
     let account: Account
     let size: CGSize
