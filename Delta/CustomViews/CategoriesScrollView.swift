@@ -8,7 +8,7 @@
 import SwiftUI
 import UISystem
 
-struct CategoriesScrollView: View { income
+struct CategoriesScrollView: View { 
     @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
     
