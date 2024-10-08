@@ -66,6 +66,8 @@ final class Tag {
 }
 
 @Observable final class ShoppingListModel {
+    var tags = ["Bread", "Tomato", "Pasta", "Water", "Table", "T-Shirt"]
+    
     var categories = [
         ShoppingListCategory(
             name: "products",
@@ -170,10 +172,10 @@ struct ShoppingListView: View {
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
+    
 //    @FocusState private var isInputActive: Bool
     
     var body: some View {
-        NavigationView {
             ScrollViewReader { proxy in
                 List {
                     ForEach($shoppingListModel.categories) { $category in
@@ -185,10 +187,11 @@ struct ShoppingListView: View {
                                 shoppingListModel.deleteItems(at: indexSet, from: category)
                             }
                             
-                            ShoppingListAddView(category: category)
+                            ShoppingListAddView(category: category, tags: $shoppingListModel.tags)
                         } header: {
                             Text(category.name)
                         }
+                        
                     }
 //                    .focused($isInputActive)
                     
@@ -240,7 +243,6 @@ struct ShoppingListView: View {
 //                .onTapGesture {
 //                    isInputActive = false
 //                }
-            }
         }
     }
 }
