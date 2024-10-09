@@ -19,7 +19,7 @@ enum Route: Hashable {
     case seeAll
     case transfer
     case incomes
-    case incomeSettings(income: IncomeExpense)
+    case incomeSettings
 }
 
 enum TabRoute: Hashable {
@@ -84,8 +84,8 @@ final class Router {
             TransferView()
         case .incomes:
             IncomesView()
-        case .incomeSettings(let income):
-            IncomeSettingsView(income: income)
+        case .incomeSettings:
+            IncomeSettingsView()
         }
         
     }

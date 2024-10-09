@@ -100,20 +100,7 @@ struct CategoriesScrollView: View {
                 }
                 
                 PlusButtonView {
-                    let draftIncome = IncomeExpense(
-                        amount: 10000,
-                        image: "dollar",
-                        repeatingType: .random,
-                        subCategories: [],
-                        transactions: [], 
-                        categoryService: categoryService,
-                        id: UUID(),
-                        title: "",
-                        currency: .usd,
-                        categoryType: .income
-                    )
-                    categoryService.createIncome(draftIncome)
-                    router.navigateTo(.incomeSettings(income: draftIncome))
+                    router.navigateTo(.incomeSettings)
                 }
             }
         }

@@ -16,7 +16,7 @@ final class CategoryService {
         incomes.append(draftIncome)
     }
     
-    func getIncomes() -> [SubCategory] {
+    func getSubIncomes() -> [SubCategory] {
         subCategories.filter { $0.categoryType == .income }
     }
     

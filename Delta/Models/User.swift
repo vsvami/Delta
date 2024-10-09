@@ -644,8 +644,6 @@ final class IncomeExpense: Category {
     var subCategories: [SubCategory] = []
     var transactions: [Transaction] = []
     
-    private var categoryService: CategoryService
-    
     var plannedAmount: Double {
         subCategories.reduce(0) { $0 + $1.amount }
     }
@@ -670,7 +668,6 @@ final class IncomeExpense: Category {
         repeatingType: RepeatingType,
         subCategories: [SubCategory],
         transactions: [Transaction],
-        categoryService: CategoryService,
         id: UUID,
         title: String,
         currency: Currency,
@@ -681,14 +678,13 @@ final class IncomeExpense: Category {
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
-        self.categoryService = categoryService
         super.init(id: id, title: title, currency: currency, categoryType: categoryType)
-        updateSubCategories()
+        //updateSubCategories()
     }
     
-    func updateSubCategories() {
-        subCategories = categoryService.getIncomes()
-    }
+//    func updateSubCategories() {
+//        subCategories = categoryService.getIncomes()
+//    }
     
     // методы для построения графика "План"
     func getAmountsByPeriod() -> [(amount: Double, date: Date)] {

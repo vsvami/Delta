@@ -12,20 +12,47 @@ struct IncomeSettingsView: View {
     @Environment(CategoryService.self) private var categoryService
     @Environment(\.dismiss) private var dismiss
     
-    @Bindable var income: IncomeExpense
+    @State private var selectedType: RepeatingType = .random
+    @State private var title: String = ""
+    @State private var currency: Currency = .usd
+    @State private var amount: String = ""
+    @State private var icon: Icon = .dollar
+    
+    var draftIncome = IncomeExpense(
+        amount: 10000,
+        image: "dollar",
+        repeatingType: .random,
+        subCategories: [],
+        transactions: [],
+        id: UUID(),
+        title: "",
+        currency: .usd,
+        categoryType: .income
+    )
 
     var body: some View {
         VStack {
-            CustomSegmentedControlView(selection: $income.repeatingType)
+            CustomSegmentedControlView(selection: $selectedType)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
             
-            switch income.repeatingType {
+            switch selectedType {
             case .random:
-                RandomIncomesView(income: income)
+                RandomIncomesView(
+                    title: $title,
+                    currency: $currency,
+                    amount: $amount,
+                    icon: $icon,
+                    income: draftIncome
+                )
                 .padding(.top, -10)
             case .certain:
-                CertainIncomesView(income: income)
+                CertainIncomesView(
+                    title: $title,
+                    currency: $currency,
+                    icon: $icon,
+                    income: draftIncome
+                )
                 .padding(.top, -10)
             }
         }
@@ -35,6 +62,16 @@ struct IncomeSettingsView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     //сохраняем изменения
+                    draftIncome.title = title
+                    draftIncome.currency = currency
+                    draftIncome.amount = Double(amount) ?? 0
+                    draftIncome.image = icon.name
+                    draftIncome.repeatingType = selectedType
+                    draftIncome.subCategories = categoryService.getSubIncomes()
+                    
+                    categoryService.createIncome(draftIncome)
+                    categoryService.subCategories.removeAll()
+                    
                     dismiss()
                 }
             }
@@ -47,16 +84,18 @@ struct IncomeSettingsView: View {
 }
 
 struct RandomIncomesView: View {
-    @Bindable var income: IncomeExpense
+    @Binding var title: String
+    @Binding var currency: Currency
+    @Binding var amount: String
+    @Binding var icon: Icon
     
-    @State private var amount: String = ""
-    @State private var icon: Icon = .dollar
-    
+    let income: IncomeExpense
+
     var body: some View {
         List {
             Section {
                 TextFieldRowView(
-                    inputValue: $income.title,
+                    inputValue: $title,
                     source: income,
                     title: "Income title",
                     keyboardType: .default, 
@@ -64,7 +103,7 @@ struct RandomIncomesView: View {
                 )
                 
                 PickerRowView(
-                    currency: $income.currency,
+                    currency: $currency,
                     source: income,
                     title: "Currency"
                 )
@@ -74,11 +113,8 @@ struct RandomIncomesView: View {
                     source: income,
                     title: "Amount",
                     keyboardType: .decimalPad, 
-                    placeholder: String(income.amount)
+                    placeholder: "0.0"
                 )
-                .onChange(of: amount) { _, newValue in
-                    income.amount = Double(newValue) ?? 0
-                }
             } header: {
                 Text("Income main info")
                     .font(.bodyText1())
@@ -94,9 +130,6 @@ struct RandomIncomesView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
-            .onChange(of: icon) { _, newValue in
-                income.image = newValue.name
-            }
         }
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
@@ -105,15 +138,18 @@ struct RandomIncomesView: View {
 
 struct CertainIncomesView: View {
     @Environment(CategoryService.self) private var categoryService
-    @Bindable var income: IncomeExpense
+    //@Bindable var income: IncomeExpense
+    @Binding var title: String
+    @Binding var currency: Currency
+    @Binding var icon: Icon
     
-    @State private var icon: Icon = .dollar
+    let income: IncomeExpense
     
     var body: some View {
         List {
             Section {
                 TextFieldRowView(
-                    inputValue: $income.title,
+                    inputValue: $title,
                     source: income,
                     title: "Income title",
                     keyboardType: .default,
@@ -121,7 +157,7 @@ struct CertainIncomesView: View {
                 )
                 
                 PickerRowView(
-                    currency: $income.currency,
+                    currency: $currency,
                     source: income,
                     title: "Currency"
                 )
@@ -140,9 +176,6 @@ struct CertainIncomesView: View {
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
             .padding(.vertical, 8)
-            .onChange(of: icon) { _, newValue in
-                income.image = newValue.name
-            }
             
             ForEach(categoryService.subCategories.indices, id: \.self) { index in
                 CertainIncomeSettingsView(
@@ -164,7 +197,9 @@ struct CertainIncomesView: View {
         .buttonStyle(BorderlessButtonStyle())
         .listSectionSpacing(.compact)
         .onAppear {
-            categoryService.createSubIncome()
+            if categoryService.subCategories.isEmpty {
+                categoryService.createSubIncome()
+            }
         }
     }
 }
@@ -235,13 +270,12 @@ struct CertainIncomeSettingsView: View {
 
 
 #Preview {
-    IncomeSettingsView(income: IncomeExpense(
+    IncomeSettingsView(draftIncome: IncomeExpense(
         amount: 10000,
         image: "dollar",
         repeatingType: .random,
         subCategories: [],
         transactions: [],
-        categoryService: CategoryService(),
         id: UUID(),
         title: "",
         currency: .usd,
