@@ -220,6 +220,7 @@ struct ShoppingListView: View {
                         }
                     }
                 }
+                .padding(.bottom, 75)
                 .listSectionSpacing(.compact)
                 .navigationTitle("Shopping List")
                 .toolbar {
