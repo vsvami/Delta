@@ -5,7 +5,7 @@
 //  Created by Vladimir Dmitriev on 24.07.24.
 //
 
-import Foundation
+import SwiftUI
 
 enum Currency: String, CaseIterable, Identifiable {
     case kes = "KES"
@@ -518,9 +518,11 @@ enum Period {
     }
 }
 
-enum RepeatingType: String {
-    case random
-    case certain
+enum RepeatingType: String, CaseIterable, Identifiable {
+    case random = "Random"
+    case certain = "Certain"
+    
+    var id: String { self.rawValue }
 }
 
 final class User {
@@ -578,7 +580,7 @@ class Transaction {
 //    var isMyDebt = false
 //    var interestRate: Double = 0.0
 //}
-
+@Observable
 class Category: Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String = ""
@@ -606,26 +608,50 @@ class Category: Identifiable, Hashable {
     }
 }
 
+@Observable
 final class SubCategory: Category {
     var amount: Double = 0
-    var date: Date?
-    var notification: Bool?
-    var autoTransaction: Bool?
+    var date: Date
+    var notification: Bool
+    var autoTransaction: Bool
     var transaction: Transaction?
+    
+    init(
+        id: UUID,
+        title: String,
+        currency: Currency,
+        categoryType: CategoryType,
+        amount: Double,
+        date: Date,
+        notification: Bool,
+        autoTransaction: Bool,
+        transaction: Transaction? = nil
+    ) {
+        self.amount = amount
+        self.date = date
+        self.notification = notification
+        self.autoTransaction = autoTransaction
+        self.transaction = transaction
+        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+    }
 }
 
+@Observable
 final class IncomeExpense: Category {
+    var amount: Double
     var image: String = ""
     var repeatingType: RepeatingType = .random
     var subCategories: [SubCategory] = []
     var transactions: [Transaction] = []
+    
+    private var categoryService: CategoryService
     
     var plannedAmount: Double {
         subCategories.reduce(0) { $0 + $1.amount }
     }
     
     // проверить обнуления amount при начале нового периода
-    var amount: Double {
+    var totalAmount: Double {
         let filteredTransactions = DataManager.filterTransactions(transactions, for: .month, startDay: 1, fromMonthOffset: 0)
         return filteredTransactions.reduce(0) { $0 + $1.amount }
     }
@@ -638,12 +664,30 @@ final class IncomeExpense: Category {
         repeatingType == .random ? getAmountsByDate() : getAmountsByPeriod()
     }
     
-    init(image: String, repeatingType: RepeatingType, subCategories: [SubCategory], transactions: [Transaction], id: UUID, title: String, currency: Currency, categoryType: CategoryType) {
+    init(
+        amount: Double,
+        image: String,
+        repeatingType: RepeatingType,
+        subCategories: [SubCategory],
+        transactions: [Transaction],
+        categoryService: CategoryService,
+        id: UUID,
+        title: String,
+        currency: Currency,
+        categoryType: CategoryType
+    ) {
+        self.amount = amount
         self.image = image
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
+        self.categoryService = categoryService
         super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+        updateSubCategories()
+    }
+    
+    func updateSubCategories() {
+        subCategories = categoryService.getIncomes()
     }
     
     // методы для построения графика "План"
@@ -667,7 +711,7 @@ final class IncomeExpense: Category {
     }
     
     func getAmountsByDate() -> [(amount: Double, date: Date)] {
-        return subCategories.map { ($0.amount, $0.date ?? Date()) }
+        return subCategories.map { ($0.amount, $0.date) }
     }
 }
 

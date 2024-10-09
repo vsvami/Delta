@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct AccountGroupCardView: View {
-    @EnvironmentObject var router: Router
+    @Environment(Router.self) private var router
     
     let accountsGroup: GroupOfAccounts
     

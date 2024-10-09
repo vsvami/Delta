@@ -9,15 +9,15 @@ import SwiftUI
 import UISystem
 
 struct IncomesView: View {
-    let incomes: [IncomeExpense]
+    @Environment(CategoryService.self) private var categoryService
     
-    init() {
-        self.incomes = IncomesMockData().incomes
-    }
+//    init() {
+//        self.incomes = IncomesMockData().incomes
+//    }
     
     var body: some View {
         VStack {
-            List(incomes, id: \.self) { income in
+            List(categoryService.incomes, id: \.self) { income in
                 BaseCategoryRowView(
                     color: AppGradient.appGray.value,
                     icon: income.image,
@@ -38,6 +38,6 @@ struct IncomesView: View {
     }
 }
 
-#Preview {
-    IncomesView()
-}
+//#Preview {
+//    IncomesView()
+//}

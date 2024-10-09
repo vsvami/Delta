@@ -57,7 +57,7 @@ struct GroupCardView: View {
 
 #Preview {
     let group = DataStore.shared.groupsOfAccounts.first!
-    GroupCardView(
+    return GroupCardView(
         group: group,
         size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
     )
