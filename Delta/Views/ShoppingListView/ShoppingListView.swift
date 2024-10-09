@@ -173,9 +173,15 @@ struct ShoppingListView: View {
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
     
-//    @FocusState private var isInputActive: Bool
-    
+    @FocusState private var isInputActive: Bool {
+        didSet {
+            showKeyboard = isInputActive ? true : false
+        }
+    }
+    @State private var showKeyboard = false
+
     var body: some View {
+        NavigationStack {
             ScrollViewReader { proxy in
                 List {
                     ForEach($shoppingListModel.categories) { $category in
@@ -193,7 +199,7 @@ struct ShoppingListView: View {
                         }
                         
                     }
-//                    .focused($isInputActive)
+                    .focused($isInputActive)
                     
                     if !shoppingListModel.completedItems.isEmpty {
                         Section {
@@ -209,7 +215,7 @@ struct ShoppingListView: View {
                                 selectedAccount: $selectedAccount
                             )
                             .listRowInsets(EdgeInsets())
-                         
+                            
                             if selectedAccount != nil {
                                 RoundedButtonView(title: "Buy", action: {
                                     let transactions = shoppingListModel.createTransactions(for: selectedAccount)
@@ -240,9 +246,14 @@ struct ShoppingListView: View {
                         }
                     }
                 }
-//                .onTapGesture {
-//                    isInputActive = false
-//                }
+                .simultaneousGesture(
+                    TapGesture().onEnded {
+                        if isInputActive && showKeyboard {
+                            isInputActive = false
+                        }
+                    }
+                )
+            }
         }
     }
 }
