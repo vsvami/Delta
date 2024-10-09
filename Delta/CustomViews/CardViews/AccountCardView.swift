@@ -9,7 +9,7 @@ import SwiftUI
 import UISystem
 
 struct AccountCardView: View {
-    @EnvironmentObject var router: Router
+    @Environment(Router.self) private var router
     
     let account: Account
     let size: CGSize
@@ -47,7 +47,7 @@ struct AccountCardView: View {
 #Preview {
     let account = DataStore.shared.accounts.first!
     
-    AccountCardView(
+    return AccountCardView(
         account: account,
         size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
     )

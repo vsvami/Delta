@@ -19,6 +19,7 @@ enum Route: Hashable {
     case seeAll
     case transfer
     case incomes
+    case incomeSettings(income: IncomeExpense)
 }
 
 enum TabRoute: Hashable {
@@ -29,9 +30,10 @@ enum TabRoute: Hashable {
 }
 
 @MainActor
-final class Router: ObservableObject {
-    @Published var startScreen: Route = .main
-    @Published var path = NavigationPath()
+@Observable
+final class Router {
+    var startScreen: Route = .main
+    var path = NavigationPath()
     
     @ViewBuilder func tabView() -> some View {
         TabBarView()
@@ -68,6 +70,8 @@ final class Router: ObservableObject {
                 .navigationBarBackButtonHidden()
         case .incomes:
             IncomesView()
+        case .incomeSettings(let income):
+            IncomeSettingsView(income: income)
         }
             
     }
