@@ -73,6 +73,10 @@ struct IncomeSettingsView: View {
                     categoryService.subCategories.removeAll()
                     
                     dismiss()
+                    
+                    categoryService.incomes.forEach { income in
+                        print(income.title)
+                    }
                 }
             }
         }
