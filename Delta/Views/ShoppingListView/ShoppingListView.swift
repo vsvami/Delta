@@ -173,13 +173,6 @@ struct ShoppingListView: View {
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
     
-    @FocusState private var isInputActive: Bool {
-        didSet {
-            showKeyboard = isInputActive ? true : false
-        }
-    }
-    @State private var showKeyboard = false
-
     var body: some View {
         NavigationStack {
             ScrollViewReader { proxy in
@@ -197,9 +190,7 @@ struct ShoppingListView: View {
                         } header: {
                             Text(category.name)
                         }
-                        
                     }
-                    .focused($isInputActive)
                     
                     if !shoppingListModel.completedItems.isEmpty {
                         Section {
@@ -246,13 +237,10 @@ struct ShoppingListView: View {
                         }
                     }
                 }
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        if isInputActive && showKeyboard {
-                            isInputActive = false
-                        }
-                    }
-                )
+                
+                .onTapGesture {
+                    hideKeyboard()
+                }
             }
         }
     }
