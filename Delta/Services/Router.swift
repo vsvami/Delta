@@ -37,7 +37,6 @@ final class Router {
     
     var path = NavigationPath()
     
-    
     @ViewBuilder func tabView(for route: Tab) -> some View {
         ZStack(alignment: .bottom) {
             VStack(spacing: 0) {
@@ -58,6 +57,7 @@ final class Router {
             CustomTabBar()
         }
         .background(Color.appBackground)
+        .ignoresSafeArea(edges: .bottom)
     }
     
     @ViewBuilder func view(for route: Route) -> some View {

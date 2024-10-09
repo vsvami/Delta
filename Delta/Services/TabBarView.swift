@@ -51,7 +51,6 @@ struct CustomTabBar: View {
             }
             .padding(.bottom)
         }
-        .padding(.bottom, -30)
     }
 }
 
