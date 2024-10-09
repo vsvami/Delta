@@ -47,7 +47,7 @@ struct AccountCardView: View {
 #Preview {
     let account = DataStore.shared.accounts.first!
     
-    AccountCardView(
+    return AccountCardView(
         account: account,
         size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
     )

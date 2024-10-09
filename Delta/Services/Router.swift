@@ -33,57 +33,71 @@ enum TabRoute: Hashable {
 @Observable
 final class Router {
     var startScreen: Route = .main
+    var selectedTabRoute: Tab = .shoppingList
+    
     var path = NavigationPath()
     
-    @ViewBuilder func tabView() -> some View {
-        TabBarView()
+    @ViewBuilder func tabView(for route: Tab) -> some View {
+        ZStack(alignment: .bottom) {
+            VStack(spacing: 0) {
+                Spacer()
+                switch selectedTabRoute {
+                case .main:
+                    MainView()
+                case .analytic:
+                    AnalyticsView()
+                case .shoppingList:
+                    ShoppingListView()
+                case .settings:
+                    SettingsView()
+                }
+                Spacer()
+            }
+            
+            CustomTabBar()
+        }
+        .background(Color.appBackground)
+        .ignoresSafeArea(edges: .bottom)
     }
-        
+    
     @ViewBuilder func view(for route: Route) -> some View {
         switch route {
         case .onboarding:
             OnboardingView()
-                .navigationBarBackButtonHidden()
         case .login:
             LoginView()
-                .navigationBarBackButtonHidden()
         case .main:
-            tabView()
+            tabView(for: selectedTabRoute)
         case .profileSettings:
             ProfileSettingsView()
-                .navigationBarBackButtonHidden()
         case .appDesignSettings:
             AppDesignSettingsView()
-                .navigationBarBackButtonHidden()
         case .accountSettings(let account):
             AccountSettingsView(account: account)
         case .accountGroupSettings(let group):
             AccountGroupSettingsView(groupOfAccounts: group)
         case .categorySettings:
             SettingsCategoryView()
-                .navigationBarBackButtonHidden()
         case .seeAll:
             SeeAllView()
-                .navigationBarBackButtonHidden()
         case .transfer:
             TransferView()
-                .navigationBarBackButtonHidden()
         case .incomes:
             IncomesView()
         case .incomeSettings(let income):
             IncomeSettingsView(income: income)
         }
-            
+        
     }
     
     func navigateTo(_ appRoute: Route) {
         path.append(appRoute)
     }
-        
+    
     func navigateBack() {
         path.removeLast()
     }
-        
+    
     func popToRoot() {
         path.removeLast(path.count)
     }
