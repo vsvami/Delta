@@ -172,9 +172,7 @@ struct ShoppingListView: View {
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
-    
-//    @FocusState private var isInputActive: Bool
-    
+        
     var body: some View {
             ScrollViewReader { proxy in
                 List {
@@ -193,7 +191,6 @@ struct ShoppingListView: View {
                         }
                         
                     }
-//                    .focused($isInputActive)
                     
                     if !shoppingListModel.completedItems.isEmpty {
                         Section {
@@ -240,9 +237,9 @@ struct ShoppingListView: View {
                         }
                     }
                 }
-//                .onTapGesture {
-//                    isInputActive = false
-//                }
+                .onTapGesture {
+                    hideKeyboard()
+                }
         }
     }
 }
