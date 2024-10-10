@@ -12,15 +12,13 @@ struct ShoppingListItemView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
-                .font(.title2)
-                .contentShape(.rect)
-                .foregroundStyle(.appBlack)
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        complete()
-                    }
-                )
+            Button(action: complete) {
+                Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
+                    .font(.title2)
+                    .contentShape(.rect)
+                    .foregroundStyle(.appBlack)
+            }
+            .buttonStyle(.plain)
             TextField(item.name, text: $item.name)
             Spacer()
         }

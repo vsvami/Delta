@@ -85,6 +85,18 @@ final class Tag {
         ShoppingListCategory(
             name: "wear",
             items: [ShoppingListItem(name: "T-Shirt")]
+        ),
+        ShoppingListCategory(
+            name: "shoes",
+            items: [ShoppingListItem(name: "Nike")]
+        ),
+        ShoppingListCategory(
+            name: "alcohol",
+            items: [ShoppingListItem(name: "Tekila")]
+        ),
+        ShoppingListCategory(
+            name: "toys",
+            items: [ShoppingListItem(name: "Lego")]
         )
     ]
     
