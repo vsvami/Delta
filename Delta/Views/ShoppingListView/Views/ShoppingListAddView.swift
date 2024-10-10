@@ -22,44 +22,46 @@ struct ShoppingListAddView: View {
     }
     
     var body: some View {
-        HStack {
-            Image(systemName: "plus.circle.fill")
-                .font(.title2)
-                .foregroundColor(.appBlack)
-            TextField("Add", text: $text)
-                .onSubmit {
-                    guard !text.isEmpty else { return }
-                    withAnimation {
-                        let newItem = ShoppingListItem(name: text)
-                        category.items.append(newItem)
-                        
-                        if !tags.contains(text) {
-                            tags.append(text)
+        NavigationStack {
+            HStack {
+                Image(systemName: "plus.circle.fill")
+                    .font(.title2)
+                    .foregroundColor(.appBlack)
+                TextField("Add", text: $text)
+                    .onSubmit {
+                        guard !text.isEmpty else { return }
+                        withAnimation {
+                            let newItem = ShoppingListItem(name: text)
+                            category.items.append(newItem)
+                            
+                            if !tags.contains(text) {
+                                tags.append(text)
+                            }
+                            
+                            text = ""
                         }
-                        
-                        text = ""
                     }
-                }
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(filteredTags, id: \.self) { tag in
-                                    Button(action: {
-                                        text = tag
-                                    }) {
-                                        Text(tag)
-                                            .font(.metadata3())
-                                            .padding(.horizontal, 10)
-                                            .padding(.vertical, 5)
-                                            .foregroundColor(.appWhite)
-                                            .background(Capsule().fill(Color.appBlack))
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 16) {
+                                    ForEach(filteredTags, id: \.self) { tag in
+                                        Button(action: {
+                                            text = tag
+                                        }) {
+                                            Text(tag)
+                                                .font(.metadata3())
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 5)
+                                                .foregroundColor(.appWhite)
+                                                .background(Capsule().fill(Color.appBlack))
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
+            }
         }
     }
 }
