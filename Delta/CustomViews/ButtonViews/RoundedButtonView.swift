@@ -17,6 +17,7 @@ struct RoundedButtonView: View {
                 .font(.bodyText2())
                 .foregroundStyle(.appWhite)
         }
+        .buttonStyle(.plain)
         .padding()
         .frame(maxWidth: .infinity)
         .background(.appBlack)
