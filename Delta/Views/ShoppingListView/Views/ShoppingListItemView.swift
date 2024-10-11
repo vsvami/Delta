@@ -18,10 +18,10 @@ struct ShoppingListItemView: View {
                     .contentShape(.rect)
                     .foregroundStyle(.appBlack)
             }
-            .buttonStyle(.plain)
             TextField(item.name, text: $item.name)
             Spacer()
         }
+        .buttonStyle(.plain)
     }
     
     func complete() {

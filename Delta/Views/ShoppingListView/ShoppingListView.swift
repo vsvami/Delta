@@ -66,7 +66,33 @@ final class Tag {
 }
 
 @Observable final class ShoppingListModel {
+    
+    // Tags
+    
+    var text = ""
     var tags = ["Bread", "Tomato", "Pasta", "Water", "Table", "T-Shirt"]
+    
+    var filteredTags: [String] {
+        if text.isEmpty {
+            return []
+        } else {
+            return tags.filter { $0.lowercased().contains(text.lowercased()) }
+        }
+    }
+    
+    func saveTags(category: ShoppingListCategory) {
+        withAnimation {
+            addItem(for: category)
+            
+            if !tags.contains(text) {
+                tags.append(text)
+            }
+            
+            text = ""
+        }
+    }
+    
+    // Categories
     
     var categories = [
         ShoppingListCategory(
@@ -111,8 +137,9 @@ final class Tag {
             category.items.contains(where: { $0.isCompleted })
         }
     }
-        
-    func addItem(_ newItem: ShoppingListItem, for category: ShoppingListCategory) {
+    
+    func addItem(for category: ShoppingListCategory) {
+        let newItem = ShoppingListItem(name: text)
         category.items.append(newItem)
     }
     
@@ -184,7 +211,9 @@ struct ShoppingListView: View {
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
-        
+    
+    @FocusState private var focusedField: UUID?
+    
     var body: some View {
             ScrollViewReader { proxy in
                 List {
@@ -197,11 +226,13 @@ struct ShoppingListView: View {
                                 shoppingListModel.deleteItems(at: indexSet, from: category)
                             }
                             
-                            ShoppingListAddView(category: category, tags: $shoppingListModel.tags)
+                            ShoppingListAddView(text: $shoppingListModel.text, category: category) {
+                                shoppingListModel.saveTags(category: category)
+                            }
+                            .focused($focusedField, equals: category.id)
                         } header: {
                             Text(category.name)
                         }
-                        
                     }
                     
                     if !shoppingListModel.completedItems.isEmpty {
@@ -218,7 +249,7 @@ struct ShoppingListView: View {
                                 selectedAccount: $selectedAccount
                             )
                             .listRowInsets(EdgeInsets())
-                         
+                            
                             if selectedAccount != nil {
                                 RoundedButtonView(title: "Buy", action: {
                                     let transactions = shoppingListModel.createTransactions(for: selectedAccount)
@@ -249,10 +280,48 @@ struct ShoppingListView: View {
                         }
                     }
                 }
-                .onTapGesture {
-                    hideKeyboard()
+                .simultaneousGesture(
+                    TapGesture().onEnded {
+                        hideKeyboard()
+                        shoppingListModel.text = ""
+                    }
+                )
+                .toolbar {
+                    ToolbarItem(placement: .keyboard) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 16) {
+                                if shoppingListModel.text == "" {
+                                    ForEach(shoppingListModel.tags, id: \.self) { tag in
+                                        Button(action: {
+                                            shoppingListModel.text = tag
+                                        }) {
+                                            Text(tag)
+                                                .font(.metadata3())
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 5)
+                                                .foregroundColor(.appWhite)
+                                                .background(Capsule().fill(Color.appBlack))
+                                        }
+                                    }
+                                } else {
+                                    ForEach(shoppingListModel.filteredTags, id: \.self) { tag in
+                                        Button(action: {
+                                            shoppingListModel.text = tag
+                                        }) {
+                                            Text(tag)
+                                                .font(.metadata3())
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 5)
+                                                .foregroundColor(.appWhite)
+                                                .background(Capsule().fill(Color.appBlack))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-        }
+            }
     }
 }
 
