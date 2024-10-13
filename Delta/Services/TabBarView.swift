@@ -9,6 +9,7 @@ import SwiftUI
 import UISystem
 
 struct TabBarView: View {
+    @State private var router = Router()
     @State private var selectedTab = TabRoute.main
     
     init() {
@@ -17,29 +18,67 @@ struct TabBarView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            MainView()
-                .tabItem {
-                    setTabItem(icon: "house", title: "Main")
-                }
-                .tag(TabRoute.main)
+            NavigationStack(path: $router.path) {
+                MainView()
+                    .navigationDestination(for: Route.self) { route in
+                        router.view(for: route)
+                    }
+            }.environment(router)
+            .tabItem {
+                setTabItem(icon: "house", title: "Main")
+            }
+            .tag(TabRoute.main)
             
-            AnalyticsView()
-                .tabItem {
-                    setTabItem(icon: "chartPie", title: "Analytics")
-                }
-                .tag(TabRoute.analytic)
+            NavigationStack {
+                AnalyticsView()
+                    .navigationTitle("Analytics")
+            }
+            .tabItem {
+                setTabItem(icon: "chartPie", title: "Analytics")
+            }
+            .tag(TabRoute.analytic)
             
-            ShoppingListView()
-                .tabItem {
-                    setTabItem(icon: "list", title: "Shopping List")
-                }
-                .tag(TabRoute.shoppingList)
+            NavigationView {
+                ShoppingListView()
+                    .navigationTitle("Shopping List")
+            }
+            .tabItem {
+                setTabItem(icon: "list", title: "Shopping List")
+            }
+            .tag(TabRoute.shoppingList)
             
-            SettingsView()
-                .tabItem {
-                    setTabItem(icon: "gearshape", title: "Settings")
-                }
-                .tag(TabRoute.settings)
+            NavigationStack {
+                SettingsView()
+                    .navigationTitle("Settings")
+            }
+            .tabItem {
+                setTabItem(icon: "gearshape", title: "Settings")
+            }
+            .tag(TabRoute.settings)
+            
+            //            MainView()
+            //                .tabItem {
+            //                    setTabItem(icon: "house", title: "Main")
+            //                }
+            //                .tag(TabRoute.main)
+            //
+            //            AnalyticsView()
+            //                .tabItem {
+            //                    setTabItem(icon: "chartPie", title: "Analytics")
+            //                }
+            //                .tag(TabRoute.analytic)
+            //
+            //            ShoppingListView()
+            //                .tabItem {
+            //                    setTabItem(icon: "list", title: "Shopping List")
+            //                }
+            //                .tag(TabRoute.shoppingList)
+            //
+            //            SettingsView()
+            //                .tabItem {
+            //                    setTabItem(icon: "gearshape", title: "Settings")
+            //                }
+            //                .tag(TabRoute.settings)
         }
     }
 }

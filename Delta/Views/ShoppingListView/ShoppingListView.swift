@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UISystem
 
 final class Tag {
     var name: String = ""
@@ -80,10 +81,8 @@ final class Tag {
         }
     }
     
-    func saveTags(category: ShoppingListCategory) {
+    func saveTags() {
         withAnimation {
-            addItem(for: category)
-            
             if !tags.contains(text) {
                 tags.append(text)
             }
@@ -93,6 +92,7 @@ final class Tag {
     }
     
     // Categories
+    var activeCategory: ShoppingListCategory?
     
     var categories = [
         ShoppingListCategory(
@@ -140,16 +140,18 @@ final class Tag {
     
     func addItem(for category: ShoppingListCategory) {
         let newItem = ShoppingListItem(name: text)
-        category.items.append(newItem)
+        withAnimation {
+            category.items.append(newItem)
+        }
     }
     
     // TODO: - добавить функционал
     
-//    func moveItem(in category: ShoppingListCategory, from source: IndexSet, to destination: Int) {
-//        var activeItems = category.activeItems
-//        activeItems.move(fromOffsets: source, toOffset: destination)
-//    }
-
+    //    func moveItem(in category: ShoppingListCategory, from source: IndexSet, to destination: Int) {
+    //        var activeItems = category.activeItems
+    //        activeItems.move(fromOffsets: source, toOffset: destination)
+    //    }
+    
     func deleteItems(at indexSet: IndexSet, from category: ShoppingListCategory) {
         if let categoryIndex = categories.firstIndex(where: { $0.id == category.id }) {
             let activeItems = category.activeItems
@@ -207,121 +209,134 @@ final class Tag {
     }
 }
 
+enum Field: Hashable {
+    case addTextField
+    case textField
+}
+
 struct ShoppingListView: View {
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
     
-    @FocusState private var focusedField: UUID?
+    @FocusState private var textFieldFocus: Field?
+    
+    @Namespace var buyButtonID
+//    @Namespace var accountID
     
     var body: some View {
-            ScrollViewReader { proxy in
-                List {
-                    ForEach($shoppingListModel.categories) { $category in
-                        Section {
-                            ForEach(category.activeItems) { item in
-                                ShoppingListItemView(item: item)
-                            }
-                            .onDelete { indexSet in
-                                shoppingListModel.deleteItems(at: indexSet, from: category)
-                            }
-                            
-                            ShoppingListAddView(text: $shoppingListModel.text, category: category) {
-                                shoppingListModel.saveTags(category: category)
-                            }
-                            .focused($focusedField, equals: category.id)
-                        } header: {
-                            Text(category.name)
+        ScrollViewReader { proxy in
+            List {
+                ForEach($shoppingListModel.categories) { $category in
+                    Section {
+                        ForEach(category.activeItems) { item in
+                            ShoppingListItemView(item: item)
+                                .focused($textFieldFocus, equals: .textField)
                         }
+                        .onDelete { indexSet in
+                            shoppingListModel.deleteItems(at: indexSet, from: category)
+                        }
+                        
+                        ShoppingListAddView(text: $shoppingListModel.text) {
+                            shoppingListModel.addItem(for: category)
+                            shoppingListModel.saveTags()
+                        }
+                        .focused($textFieldFocus, equals: .addTextField)
+                    } header: {
+                        Text(category.name)
                     }
-                    
-                    if !shoppingListModel.completedItems.isEmpty {
-                        Section {
-                            ForEach(shoppingListModel.completedItems) { item in
-                                ShoppingListItemView(item: item)
-                            }
-                            ForEach(shoppingListModel.categoriesWithCompletedItems) { category in
-                                ShoppingListAmountRowView(category: category)
-                            }
-                            
-                            ShoppingListAccountsScrollView(
-                                categories: shoppingListModel.accountsAndGroups,
-                                selectedAccount: $selectedAccount
-                            )
-                            .listRowInsets(EdgeInsets())
-                            
-                            if selectedAccount != nil {
-                                RoundedButtonView(title: "Buy", action: {
+                    .simultaneousGesture(
+                        TapGesture().onEnded {
+                            shoppingListModel.activeCategory = category
+                        }
+                    )
+                    .listRowBackground(Color.appBackgroundMini)
+                }
+                
+                if !shoppingListModel.completedItems.isEmpty {
+                    Section {
+                        ForEach(shoppingListModel.completedItems) { item in
+                            ShoppingListItemView(item: item)
+                        }
+                        .focused($textFieldFocus, equals: .textField)
+                        
+                        ForEach(shoppingListModel.categoriesWithCompletedItems) { category in
+                            ShoppingListAmountRowView(category: category)
+                        }
+                        .focused($textFieldFocus, equals: .textField)
+                        
+                        ShoppingListAccountsScrollView(
+                            categories: shoppingListModel.accountsAndGroups,
+                            selectedAccount: $selectedAccount
+                        )
+                        .listRowInsets(EdgeInsets())
+                        
+                            RoundedButtonView(title: "Buy", action: {
+                                if selectedAccount != nil {
                                     let transactions = shoppingListModel.createTransactions(for: selectedAccount)
                                     shoppingListModel.saveTransactions(transactions)
                                     selectedAccount = nil
-                                })
-                                .id("BuySection")
-                            }
-                        } header: {
-                            Text("Completed")
-                        }
+                                }
+                                // TODO: - add alert if amount is empty
+                            })
+                            .id(buyButtonID)
+                            .transition(.move(edge: .bottom))
+                    } header: {
+                        Text("Completed")
+                    }
+                    .listRowBackground(Color.appBackgroundMini)
+                }
+            }
+            .scrollContentBackground(.hidden)
+            .background(.appBackground)
+            .foregroundStyle(.appBlack)
+            .listSectionSpacing(.compact)
+            .toolbar {
+                Button(action: {
+                    shoppingListModel.addCategory(withName: categoryName)
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            .onChange(of: selectedAccount) { _ , newValue in
+                if newValue != nil {
+                    withAnimation {
+                        proxy.scrollTo(buyButtonID, anchor: .bottom)
                     }
                 }
-                .listSectionSpacing(.compact)
-                .navigationTitle("Shopping List")
-                .toolbar {
-                    Button(action: {
-                        shoppingListModel.addCategory(withName: categoryName)
-                    }) {
-                        Image(systemName: "plus")
-                    }
-                }
-                .foregroundStyle(.appBlack)
-                .onChange(of: selectedAccount) { _ , newValue in
-                    if newValue != nil {
-                        withAnimation {
-                            proxy.scrollTo("BuySection", anchor: .bottom)
-                        }
-                    }
-                }
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        hideKeyboard()
-                        shoppingListModel.text = ""
-                    }
-                )
-                .toolbar {
-                    ToolbarItem(placement: .keyboard) {
+            }
+//            .simultaneousGesture(
+//                TapGesture().onEnded {
+//                    hideKeyboard()
+//                    shoppingListModel.text = ""
+//                }
+//            )
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    if textFieldFocus == .addTextField {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
                                 if shoppingListModel.text == "" {
-                                    ForEach(shoppingListModel.tags, id: \.self) { tag in
-                                        Button(action: {
-                                            shoppingListModel.text = tag
-                                        }) {
-                                            Text(tag)
-                                                .font(.metadata3())
-                                                .padding(.horizontal, 10)
-                                                .padding(.vertical, 5)
-                                                .foregroundColor(.appWhite)
-                                                .background(Capsule().fill(Color.appBlack))
-                                        }
-                                    }
+                                    ScrollTagsView(tags: shoppingListModel.tags, shoppingListModel: $shoppingListModel)
                                 } else {
-                                    ForEach(shoppingListModel.filteredTags, id: \.self) { tag in
-                                        Button(action: {
-                                            shoppingListModel.text = tag
-                                        }) {
-                                            Text(tag)
-                                                .font(.metadata3())
-                                                .padding(.horizontal, 10)
-                                                .padding(.vertical, 5)
-                                                .foregroundColor(.appWhite)
-                                                .background(Capsule().fill(Color.appBlack))
-                                        }
-                                    }
+                                    ScrollTagsView(tags: shoppingListModel.filteredTags, shoppingListModel: $shoppingListModel)
                                 }
                             }
+                        }
+                    } else if textFieldFocus == .textField {
+                        Spacer()
+                        Button(action: {
+                            hideKeyboard()
+                            withAnimation {
+                                proxy.scrollTo(buyButtonID, anchor: .bottom)
+                            }
+                        }) {
+                            Text("Done")
                         }
                     }
                 }
             }
+        }
     }
 }
 

@@ -19,7 +19,6 @@ struct ShoppingListItemView: View {
                     .foregroundStyle(.appBlack)
             }
             TextField(item.name, text: $item.name)
-            Spacer()
         }
         .buttonStyle(.plain)
     }
