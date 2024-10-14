@@ -246,6 +246,12 @@ struct CertainExpenseSettingsView: View {
                 notificationIsOn: $certainExpense.autoTransaction,
                 title: "Autotransaction"
             )
+            
+            if certainExpense.autoTransaction == true {
+                TransactionRowView(action: {
+                    //show modal
+                }, title: "Transaction")
+            }
         }
     }
     

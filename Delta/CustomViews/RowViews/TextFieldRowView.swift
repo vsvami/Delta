@@ -92,6 +92,26 @@ struct NotificationRowView: View {
     }
 }
 
+struct TransactionRowView: View {
+    //@Binding var notificationIsOn: Bool
+    let action: () -> Void
+    let title: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Button(action: action) {
+                Image(systemName: "chevron.right")
+                    .tint(.appBlack)
+            }
+            
+        }
+        .padding(.vertical, 8)
+        .frame(height: 37)
+    }
+}
+
 
 //#Preview {
 //    SettingsRowView(

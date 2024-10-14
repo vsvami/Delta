@@ -247,6 +247,12 @@ struct CertainIncomeSettingsView: View {
                 notificationIsOn: $certainIncome.autoTransaction,
                 title: "Autotransaction"
             )
+            
+            if certainIncome.autoTransaction == true {
+                TransactionRowView(action: {
+                    //show modal
+                }, title: "Transaction")
+            }
         }
     }
     
