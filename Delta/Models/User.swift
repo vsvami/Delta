@@ -645,7 +645,11 @@ final class Income: Category {
     var transactions: [Transaction] = []
     
     var plannedAmount: Double {
-        subCategories.reduce(0) { $0 + $1.amount }
+        if subCategories.isEmpty {
+            return amount
+        } else {
+            return subCategories.reduce(0) { $0 + $1.amount }
+        }
     }
     
     // проверить обнуления amount при начале нового периода

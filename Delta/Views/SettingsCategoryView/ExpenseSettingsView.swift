@@ -58,7 +58,7 @@ struct ExpenseSettingsView: View {
                 .padding(.top, -10)
             }
         }
-        .navigationTitle("Income source")
+        .navigationTitle("Expense source")
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

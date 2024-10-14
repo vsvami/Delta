@@ -9,9 +9,18 @@ import SwiftUI
 
 @Observable
 final class CategoryService {
-    var incomes: [Income] = []
-    var expenses: [Expense] = []
+    var incomes: [Income] = DataStore.shared.incomes
+    var expenses: [Expense] = DataStore.shared.expenses
     var subCategories: [SubCategory] = []
+    
+    var categories: [Category] {
+        incomes + expenses
+    }
+
+//MARK: - CATEGORIES
+    func getCategories(with categoryType: CategoryType) -> [Category] {
+        categories.filter { $0.categoryType == categoryType }
+    }
     
 //MARK: - INCOMES
     func createIncome(_ draftIncome: Income) {

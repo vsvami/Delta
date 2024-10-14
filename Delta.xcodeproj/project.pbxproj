@@ -14,7 +14,6 @@
 		1A2A33832C860431008F6414 /* Double +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33822C860431008F6414 /* Double +.swift */; };
 		1A2A33872C8893EB008F6414 /* GoalCategoryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33862C8893EB008F6414 /* GoalCategoryRowView.swift */; };
 		1A2A338C2C889E45008F6414 /* IncomesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A338B2C889E45008F6414 /* IncomesView.swift */; };
-		1A2A338E2C889EC8008F6414 /* IncomesMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A338D2C889EC8008F6414 /* IncomesMockData.swift */; };
 		1A2A33902C91AE6B008F6414 /* AccountLargeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A338F2C91AE6B008F6414 /* AccountLargeCardView.swift */; };
 		1A2A33922C9300A0008F6414 /* IconPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33912C9300A0008F6414 /* IconPickerView.swift */; };
 		1A2A33942C9440BD008F6414 /* ItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A33932C9440BD008F6414 /* ItemPickerView.swift */; };
@@ -85,7 +84,6 @@
 		1A2A33862C8893EB008F6414 /* GoalCategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCategoryRowView.swift; sourceTree = "<group>"; };
 		1A2A33882C88983F008F6414 /* InvestmentCategoryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestmentCategoryRowView.swift; sourceTree = "<group>"; };
 		1A2A338B2C889E45008F6414 /* IncomesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesView.swift; sourceTree = "<group>"; };
-		1A2A338D2C889EC8008F6414 /* IncomesMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomesMockData.swift; sourceTree = "<group>"; };
 		1A2A338F2C91AE6B008F6414 /* AccountLargeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountLargeCardView.swift; sourceTree = "<group>"; };
 		1A2A33912C9300A0008F6414 /* IconPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconPickerView.swift; sourceTree = "<group>"; };
 		1A2A33932C9440BD008F6414 /* ItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerView.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				1A2A338B2C889E45008F6414 /* IncomesView.swift */,
-				1A2A338D2C889EC8008F6414 /* IncomesMockData.swift */,
 			);
 			path = IncomesView;
 			sourceTree = "<group>";
@@ -587,7 +584,6 @@
 				64445A8D2C8FA63600D35F1A /* CircularProgressView.swift in Sources */,
 				64E00AF82CA5AF7E000092CB /* ShoppingListAccountsScrollView.swift in Sources */,
 				640F9F422C7CFEAE007C7E7E /* ExpenseIncomeView.swift in Sources */,
-				1A2A338E2C889EC8008F6414 /* IncomesMockData.swift in Sources */,
 				1A2A338C2C889E45008F6414 /* IncomesView.swift in Sources */,
 				1AB8A7462CBD2B2B0080D148 /* ExpenseSettingsView.swift in Sources */,
 				1A2A33A22CAE9DAD008F6414 /* CustomSegmentedControlView.swift in Sources */,
