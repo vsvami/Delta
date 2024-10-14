@@ -13,12 +13,13 @@ struct ContentView: View {
     @State private var categoryService = CategoryService()
     
     var body: some View {
-        NavigationStack(path: $router.path) {
-            router.view(for: router.startScreen)
-                .navigationDestination(for: Route.self) { route in
-                    router.view(for: route)
-                }
-        }
+//        NavigationStack(path: $router.path) {
+//            router.view(for: router.startScreen)
+//                .navigationDestination(for: Route.self) { route in
+//                    router.view(for: route)
+//                }
+//        }
+        router.tabView()
         .environment(router)
         .environment(categoryService)
     }
@@ -27,3 +28,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+

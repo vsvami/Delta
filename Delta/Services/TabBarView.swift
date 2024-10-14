@@ -8,54 +8,90 @@
 import SwiftUI
 import UISystem
 
-enum Tab: CaseIterable {
-    case main
-    case analytic
-    case shoppingList
-    case settings
-
-    var iconName: String {
-        switch self {
-        case .main:
-            "house"
-        case .analytic:
-            "chartPie"
-        case .shoppingList:
-            "list"
-        case .settings:
-            "gearshape"
-        }
+struct TabBarView: View {
+    @State private var router = Router()
+    @State private var selectedTab = TabRoute.main
+    
+    init() {
+        setupTabBarAppearance()
     }
-}
-
-struct CustomTabBar: View {
-    @Environment(Router.self) private var router
-
+    
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundStyle(AppGradient.appBackground.value)
-                .frame(height: 84)
-
-            HStack {
-                ForEach(Tab.allCases, id: \.self) { tab in
-                    Image(tab.iconName)
-                        .renderingMode(.template)
-                        .foregroundStyle(router.selectedTabRoute == tab ? Color.appBlack : Color.gray)
-                        .onTapGesture {
-                            router.selectedTabRoute = tab
-                        }
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 32)
+        TabView(selection: $selectedTab) {
+            NavigationStack(path: $router.path) {
+                MainView()
+                    .navigationDestination(for: Route.self) { route in
+                        router.view(for: route)
+                    }
+            }.environment(router)
+            .tabItem {
+                setTabItem(icon: "house", title: "Main")
             }
-            .padding(.bottom)
+            .tag(TabRoute.main)
+            
+            NavigationStack {
+                AnalyticsView()
+                    .navigationTitle("Analytics")
+            }
+            .tabItem {
+                setTabItem(icon: "chartPie", title: "Analytics")
+            }
+            .tag(TabRoute.analytic)
+            
+            NavigationView {
+                ShoppingListView()
+                    .navigationTitle("Shopping List")
+            }
+            .tabItem {
+                setTabItem(icon: "list", title: "Shopping List")
+            }
+            .tag(TabRoute.shoppingList)
+            
+            NavigationStack {
+                SettingsView()
+                    .navigationTitle("Settings")
+            }
+            .tabItem {
+                setTabItem(icon: "gearshape", title: "Settings")
+            }
+            .tag(TabRoute.settings)
         }
     }
 }
 
-#Preview {
-    CustomTabBar()
-        .environment(Router())
+extension TabBarView {
+    private func setTabItem(icon: String, title: String) -> some View {
+        VStack {
+            Image(icon)
+            Text(title)
+                .font(.metadata2())
+        }
+    }
+    
+    private func setupTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .appBackground
+        
+        appearance.shadowImage = nil
+        appearance.shadowColor = nil
+        
+        // Цвет для выделенного таба
+        appearance.stackedLayoutAppearance.selected.iconColor = .appBlack
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.appBlack]
+        
+        // Цвет для невыбранных табов
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.lightGray
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.lightGray]
+        
+        UITabBar.appearance().standardAppearance = appearance
+        
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
 }
 
+//#Preview {
+//    TabBarView()
+//}

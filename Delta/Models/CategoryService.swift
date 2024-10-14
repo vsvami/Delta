@@ -9,14 +9,25 @@ import SwiftUI
 
 @Observable
 final class CategoryService {
-    var incomes: [IncomeExpense] = []
+    var incomes: [Income] = DataStore.shared.incomes
+    var expenses: [Expense] = DataStore.shared.expenses
     var subCategories: [SubCategory] = []
     
-    func createIncome(_ draftIncome: IncomeExpense) {
+    var categories: [Category] {
+        incomes + expenses
+    }
+
+//MARK: - CATEGORIES
+    func getCategories(with categoryType: CategoryType) -> [Category] {
+        categories.filter { $0.categoryType == categoryType }
+    }
+    
+//MARK: - INCOMES
+    func createIncome(_ draftIncome: Income) {
         incomes.append(draftIncome)
     }
     
-    func getIncomes() -> [SubCategory] {
+    func getSubIncomes() -> [SubCategory] {
         subCategories.filter { $0.categoryType == .income }
     }
     
@@ -41,6 +52,37 @@ final class CategoryService {
         subCategories.append(newSubCategory)
     }
     
+//MARK: - EXPENSES
+    func createExpense(_ draftExpense: Expense) {
+        expenses.append(draftExpense)
+    }
+    
+    func getSubExpenses() -> [SubCategory] {
+        subCategories.filter { $0.categoryType == .expense }
+    }
+    
+    func removeExpense(at index: Int) {
+        guard index >= 0 && index < expenses.count else { return }
+        expenses.remove(at: index)
+    }
+    
+    func createSubExpense() {
+        let newSubCategory = SubCategory(
+            id: UUID(),
+            title: "",
+            currency: .usd,
+            categoryType: .expense,
+            amount: 5000,
+            date: Date(),
+            notification: false,
+            autoTransaction: true,
+            transaction: nil
+        )
+        
+        subCategories.append(newSubCategory)
+    }
+    
+//MARK: - SUBCATEGORIES
     func removeSubCategory(at index: Int) {
         guard index >= 0 && index < subCategories.count else { return }
         subCategories.remove(at: index)

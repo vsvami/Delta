@@ -45,12 +45,11 @@ struct AccountSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 14, trailing: 0))
             
             Section {
                 TextFieldRowView(
                     inputValue: $name,
-                    source: account,
                     title: "Account name",
                     keyboardType: .default, 
                     placeholder: account.title
@@ -58,13 +57,11 @@ struct AccountSettingsView: View {
                 
                 PickerRowView(
                     currency: $currency,
-                    source: account,
                     title: "Currency"
                 )
                 
                 TextFieldRowView(
                     inputValue: $balance,
-                    source: account,
                     title: "Account balance",
                     keyboardType: .decimalPad, 
                     placeholder: String(account.amount)
@@ -78,18 +75,16 @@ struct AccountSettingsView: View {
             
             Section {
                 HStack(spacing: 16) {
-                    ChosingItemView(
+                    IconPickerView(
                         selectedItem: $selectedIcon,
                         items: Icon.allCases,
-                        title: "Icon",
-                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                        title: "Icon"
                     )
                     
-                    ChosingItemView(
+                    ColorPickerView(
                         selectedItem: $selectedColor,
                         items: AppGradient.allCases,
-                        title: "Color",
-                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                        title: "Color"
                     )
                 }
                 .listRowInsets(EdgeInsets())
@@ -136,7 +131,7 @@ struct AccountSettingsView: View {
                 .listRowInsets(EdgeInsets())
                 .padding(.top, 8)
         }
-        .buttonStyle(BorderlessButtonStyle())
+        .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
         .navigationTitle(account.title)
         .navigationBarTitleDisplayMode(.large)

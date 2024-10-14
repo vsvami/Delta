@@ -637,14 +637,86 @@ final class SubCategory: Category {
 }
 
 @Observable
-final class IncomeExpense: Category {
+final class Income: Category {
     var amount: Double
     var image: String = ""
     var repeatingType: RepeatingType = .random
     var subCategories: [SubCategory] = []
     var transactions: [Transaction] = []
     
-    private var categoryService: CategoryService
+    var plannedAmount: Double {
+        if subCategories.isEmpty {
+            return amount
+        } else {
+            return subCategories.reduce(0) { $0 + $1.amount }
+        }
+    }
+    
+    // проверить обнуления amount при начале нового периода
+    var totalAmount: Double {
+        let filteredTransactions = DataManager.filterTransactions(transactions, for: .month, startDay: 1, fromMonthOffset: 0)
+        return filteredTransactions.reduce(0) { $0 + $1.amount }
+    }
+
+    var isExceeded: Bool {
+        amount >= plannedAmount
+    }
+    
+    var amountsAndDates: [(amount: Double, date: Date)] {
+        repeatingType == .random ? getAmountsByDate() : getAmountsByPeriod()
+    }
+    
+    init(
+        amount: Double,
+        image: String,
+        repeatingType: RepeatingType,
+        subCategories: [SubCategory],
+        transactions: [Transaction],
+        id: UUID,
+        title: String,
+        currency: Currency,
+        categoryType: CategoryType
+    ) {
+        self.amount = amount
+        self.image = image
+        self.repeatingType = repeatingType
+        self.subCategories = subCategories
+        self.transactions = transactions
+        super.init(id: id, title: title, currency: currency, categoryType: categoryType)
+    }
+    
+    // методы для построения графика "План"
+    func getAmountsByPeriod() -> [(amount: Double, date: Date)] {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        let range = calendar.range(of: .day, in: .month, for: currentDate)!
+        let numberOfDaysInMonth = range.count
+        
+        let dailyAmount = plannedAmount / Double(numberOfDaysInMonth)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+        
+        var result: [(amount: Double, date: Date)] = []
+        for day in 0..<numberOfDaysInMonth {
+            if let date = calendar.date(byAdding: .day, value: day, to: startOfMonth) {
+                result.append((amount: dailyAmount, date: date))
+            }
+        }
+        return result
+    }
+    
+    func getAmountsByDate() -> [(amount: Double, date: Date)] {
+        return subCategories.map { ($0.amount, $0.date) }
+    }
+}
+
+@Observable
+final class Expense: Category {
+    var amount: Double
+    var image: String = ""
+    var repeatingType: RepeatingType = .random
+    var subCategories: [SubCategory] = []
+    var transactions: [Transaction] = []
     
     var plannedAmount: Double {
         subCategories.reduce(0) { $0 + $1.amount }
@@ -670,7 +742,6 @@ final class IncomeExpense: Category {
         repeatingType: RepeatingType,
         subCategories: [SubCategory],
         transactions: [Transaction],
-        categoryService: CategoryService,
         id: UUID,
         title: String,
         currency: Currency,
@@ -681,13 +752,7 @@ final class IncomeExpense: Category {
         self.repeatingType = repeatingType
         self.subCategories = subCategories
         self.transactions = transactions
-        self.categoryService = categoryService
         super.init(id: id, title: title, currency: currency, categoryType: categoryType)
-        updateSubCategories()
-    }
-    
-    func updateSubCategories() {
-        subCategories = categoryService.getIncomes()
     }
     
     // методы для построения графика "План"

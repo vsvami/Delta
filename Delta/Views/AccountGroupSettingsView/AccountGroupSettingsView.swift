@@ -43,7 +43,7 @@ struct AccountGroupSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 14, trailing: 0))
             
             Section {
                 CategoriesScrollView(categories: accounts)
@@ -59,7 +59,6 @@ struct AccountGroupSettingsView: View {
             Section {
                 TextFieldRowView(
                     inputValue: $name,
-                    source: groupOfAccounts,
                     title: "Account name",
                     keyboardType: .default, 
                     placeholder: groupOfAccounts.title
@@ -67,7 +66,6 @@ struct AccountGroupSettingsView: View {
                 
                 PickerRowView(
                     currency: $currency,
-                    source: groupOfAccounts,
                     title: "Currency"
                 )
             } header: {
@@ -79,18 +77,16 @@ struct AccountGroupSettingsView: View {
             
             Section {
                 HStack(spacing: 16) {
-                    ChosingItemView(
+                    IconPickerView(
                         selectedItem: $selectedIcon,
                         items: Icon.allCases,
-                        title: "Icon",
-                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                        title: "Icon"
                     )
                     
-                    ChosingItemView(
+                    ColorPickerView(
                         selectedItem: $selectedColor,
                         items: AppGradient.allCases,
-                        title: "Color",
-                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                        title: "Color"
                     )
                 }
                 .listRowInsets(EdgeInsets())
@@ -103,7 +99,7 @@ struct AccountGroupSettingsView: View {
                 .listRowInsets(EdgeInsets())
                 .padding(.top, 8)
         }
-        .buttonStyle(BorderlessButtonStyle())
+        .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
         .navigationTitle(groupOfAccounts.title)
         .navigationBarTitleDisplayMode(.large)
