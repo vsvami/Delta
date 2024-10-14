@@ -13,7 +13,6 @@ struct ColorPickerView: View {
     
     let items: [AppGradient]
     let title: String
-    let size: CGSize
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,7 +26,7 @@ struct ColorPickerView: View {
                         Circle()
                             .fill(color.value)
                             .frame(width: 35)
-                            .shadow(color: selectedItem == color ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
+                            //.shadow(color: selectedItem == color ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
                             .overlay(
                                 Circle()
                                     .stroke(selectedItem == color ? Color.appBlack : Color.clear, lineWidth: 2)
@@ -42,10 +41,9 @@ struct ColorPickerView: View {
                 .padding(.vertical, 4)
             }
         }
-        .componentBackground(
-            color: AppGradient.appBackgroundMini.name,
-            size: CGSize(width: size.width, height: size.height)
-        )
+        .frame(height: 106)
+        .background(AppGradient.appBackgroundMini.value)
+        .cornerRadius(16)
     }
 }
 
@@ -54,7 +52,6 @@ struct IconPickerView: View {
     
     let items: [Icon]
     let title: String
-    let size: CGSize
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -69,7 +66,7 @@ struct IconPickerView: View {
                             Circle()
                                 .fill(.appGray)
                                 .frame(width: 35)
-                                .shadow(color: selectedItem == icon ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
+                                //.shadow(color: selectedItem == icon ? Color.gray.opacity(0.8) : Color.clear, radius: 3)
                                 .overlay(
                                     Circle()
                                         .stroke(selectedItem == icon ? Color.appBlack : Color.clear, lineWidth: 2)
@@ -87,13 +84,12 @@ struct IconPickerView: View {
                 .padding(.vertical, 4)
             }
         }
-        .componentBackground(
-            color: AppGradient.appBackgroundMini.name,
-            size: CGSize(width: size.width, height: size.height)
-        )
+        .frame(height: 106)
+        .background(AppGradient.appBackgroundMini.value)
+        .cornerRadius(16)
     }
 }
 
 #Preview {
-    IconPickerView(selectedItem: .constant(Icon.creditcard), items: Icon.allCases, title: "Icons", size: CGSize(width: Constants.widthThree, height: Constants.heightSix))
+    IconPickerView(selectedItem: .constant(Icon.creditcard), items: Icon.allCases, title: "Icons")
 }

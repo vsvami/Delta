@@ -135,8 +135,7 @@ struct RandomIncomesView: View {
             IconPickerView(
                 selectedItem: $icon,
                 items: Icon.allCases,
-                title: "Icon",
-                size: CGSize(width: Constants.widthSix, height: Constants.heightFour)
+                title: "Icon"
             )
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)
@@ -176,8 +175,7 @@ struct CertainIncomesView: View {
             IconPickerView(
                 selectedItem: $icon,
                 items: Icon.allCases,
-                title: "Icon",
-                size: CGSize(width: Constants.widthSix, height: Constants.heightFour)
+                title: "Icon"
             )
             .listRowInsets(EdgeInsets())
             .listRowBackground(Color.clear)

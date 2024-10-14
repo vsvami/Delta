@@ -40,7 +40,7 @@ struct AccountLargeCardView: View {
         .padding()
         .frame(width: size.width, height: size.height)
         .background(AppGradient.getColor(from: color)?.value)
-        .cornerRadius(18)
+        .cornerRadius(24)
     }
 }
 

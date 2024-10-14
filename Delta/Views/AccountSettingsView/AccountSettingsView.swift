@@ -78,15 +78,13 @@ struct AccountSettingsView: View {
                     IconPickerView(
                         selectedItem: $selectedIcon,
                         items: Icon.allCases,
-                        title: "Icon",
-                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                        title: "Icon"
                     )
                     
                     ColorPickerView(
                         selectedItem: $selectedColor,
                         items: AppGradient.allCases,
-                        title: "Color",
-                        size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
+                        title: "Color"
                     )
                 }
                 .listRowInsets(EdgeInsets())
