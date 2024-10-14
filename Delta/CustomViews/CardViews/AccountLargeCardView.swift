@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct AccountLargeCardView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    
     let title: String
     let currency: Currency
     let amount: String
@@ -41,6 +43,7 @@ struct AccountLargeCardView: View {
         .frame(width: size.width, height: size.height)
         .background(AppGradient.getColor(from: color)?.value)
         .cornerRadius(24)
+        .shadow(color: colorScheme == .light ? Color.gray.opacity(0.4) : Color.black.opacity(0.4), radius: 6, x: 2, y: 4)
     }
 }
 

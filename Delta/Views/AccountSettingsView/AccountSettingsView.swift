@@ -45,7 +45,7 @@ struct AccountSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 14, trailing: 0))
             
             Section {
                 TextFieldRowView(
