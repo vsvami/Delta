@@ -15,11 +15,11 @@ enum Route: Hashable {
     case appDesignSettings
     case accountSettings(account: Account)
     case accountGroupSettings(group: GroupOfAccounts)
-    case categorySettings
     case seeAll
     case transfer
     case incomes
     case incomeSettings
+    case expenseSettings
 }
 
 enum TabRoute: Hashable {
@@ -59,9 +59,6 @@ final class Router {
             AccountSettingsView(account: account)
         case .accountGroupSettings(let group):
             AccountGroupSettingsView(groupOfAccounts: group)
-        case .categorySettings:
-            SettingsCategoryView()
-                .navigationBarBackButtonHidden()
         case .seeAll:
             SeeAllView()
                 .navigationBarBackButtonHidden()
@@ -72,6 +69,8 @@ final class Router {
             IncomesView()
         case .incomeSettings:
             IncomeSettingsView()
+        case .expenseSettings:
+            ExpenseSettingsView()
         }
             
     }

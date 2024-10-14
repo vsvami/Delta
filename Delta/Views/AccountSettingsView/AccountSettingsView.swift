@@ -133,7 +133,7 @@ struct AccountSettingsView: View {
                 .listRowInsets(EdgeInsets())
                 .padding(.top, 8)
         }
-        .buttonStyle(BorderlessButtonStyle())
+        .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
         .navigationTitle(account.title)
         .navigationBarTitleDisplayMode(.large)

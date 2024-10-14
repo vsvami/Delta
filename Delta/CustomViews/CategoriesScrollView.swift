@@ -100,7 +100,7 @@ struct CategoriesScrollView: View {
                 }
                 
                 PlusButtonView {
-                    router.navigateTo(.incomeSettings)
+                    router.navigateTo(.expenseSettings)
                 }
             }
         }
