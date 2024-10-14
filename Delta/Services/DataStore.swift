@@ -16,7 +16,7 @@ final class DataStore {
     var transactions: [Transaction] = []
     var groupsOfAccounts: [GroupOfAccounts] = []
     var accounts: [Account] = []
-    var incomes: [IncomeExpense] = []
+    var incomes: [Income] = []
     
     private init() {
         initializeTestData()

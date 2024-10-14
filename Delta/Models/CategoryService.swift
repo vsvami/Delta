@@ -9,10 +9,10 @@ import SwiftUI
 
 @Observable
 final class CategoryService {
-    var incomes: [IncomeExpense] = []
+    var incomes: [Income] = []
     var subCategories: [SubCategory] = []
     
-    func createIncome(_ draftIncome: IncomeExpense) {
+    func createIncome(_ draftIncome: Income) {
         incomes.append(draftIncome)
     }
     

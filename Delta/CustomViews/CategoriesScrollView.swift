@@ -31,7 +31,7 @@ struct CategoriesScrollView: View {
                             AccountGroupCardView(accountsGroup: group)
                         }
                     case .income:
-                        if let income = category as? IncomeExpense {
+                        if let income = category as? Income {
                             BaseCategoryCardView(
                                 title: income.title,
                                 subtitle: "",
@@ -42,7 +42,7 @@ struct CategoriesScrollView: View {
                             )
                         }
                     case .expense:
-                        if let expense = category as? IncomeExpense {
+                        if let expense = category as? Expense {
                             BaseCategoryCardView(
                                 title: expense.title,
                                 subtitle: "",

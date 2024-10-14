@@ -18,9 +18,9 @@ struct IncomeSettingsView: View {
     @State private var amount: String = ""
     @State private var icon: Icon = .dollar
     
-    var income: IncomeExpense?
+    var income: Income?
     
-    init(income: IncomeExpense = IncomeExpense(
+    init(income: Income = Income(
         amount: 0,
         image: "",
         repeatingType: .random,
@@ -71,7 +71,7 @@ struct IncomeSettingsView: View {
                     income?.repeatingType = selectedType
                     income?.subCategories = categoryService.getSubIncomes()
                     
-                    categoryService.createIncome(income ?? IncomeExpense(
+                    categoryService.createIncome(income ?? Income(
                         amount: 0,
                         image: "",
                         repeatingType: .random,
