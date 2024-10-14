@@ -77,14 +77,14 @@ struct AccountGroupSettingsView: View {
             
             Section {
                 HStack(spacing: 16) {
-                    ChosingItemView(
+                    IconPickerView(
                         selectedItem: $selectedIcon,
                         items: Icon.allCases,
                         title: "Icon",
                         size: CGSize(width: Constants.widthHalfScreen, height: Constants.heightFour)
                     )
                     
-                    ChosingItemView(
+                    ColorPickerView(
                         selectedItem: $selectedColor,
                         items: AppGradient.allCases,
                         title: "Color",

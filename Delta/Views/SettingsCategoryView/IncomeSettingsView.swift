@@ -132,7 +132,7 @@ struct RandomIncomesView: View {
                     .padding(.bottom, 6)
             }
             
-            ChosingItemView(
+            IconPickerView(
                 selectedItem: $icon,
                 items: Icon.allCases,
                 title: "Icon",
@@ -149,7 +149,6 @@ struct RandomIncomesView: View {
 
 struct CertainIncomesView: View {
     @Environment(CategoryService.self) private var categoryService
-    //@Bindable var income: IncomeExpense
     @Binding var title: String
     @Binding var currency: Currency
     @Binding var icon: Icon
@@ -174,7 +173,7 @@ struct CertainIncomesView: View {
                     .padding(.bottom, 6)
             }
             
-            ChosingItemView(
+            IconPickerView(
                 selectedItem: $icon,
                 items: Icon.allCases,
                 title: "Icon",
