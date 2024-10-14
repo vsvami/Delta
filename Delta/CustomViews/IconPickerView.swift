@@ -21,7 +21,7 @@ struct ColorPickerView: View {
                 .font(.subheading2())
                 .padding(.horizontal, 16)
             
-            ScrollView(.horizontal, showsIndicators: false) {
+            ScrollView(.horizontal) {
                 HStack(spacing: 12) {
                     ForEach(items, id: \.self) { color in
                         Circle()
@@ -62,7 +62,7 @@ struct IconPickerView: View {
                 .font(.subheading2())
                 .padding(.horizontal, 16)
             
-            ScrollView(.horizontal, showsIndicators: false) {
+            ScrollView(.horizontal) {
                 HStack(spacing: 12) {
                     ForEach(items, id: \.self) { icon in
                         ZStack {
@@ -74,13 +74,13 @@ struct IconPickerView: View {
                                     Circle()
                                         .stroke(selectedItem == icon ? Color.appBlack : Color.clear, lineWidth: 2)
                                 )
-                                .onTapGesture {
-                                    selectedItem = icon
-                                }
                             Image(systemName: icon.name)
                                 .foregroundStyle(.appBlack)
                         }
                         .frame(height: 40)
+                        .onTapGesture {
+                            selectedItem = icon
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
