@@ -101,7 +101,7 @@ struct AccountGroupSettingsView: View {
                 .listRowInsets(EdgeInsets())
                 .padding(.top, 8)
         }
-        .buttonStyle(BorderlessButtonStyle())
+        .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
         .navigationTitle(groupOfAccounts.title)
         .navigationBarTitleDisplayMode(.large)
