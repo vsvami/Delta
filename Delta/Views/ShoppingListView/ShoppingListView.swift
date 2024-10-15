@@ -212,18 +212,20 @@ final class Tag {
 enum Field: Hashable {
     case addTextField
     case textField
+    case amountField
 }
 
 struct ShoppingListView: View {
     @State private var shoppingListModel = ShoppingListModel()
     @State private var categoryName = ""
     @State private var selectedAccount: Account? = nil
+    @State private var heightKeyboard: CGFloat = 0
     
     @FocusState private var textFieldFocus: Field?
     
     @Namespace var buyButtonID
+    @Namespace var emptySpacerID
 //    @Namespace var accountID
-    
     var body: some View {
         ScrollViewReader { proxy in
             List {
@@ -252,7 +254,6 @@ struct ShoppingListView: View {
                     )
                     .listRowBackground(Color.appBackgroundMini)
                 }
-                
                 if !shoppingListModel.completedItems.isEmpty {
                     Section {
                         ForEach(shoppingListModel.completedItems) { item in
@@ -263,7 +264,7 @@ struct ShoppingListView: View {
                         ForEach(shoppingListModel.categoriesWithCompletedItems) { category in
                             ShoppingListAmountRowView(category: category)
                         }
-                        .focused($textFieldFocus, equals: .textField)
+                        .focused($textFieldFocus, equals: .amountField)
                         
                         ShoppingListAccountsScrollView(
                             categories: shoppingListModel.accountsAndGroups,
@@ -271,20 +272,21 @@ struct ShoppingListView: View {
                         )
                         .listRowInsets(EdgeInsets())
                         
-                            RoundedButtonView(title: "Buy", action: {
-                                if selectedAccount != nil {
-                                    let transactions = shoppingListModel.createTransactions(for: selectedAccount)
-                                    shoppingListModel.saveTransactions(transactions)
-                                    selectedAccount = nil
-                                }
-                                // TODO: - add alert if amount is empty
-                            })
-                            .id(buyButtonID)
-                            .transition(.move(edge: .bottom))
+                        RoundedButtonView(title: "Buy", action: {
+                            if selectedAccount != nil {
+                                let transactions = shoppingListModel.createTransactions(for: selectedAccount)
+                                shoppingListModel.saveTransactions(transactions)
+                                selectedAccount = nil
+                            }
+                            // TODO: - add alert if amount is empty
+                        })
+                        .id(buyButtonID)
+                        .transition(.move(edge: .bottom))
                     } header: {
                         Text("Completed")
                     }
                     .listRowBackground(Color.appBackgroundMini)
+                    Spacer(minLength: heightKeyboard / 1.5).listRowBackground(Color.clear).id(emptySpacerID)
                 }
             }
             .scrollContentBackground(.hidden)
@@ -305,12 +307,19 @@ struct ShoppingListView: View {
                     }
                 }
             }
-//            .simultaneousGesture(
-//                TapGesture().onEnded {
-//                    hideKeyboard()
-//                    shoppingListModel.text = ""
-//                }
-//            )
+            .onChange(of: textFieldFocus, { _, newValue in
+                if newValue == .amountField {
+                    withAnimation {
+                        proxy.scrollTo(emptySpacerID)
+                    }
+                }
+            })
+            //            .simultaneousGesture(
+            //                TapGesture().onEnded {
+            //                    hideKeyboard()
+            //                    shoppingListModel.text = ""
+            //                }
+            //            )
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     if textFieldFocus == .addTextField {
@@ -337,6 +346,30 @@ struct ShoppingListView: View {
                 }
             }
         }
+        .onAppear {
+            keyboardHeightObserver()
+        }
+    }
+    
+    private func keyboardHeightObserver() {
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillShowNotification,
+            object: nil,
+            queue: .main) { noti in
+                
+                let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                let height = value.height
+                
+                self.heightKeyboard = height
+            }
+        
+        NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            queue: .main) { noti in
+                self.heightKeyboard = 0
+                textFieldFocus = nil
+            }
     }
 }
 
