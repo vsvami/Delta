@@ -8,11 +8,17 @@
 import SwiftUI
 import UISystem
 
+//enum PickerEvents {
+//    case onSelect(AppGradient)
+//}
+
 struct ColorPickerView: View {
     @Binding var selectedItem: AppGradient
     
     let items: [AppGradient]
     let title: String
+    
+    //let onEvent: (PickerEvents) -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,6 +39,7 @@ struct ColorPickerView: View {
                             )
                             .onTapGesture {
                                 selectedItem = color
+                                //onEvent(.onSelect(color))
                             }
                     }
                     .frame(height: 40)
@@ -40,10 +47,12 @@ struct ColorPickerView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 4)
             }
+            .scrollIndicators(.hidden)
         }
         .frame(height: 106)
         .background(AppGradient.appBackgroundMini.value)
         .cornerRadius(16)
+        //.contentShape(Rectangle())
     }
 }
 
@@ -83,6 +92,7 @@ struct IconPickerView: View {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 4)
             }
+            .scrollIndicators(.hidden)
         }
         .frame(height: 106)
         .background(AppGradient.appBackgroundMini.value)

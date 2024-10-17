@@ -9,6 +9,8 @@ import SwiftUI
 import UISystem
 
 struct ExpenseSettingsView: View {
+    //TODO: - Validation
+    
     @Environment(CategoryService.self) private var categoryService
     @Environment(\.dismiss) private var dismiss
     

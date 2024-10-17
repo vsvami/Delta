@@ -9,7 +9,6 @@ import SwiftUI
 import UISystem
 
 struct CategoriesScrollView: View { 
-    @Environment(CategoryService.self) private var categoryService
     @Environment(Router.self) private var router
     
     let categories: [Category]
@@ -110,5 +109,5 @@ struct CategoriesScrollView: View {
 
 #Preview {
     let group = DataManager.shared.getAccountsAndGroup()
-    return CategoriesScrollView(categories: group)
+    return CategoriesScrollView(categories: group).environment(Router())
 }

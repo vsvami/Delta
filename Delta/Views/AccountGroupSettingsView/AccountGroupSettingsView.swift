@@ -87,7 +87,12 @@ struct AccountGroupSettingsView: View {
                         selectedItem: $selectedColor,
                         items: AppGradient.allCases,
                         title: "Color"
-                    )
+                    ) /*{ event in
+                        switch event {
+                            case .onSelect(let color):
+                            selectedColor = color
+                        }
+                    }*/
                 }
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
@@ -101,7 +106,6 @@ struct AccountGroupSettingsView: View {
         }
         .buttonStyle(.borderless)
         .listSectionSpacing(.compact)
-        .navigationTitle(groupOfAccounts.title)
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
