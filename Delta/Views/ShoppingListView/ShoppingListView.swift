@@ -286,7 +286,7 @@ struct ShoppingListView: View {
                         Text("Completed")
                     }
                     .listRowBackground(Color.appBackgroundMini)
-                    Spacer(minLength: heightKeyboard / 1.5).listRowBackground(Color.clear).id(emptySpacerID)
+                    Spacer(minLength: heightKeyboard).listRowBackground(Color.clear).id(emptySpacerID)
                 }
             }
             .scrollContentBackground(.hidden)
@@ -314,12 +314,10 @@ struct ShoppingListView: View {
                     }
                 }
             })
-            //            .simultaneousGesture(
-            //                TapGesture().onEnded {
-            //                    hideKeyboard()
-            //                    shoppingListModel.text = ""
-            //                }
-            //            )
+            .onTapGesture {
+                textFieldFocus = nil
+                shoppingListModel.text = ""
+            }
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     if textFieldFocus == .addTextField {
