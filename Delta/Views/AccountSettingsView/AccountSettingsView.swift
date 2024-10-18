@@ -138,10 +138,21 @@ struct AccountSettingsView: View {
                 .listRowBackground(Color.clear)
             }
             
-            RoundedButtonView(title: "Delete account", action: {})
-                .listRowBackground(Color.clear)
-                .listRowInsets(EdgeInsets())
-                .padding(.top, 8)
+            RoundedButtonView(title: "Delete account") {
+                if categoryService.isAccountExist(account!.id) {
+                    categoryService.removeAccount(by: account!.id)
+                }
+                
+                dismiss()
+                
+                categoryService.accounts.forEach { account in
+                    print(account.title)
+                }
+            }
+            .buttonStyle(.borderless)
+            .listRowBackground(Color.clear)
+            .listRowInsets(EdgeInsets())
+            .padding(.top, 8)
         }
         .buttonStyle(.borderless)
         .listSectionSpacing(.compact)

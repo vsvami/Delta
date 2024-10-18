@@ -95,13 +95,20 @@ final class CategoryService {
         accounts.append(account)
     }
     
-    func removeAccount(at index: Int) {
-        guard index >= 0 && index < accounts.count else { return }
-        accounts.remove(at: index)
+    func removeAccount(by id: UUID) {
+        if let index = accounts.firstIndex(where: { $0.id == id }) {
+            accounts.remove(at: index)
+        }
     }
     
     func isAccountExist(_ id: UUID) -> Bool {
         accounts.contains { $0.id == id }
+    }
+    
+    func getAccounts(from categories: [Category]) -> [Account] {
+        categories
+            .filter { $0.categoryType == .account }
+            .compactMap { $0 as? Account }
     }
     
 //MARK: - GROUP OF ACCOUNTS
@@ -109,13 +116,18 @@ final class CategoryService {
         groupsOfAccounts.append(group)
     }
     
-    func removeGroupOfAccounts(at index: Int) {
-        guard index >= 0 && index < groupsOfAccounts.count else { return }
-        groupsOfAccounts.remove(at: index)
+    func removeGroupOfAccounts(by id: UUID) {
+        if let index = groupsOfAccounts.firstIndex(where: { $0.id == id }) {
+            groupsOfAccounts.remove(at: index)
+        }
     }
     
     func getGroupOfAccounts(from title: String) -> GroupOfAccounts? {
         groupsOfAccounts.first { $0.title == title }
+    }
+    
+    func isGroupOfAccountsExist(_ id: UUID) -> Bool {
+        groupsOfAccounts.contains { $0.id == id }
     }
 }
 
