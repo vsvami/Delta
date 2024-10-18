@@ -225,7 +225,7 @@ struct ShoppingListView: View {
     
     @Namespace var buyButtonID
     @Namespace var emptySpacerID
-//    @Namespace var accountID
+
     var body: some View {
         ScrollViewReader { proxy in
             List {
@@ -294,10 +294,19 @@ struct ShoppingListView: View {
             .foregroundStyle(.appBlack)
             .listSectionSpacing(.compact)
             .toolbar {
-                Button(action: {
-                    shoppingListModel.addCategory(withName: categoryName)
-                }) {
-                    Image(systemName: "plus")
+                Menu {
+                    Button(action: {
+                        shoppingListModel.addCategory(withName: categoryName)
+                    }) {
+                        Label("Add category", systemImage: "plus")
+                    }
+                    Button(action: {
+                        
+                    }) {
+                        Label("Swap categories", systemImage: "filemenu.and.selection")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
             }
             .onChange(of: selectedAccount) { _ , newValue in
