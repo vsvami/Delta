@@ -73,11 +73,13 @@ struct AccountGroupSettingsView: View {
                     keyboardType: .default, 
                     placeholder: "Your title"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Account settings")
                     .font(.subheading1())
@@ -151,6 +153,7 @@ struct AccountGroupSettingsView: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()

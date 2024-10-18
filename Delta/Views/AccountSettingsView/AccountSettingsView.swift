@@ -66,11 +66,13 @@ struct AccountSettingsView: View {
                     keyboardType: .default, 
                     placeholder: "Your account"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 TextFieldRowView(
                     inputValue: $balance,
@@ -78,6 +80,7 @@ struct AccountSettingsView: View {
                     keyboardType: .decimalPad, 
                     placeholder: "0.0"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Account settings")
                     .font(.subheading1())
@@ -187,6 +190,7 @@ struct AccountSettingsView: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
         .background(.appBackground)
         .onTapGesture {
             hideKeyboard()
