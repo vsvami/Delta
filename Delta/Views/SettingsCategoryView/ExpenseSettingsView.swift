@@ -115,11 +115,13 @@ struct RandomExpensesView: View {
                     keyboardType: .default,
                     placeholder: "New expense"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 TextFieldRowView(
                     inputValue: $amount,
@@ -127,6 +129,7 @@ struct RandomExpensesView: View {
                     keyboardType: .decimalPad,
                     placeholder: "0.0"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Expense main info")
                     .font(.bodyText1())
@@ -143,6 +146,7 @@ struct RandomExpensesView: View {
             .padding(.vertical, 8)
         }
         .buttonStyle(.borderless)
+        .scrollContentBackground(.hidden)
         .listSectionSpacing(.compact)
     }
 }
@@ -162,11 +166,13 @@ struct CertainExpensesView: View {
                     keyboardType: .default,
                     placeholder: "New Expense"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
                 
                 PickerRowView(
                     currency: $currency,
                     title: "Currency"
                 )
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             } header: {
                 Text("Expense main info")
                     .font(.bodyText1())
@@ -200,6 +206,7 @@ struct CertainExpensesView: View {
             
         }
         .buttonStyle(.borderless)
+        .scrollContentBackground(.hidden)
         .listSectionSpacing(.compact)
         .onAppear {
             if categoryService.subCategories.isEmpty {
@@ -223,6 +230,7 @@ struct CertainExpenseSettingsView: View {
                 keyboardType: .default,
                 placeholder: "New expense"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             TextFieldRowView(
                 inputValue: $amount,
@@ -230,6 +238,7 @@ struct CertainExpenseSettingsView: View {
                 keyboardType: .decimalPad,
                 placeholder: String(certainExpense.amount)
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             .onChange(of: amount) { _, newValue in
                 certainExpense.amount = Double(newValue) ?? 0
             }
@@ -238,21 +247,25 @@ struct CertainExpenseSettingsView: View {
                 date: $certainExpense.date,
                 title: "Choose date"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             NotificationRowView(
                 notificationIsOn: $certainExpense.notification,
                 title: "Notifications"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             NotificationRowView(
                 notificationIsOn: $certainExpense.autoTransaction,
                 title: "Autotransaction"
             )
+            .listRowBackground(AppGradient.appBackgroundMini.value)
             
             if certainExpense.autoTransaction == true {
                 TransactionRowView(action: {
                     //show modal
                 }, title: "Transaction")
+                .listRowBackground(AppGradient.appBackgroundMini.value)
             }
         }
     }
