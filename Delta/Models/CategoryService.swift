@@ -54,6 +54,10 @@ final class CategoryService {
         subCategories.append(newSubCategory)
     }
     
+    func isIncomeExist(_ id: UUID) -> Bool {
+        incomes.contains { $0.id == id }
+    }
+    
 //MARK: - EXPENSES
     func createExpense(_ draftExpense: Expense) {
         expenses.append(draftExpense)
@@ -82,6 +86,10 @@ final class CategoryService {
         )
         
         subCategories.append(newSubCategory)
+    }
+    
+    func isExpenseExist(_ id: UUID) -> Bool {
+        expenses.contains { $0.id == id }
     }
     
 //MARK: - SUBCATEGORIES

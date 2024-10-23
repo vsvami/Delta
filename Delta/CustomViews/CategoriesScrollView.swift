@@ -40,6 +40,9 @@ struct CategoriesScrollView: View {
                                 plannedAmount: 0,
                                 currency: .rub
                             )
+                            .onTapGesture {
+                                router.navigateTo(.incomeSettings(income: income))
+                            }
                         }
                     case .expense:
                         if let expense = category as? Expense {
@@ -51,6 +54,9 @@ struct CategoriesScrollView: View {
                                 plannedAmount: expense.plannedAmount,
                                 currency: expense.currency
                             )
+                            .onTapGesture {
+                                router.navigateTo(.expenseSettings(expense: expense))
+                            }
                         }
                     case .goal:
                         if let goal = category as? Goal {
@@ -100,7 +106,7 @@ struct CategoriesScrollView: View {
                 }
                 
                 PlusButtonView {
-                    router.navigateTo(.expenseSettings)
+                    router.navigateTo(.expenseCreate)
                 }
             }
         }

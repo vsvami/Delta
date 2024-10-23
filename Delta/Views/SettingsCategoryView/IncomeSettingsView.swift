@@ -71,17 +71,19 @@ struct IncomeSettingsView: View {
                     income?.repeatingType = selectedType
                     income?.subCategories = categoryService.getSubIncomes()
                     
-                    categoryService.createIncome(income ?? Income(
-                        amount: 0,
-                        image: "",
-                        repeatingType: .random,
-                        subCategories: [],
-                        transactions: [],
-                        id: UUID(),
-                        title: "",
-                        currency: .usd,
-                        categoryType: .income
-                    ))
+                    if !categoryService.isIncomeExist(income!.id) {
+                        categoryService.createIncome(income ?? Income(
+                            amount: 0,
+                            image: "",
+                            repeatingType: .random,
+                            subCategories: [],
+                            transactions: [],
+                            id: UUID(),
+                            title: "",
+                            currency: .usd,
+                            categoryType: .income
+                        ))
+                    }
                     categoryService.subCategories.removeAll()
                     
                     dismiss()
