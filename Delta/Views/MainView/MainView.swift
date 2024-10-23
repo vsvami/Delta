@@ -55,4 +55,6 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environment(CategoryService())
+        .environment(Router())
 }
