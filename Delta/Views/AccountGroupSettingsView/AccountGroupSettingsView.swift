@@ -53,17 +53,12 @@ struct AccountGroupSettingsView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowBackground(Color.clear)
-            .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 14, trailing: 0))
+            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 14, trailing: 0))
             
-            Section {
+            Section(header: headerView) {
                 CategoriesScrollView(categories: accounts)
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
-            } header: {
-                Text("Accounts")
-                    .font(.subheading1())
-                    .padding(.leading, -18)
-                    .foregroundStyle(AppGradient.appBlack.value)
             }
             
             Section {
@@ -84,6 +79,7 @@ struct AccountGroupSettingsView: View {
                 Text("Account settings")
                     .font(.subheading1())
                     .padding(.leading, -18)
+                    .padding(.bottom, 8)
                     .foregroundStyle(AppGradient.appBlack.value)
             }
             
@@ -155,9 +151,27 @@ struct AccountGroupSettingsView: View {
         }
         .scrollContentBackground(.hidden)
         .background(.appBackground)
+        .padding(.top, -20)
         .onTapGesture {
             hideKeyboard()
         }
+    }
+    
+    private var headerView: some View {
+        HStack {
+            Text("Accounts")
+                .font(.subheading1())
+                .foregroundStyle(.appBlack)
+            
+            Spacer()
+            
+            ChevronButtonView() {
+                router.navigateTo(.seeAll)
+            }
+            .textCase(.none)
+        }
+        .padding(.bottom, 6)
+        .padding(.horizontal, -16)
     }
 }
 
