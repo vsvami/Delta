@@ -216,6 +216,6 @@ struct AccountSettingsView: View {
             groupOfAccounts: "Main"
         )
     )
-    .environment(Router())
+    .environment(Router.shared)
     .environment(CategoryService())
 }

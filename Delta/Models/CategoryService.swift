@@ -137,6 +137,20 @@ final class CategoryService {
     func isGroupOfAccountsExist(_ id: UUID) -> Bool {
         groupsOfAccounts.contains { $0.id == id }
     }
+    
+    func isContainsAccount(group: GroupOfAccounts, account: Account) -> Bool {
+        group.accounts.contains(account)
+    }
+    
+    func manageAccounts(for group: GroupOfAccounts, and account: Account) {
+        if isContainsAccount(group: group, account: account) {
+            group.accounts.removeAll(where: { $0.id == account.id })
+            print("\(group.accounts.count) removed")
+        } else {
+            group.accounts.append(account)
+            print("\(group.accounts.count) added")
+        }
+    }
 }
 
 

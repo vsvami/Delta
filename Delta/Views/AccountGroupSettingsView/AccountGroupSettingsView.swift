@@ -18,7 +18,7 @@ struct AccountGroupSettingsView: View {
     @State private var balance: String
     @State private var selectedIcon: Icon
     @State private var selectedColor: AppGradient
-    @State private var accounts: [Category] = [] //TODO: - adding/deleting accounts
+    @State private var accounts: [Category] = []
     
     let dataManager = DataManager.shared
     var groupOfAccounts: GroupOfAccounts?
@@ -166,7 +166,7 @@ struct AccountGroupSettingsView: View {
             Spacer()
             
             ChevronButtonView() {
-                router.navigateTo(.seeAll)
+                router.presentModal(.seeAllAccounts(accounts: $accounts))
             }
             .textCase(.none)
         }
@@ -187,6 +187,6 @@ struct AccountGroupSettingsView: View {
             categoryType: .account
         )
     )
-    .environment(Router())
+    .environment(Router.shared)
     .environment(CategoryService())
 }

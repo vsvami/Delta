@@ -115,5 +115,5 @@ struct CategoriesScrollView: View {
 
 #Preview {
     let group = DataManager.shared.getAccountsAndGroup()
-    return CategoriesScrollView(categories: group).environment(Router())
+    return CategoriesScrollView(categories: group).environment(Router.shared)
 }

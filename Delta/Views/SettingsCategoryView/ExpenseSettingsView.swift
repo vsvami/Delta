@@ -113,7 +113,7 @@ struct RandomExpensesView: View {
                     inputValue: $title,
                     title: "Expense title",
                     keyboardType: .default,
-                    placeholder: "New expense"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
@@ -164,7 +164,7 @@ struct CertainExpensesView: View {
                     inputValue: $title,
                     title: "Expense title",
                     keyboardType: .default,
-                    placeholder: "New Expense"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 

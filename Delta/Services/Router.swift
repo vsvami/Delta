@@ -33,11 +33,32 @@ enum TabRoute: Hashable {
     case settings
 }
 
+enum ModalRoute: Equatable {
+    static func == (lhs: ModalRoute, rhs: ModalRoute) -> Bool {
+        switch (lhs, rhs) {
+        case (.seeAllAccounts(let lhsAccounts), .seeAllAccounts(let rhsAccounts)):
+            lhsAccounts.wrappedValue == rhsAccounts.wrappedValue
+        case (.seeAll, .seeAll):
+            true
+        default:
+            false
+        }
+    }
+    
+    case seeAllAccounts(accounts: Binding<[Category]>)
+    case seeAll
+}
+
 @MainActor
 @Observable
 final class Router {
+    static let shared = Router()
+    
     var startScreen: Route = .main
     var path = NavigationPath()
+    
+    var modalRoute: ModalRoute? = nil
+    var isModalPresented: Bool = false
     
     @ViewBuilder func tabView() -> some View {
         TabBarView()
@@ -87,6 +108,15 @@ final class Router {
             
     }
     
+    @ViewBuilder func modalView(for modalRoute: ModalRoute) -> some View {
+        switch modalRoute {
+        case .seeAllAccounts(let accounts):
+            SeeAllAccounts(accounts: accounts)
+        case .seeAll:
+            SeeAllView()
+        }
+    }
+    
     func navigateTo(_ appRoute: Route) {
         path.append(appRoute)
     }
@@ -98,4 +128,15 @@ final class Router {
     func popToRoot() {
         path.removeLast(path.count)
     }
+    
+    func presentModal(_ appRoute: ModalRoute) {
+        modalRoute = appRoute
+        isModalPresented = true
+    }
+    
+    func dismissModal() {
+        isModalPresented = false
+    }
+    
+    private init() {}
 }
