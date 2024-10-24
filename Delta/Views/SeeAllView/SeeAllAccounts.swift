@@ -14,13 +14,6 @@ struct SeeAllAccounts: View {
     
     @Binding var accounts: [Category]
     
-    //let group: GroupOfAccounts
-    
-//    init(group: GroupOfAccounts) {
-//        self.group = group
-//        _accounts = State(initialValue: group.accounts)
-//    }
-    
     var body: some View {
         VStack {
             Text("Choose accounts for group")
@@ -37,7 +30,7 @@ struct SeeAllAccounts: View {
                             size: CGSize(width: Constants.widthTwo, height: Constants.heightThree)
                         )
                         Spacer()
-                        Image(systemName: accounts.contains(where: { $0.id == account.id }) ? "checkmark.circle.fill" : "circle")
+                        Image(systemName: accounts.contains(account) ? "checkmark.circle.fill" : "circle")
                             .font(.title)
                             .foregroundStyle(AppGradient.appBlack.value)
                         
@@ -47,7 +40,6 @@ struct SeeAllAccounts: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         //categoryService.manageAccounts(for: group, and: account)
-                        
                         setCheckmarks(for: account)
                     }
                 }
@@ -57,7 +49,9 @@ struct SeeAllAccounts: View {
             .background(.appBackground)
             .padding(.top, -10)
             
-            RoundedButtonView(title: "Save accounts") { }
+            RoundedButtonView(title: "Save accounts") {
+                router.dismissModal()
+            }
             .contentShape(Rectangle())
             .padding(20)
             .onTapGesture {
@@ -68,7 +62,7 @@ struct SeeAllAccounts: View {
     }
     
     private func setCheckmarks(for account: Account) {
-        if accounts.contains(where: { $0.id == account.id }) {
+        if accounts.contains(account) {
             if let index = accounts.firstIndex(where: { $0.id == account.id }) {
                 accounts.remove(at: index)
             }
@@ -80,7 +74,7 @@ struct SeeAllAccounts: View {
 
 
 //#Preview {
-//    SeeAllAccounts(group: DataStore.shared.groupsOfAccounts.first!)
+//    SeeAllAccounts()
 //        .environment(Router.shared)
 //        .environment(CategoryService())
 //}

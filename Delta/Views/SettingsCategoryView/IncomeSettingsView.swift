@@ -114,7 +114,7 @@ struct RandomIncomesView: View {
                     inputValue: $title,
                     title: "Income title",
                     keyboardType: .default, 
-                    placeholder: "New income"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
@@ -165,7 +165,7 @@ struct CertainIncomesView: View {
                     inputValue: $title,
                     title: "Income title",
                     keyboardType: .default,
-                    placeholder: "New Income"
+                    placeholder: "Your title"
                 )
                 .listRowBackground(AppGradient.appBackgroundMini.value)
                 
